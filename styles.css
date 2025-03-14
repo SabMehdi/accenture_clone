@@ -90,3 +90,64 @@ body {
     color: inherit;
     margin: 0;
 }
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Dropdown container (hidden by default) */
+.dropdown-container {
+    display: none;
+    position: absolute;
+    background-color: #202020;
+    border-top: 1px solid #a100ff; /* Add a border at the top */
+    padding: 20px;
+    z-index: 1000; /* Ensure it appears above other content */
+    top: 100%; /* Position it directly under the navbar */
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    flex-direction: row; /* Display content in a row */
+    justify-content: space-around; /* Space out the content */
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+    width: 45%; /* Adjust width as needed */
+}
+
+/* Columns inside the dropdown */
+.dropdown-column {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%; /* Full width of the column */
+}
+
+.dropdown-column h4 {
+    color: #a100ff;
+    margin-bottom: 10px;
+}
+
+.dropdown-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-column ul li {
+    margin: 5px 0;
+    color: #fff;
+}
+
+.dropdown-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-left:0;
+    background-color: black;
+}
