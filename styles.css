@@ -1,0 +1,89 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #a100ff;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin: 0 15px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+.hero {
+    padding: 100px 20px;
+}
+.hero h1 {
+    font-size: 70px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+.hero p {
+    font-size: 24px;
+    margin: 20px 0;
+}
+.cta-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    background-color: #a100ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    justify-self: center;
+    padding: 20px;
+}
+.card {
+    width: 250px;
+    height: 400px;
+    background-image: url('https://placehold.co/250x400'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    color: rgb(255, 0, 0); /* Adjust text color for better visibility */
+}
+
+.card h1 {
+    font-size: 24px;
+    margin: 0 0 10px;
+    color: inherit; /* Inherits the color from the card */
+}
+
+.card p {
+    font-size: 16px;
+    color: inherit; /* Inherits the color from the card */
+    margin: 0;
+}
