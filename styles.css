@@ -103,21 +103,22 @@ body {
     position: absolute;
     background-color: #202020;
     border-top: 1px solid #a100ff; /* Add a border at the top */
-    padding: 20px;
     z-index: 1000; /* Ensure it appears above other content */
-    top: 100%; /* Position it directly under the navbar */
     left: 0;
     width: 100vw; /* Full viewport width */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     flex-direction: row; /* Display content in a row */
-    justify-content: space-around; /* Space out the content */
+    justify-content: center; /* Space out the content */
+
 }
 
 /* Dropdown content */
 .dropdown-content {
+    background-color: #202020;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    width: 45%; /* Adjust width as needed */
+    width: 30%; /* Adjust width as needed */
 }
 
 /* Columns inside the dropdown */
@@ -149,5 +150,4 @@ body {
     align-items: center;
     padding: 20px;
     padding-left:0;
-    background-color: black;
 }
