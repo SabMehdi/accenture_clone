@@ -1,0 +1,162 @@
+$primary-color: #a100ff;
+$background-color: #000;
+$text-color: #fff;
+$card-color: rgb(255, 0, 0);
+
+body {
+  margin: 0 400px;
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: $background-color;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+
+  li {
+    margin: 0 15px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+    font-size: 16px;
+  }
+}
+
+.hero {
+  padding: 100px 20px;
+
+  h1 {
+    font-size: 70px;
+    font-weight: bold;
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 24px;
+    margin: 20px 0;
+  }
+}
+
+.cta-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  background-color: $primary-color;
+  color: $text-color;
+  cursor: pointer;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  max-height: calc(400px + 40px);
+  align-self: center;
+  max-width: 1500px;
+}
+
+.card {
+  width: 250px;
+  height: 400px;
+  background-image: url('https://placehold.co/250x400');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  color: $card-color;
+
+  h1 {
+    font-size: 24px;
+    margin: 0 0 10px;
+    color: inherit;
+  }
+
+  p {
+    font-size: 16px;
+    color: inherit;
+    margin: 0;
+  }
+}
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-container {
+  display: none;
+  position: absolute;
+  background-color: #202020;
+  border-top: 1px solid $primary-color;
+  z-index: 1000;
+  left: 0;
+  width: 100vw;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dropdown-content {
+  background-color: #202020;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.dropdown-column {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+
+  h4 {
+    color: $primary-color;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 5px 0;
+      color: $text-color;
+    }
+  }
+}
+
+
+.dropdown-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-left: 0;
+}
