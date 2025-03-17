@@ -157,47 +157,55 @@ body {
   padding: 20px;
   padding-left: 0;
 }
-.value-container {
+
+.carousel-container {
   display: flex;
   flex-direction: column;
   margin-top: 160px;
 
-  .value-sections {
+  .carousel-sections {
     display: flex;
     flex-direction: row;
     margin: 60px 0;
-    .value-section {
+
+    .carousel-section {
       text-align: center;
       height: 795px;
-      .value-title {
+
+      .carousel-title {
         font-size: 50px;
         font-weight: bold;
       }
 
-      .value-description {
+      .carousel-description {
         font-size: 20px;
         max-width: 700px;
         margin: 0 auto 40px;
       }
 
-      .value-content {
+      .carousel-content {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 30px;
+        gap: 50px;
 
         &.reverse {
           flex-direction: row-reverse;
         }
 
-        .value-image {
-          width: 100%;
-          height: auto;
+        .carousel-image-container {
+
           background-size: cover;
           background-position: center;
+
+          .carousel-image {
+
+            width: 100%;
+            height: auto;
+          }
         }
 
-        .value-text {
+        .carousel-text {
           text-align: left;
 
           h3 {
@@ -226,4 +234,59 @@ body {
       }
     }
   }
+
+  .carousel-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 60px;
+
+    .carousel-play-buttons {
+      display: flex;
+      justify-content: center;
+
+      .nav-button.play {
+        width: 50px;
+        height: 50px;
+        background-color: #222;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #444;
+        }
+      }
+    }
+
+    .carousel-nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .nav-button {
+        width: 50px;
+        height: 50px;
+        background-color: #222;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #444;
+        }
+      }
+
+      .slide-indicator {
+        font-size: 18px;
+        color: white;
+      }
+    }
+  }
+
+
 }
