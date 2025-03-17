@@ -207,6 +207,10 @@ body {
 
         .carousel-text {
           text-align: left;
+          display: flex;
+          flex-direction: column;
+          align-self: flex-end;
+          padding-bottom: 60px;
 
           h3 {
             font-size: 22px;
@@ -226,7 +230,6 @@ body {
         color: white;
         text-decoration: none;
         font-weight: bold;
-        border-bottom: 2px solid #8000ff;
 
         span {
           margin-left: 5px;
