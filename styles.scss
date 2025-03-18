@@ -12,13 +12,22 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $background-color;
+  z-index: 1000; /* Ensure the header stays above other content */
+}
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   background-color: $background-color;
+  margin: 0 auto; /* Center the navbar */
+  max-width: calc(100% - 400px)
 }
 
 .logo {
