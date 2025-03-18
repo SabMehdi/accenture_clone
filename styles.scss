@@ -161,78 +161,61 @@ body {
 .carousel-container {
   display: flex;
   flex-direction: column;
-  margin-top: 160px;
+  justify-content: center;
 
-  .carousel-sections {
-    display: flex;
-    flex-direction: row;
-    margin: 60px 0;
+  .carousel {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    align-self:center;
+    &-text {
 
-    .carousel-section {
-      text-align: center;
+      text-align: left;
+      margin: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
 
-      .carousel-title {
-        font-size: 50px;
-        font-weight: bold;
+    }
+
+    &-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 95%;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      min-width: 100%;
+      box-sizing: border-box;
+
+      img {
+        width: 50%;
+        display: block;
+      }
+    }
+
+    &-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 18px;
+
+      &.prev {
+        left: 10px;
       }
 
-      .carousel-description {
-        font-size: 20px;
-        max-width: 700px;
-        margin: 0 auto 40px;
-      }
-
-      .carousel-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 50px;
-
-        &.reverse {
-          flex-direction: row-reverse;
-        }
-
-        .carousel-image-container {
-
-          background-size: cover;
-          background-position: center;
-
-          .carousel-image {
-
-            width: 100%;
-            height: auto;
-          }
-        }
-
-        .carousel-text {
-          text-align: left;
-          display: flex;
-          flex-direction: column;
-          align-self: flex-end;
-          padding-bottom: 60px;
-
-          h3 {
-            font-size: 22px;
-            font-weight: bold;
-          }
-
-          p {
-            font-size: 16px;
-            line-height: 1.5;
-          }
-        }
-      }
-
-      .learn-more {
-        display: inline-block;
-        margin-top: 10px;
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-
-        span {
-          margin-left: 5px;
-        }
+      &.next {
+        right: 10px;
       }
     }
   }
@@ -242,7 +225,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
-    margin: 0 60px;
+    margin: 20px 300px;
 
     .carousel-play-buttons {
       display: flex;
@@ -289,6 +272,4 @@ body {
       }
     }
   }
-
-
 }
