@@ -6,6 +6,7 @@ $spacer-height: 300vh;
 $body-margin-offset: -200px;
 $transition-duration: 0.4s;
 $fade-duration: 0.6s;
+$gap-size: 40px;
 
 body {
   margin: 0 200px;
@@ -461,5 +462,64 @@ header {
         }
       }
     }
+  }
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.headline {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: $gap-size;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  .column {
+      display: flex;
+      flex-direction: column;
+
+      a {
+          color: $text-color;
+          text-decoration: none;
+          margin-bottom: 10px;
+          font-size: 1em;
+      }
+  }
+}
+
+.footer {
+  font-size: 0.9em;
+  margin-top: $gap-size;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  img {
+      max-width: 50%;
+      height: auto;
   }
 }
