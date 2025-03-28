@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
           
           // Apply easing function to make the transition feel more natural
           // This cubic easing slows down the transition at the beginning and end
-          progress = easeInOutCubic(progress);
       }
       
       // Calculate the width of the left side based on progress
@@ -148,14 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
       secondaryImage.style.opacity = leftWidthPercentage < secondImageThreshold ? 1 : 0;
       
       // Hide scroll indicator after scrolling begins
-      scrollIndicator.style.opacity = progress > 0.05 ? 0 : 0.8;
   }
-  
-  // Easing function for smoother transitions
-  function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-  
+    
   // Throttled scroll event for better performance
   const throttledUpdate = throttle(updateLayout, 10);
   
