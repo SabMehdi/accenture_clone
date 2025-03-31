@@ -137,9 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function revealOnScroll() {
     cards.forEach((card) => {
       const cardTop = card.getBoundingClientRect().top;
-      if (cardTop < window.innerHeight - 100) {
-        card.classList.add("show");
-      }
+ 
     });
   }
 
