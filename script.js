@@ -125,51 +125,53 @@ document.addEventListener("DOMContentLoaded", function () {
     const offset = -currentIndex * 100;
     carouselInner.style.transform = `translateX(${offset}%)`;
 
-    // Update the slide indicator
     slideIndicator.textContent = `${currentIndex + 1}/${totalItems}`;
   }
 
-  // Initialize the slide indicator
   slideIndicator.textContent = `1/${totalItems}`;
 
-  const cards = document.querySelectorAll(".sticky-card");
 
   // Scroll animation handler
   const handleScroll = () => {
-    const scrollSection = document.querySelector('.scroll-section');
-    const rect = scrollSection.getBoundingClientRect();
-    const scrollPosition = window.scrollY;
-    const sectionTop = rect.top;
-    const imageContainer = document.querySelector('.scroll-image-container');
-    const paragraphs = document.querySelectorAll('.paragraph-reveal');
+    const wrapper = document.querySelector('.scroll-effect-wrapper');
+    const imageContainer = wrapper.querySelector('.scroll-image-container');
+    const content = wrapper.querySelector('.content');
+    const paragraphs = wrapper.querySelectorAll('.paragraph-reveal');
+  
+    // Get wrapper's position relative to viewport
+    const rect = wrapper.getBoundingClientRect();
+  
+    // Calculate how far the top of the wrapper is scrolled past the top of the viewport
+    const scrollTopInWrapper = -rect.top;
+  
+    // Total scrollable distance *within the wrapper* that drives the animation
+    // Wrapper height minus the height of the sticky section (which is 1 viewport height)
+    const scrollableHeight = wrapper.offsetHeight - window.innerHeight;
+  
+    // Calculate scroll progress (0 to 1) based on wrapper scroll
+    // Ensure progress doesn't go below 0 or above 1
+    const scrollProgress = Math.min(1, Math.max(0, scrollTopInWrapper / scrollableHeight));
+  
 
-    if (sectionTop <= 0 && rect.bottom >= window.innerHeight) {
-      imageContainer.classList.add('fixed');
-      imageContainer.classList.remove('bottom');
-      scrollSection.classList.remove('shrinked');
-    } else if (rect.bottom < window.innerHeight) {
-      imageContainer.classList.remove('fixed');
-      imageContainer.classList.add('bottom');
-      scrollSection.classList.add('shrinked');
+    const imageStartWidth = 100;
+    const imageEndWidth = 45;
+    const currentImageWidth = imageStartWidth - (scrollProgress * (imageStartWidth - imageEndWidth));
+    // Clamp width to ensure it doesn't go beyond bounds due to potential easing/overscroll
+    imageContainer.style.width = `${Math.max(imageEndWidth, Math.min(imageStartWidth, currentImageWidth))}vw`;
+  
+ 
+    const contentAppearThreshold = 0.6;
+  
+    if (scrollProgress >= contentAppearThreshold) {
+      content.classList.add('visible');
     } else {
-      imageContainer.classList.remove('fixed', 'bottom');
-      scrollSection.classList.remove('shrinked');
+      content.classList.remove('visible');
+      paragraphs.forEach(paragraph => {
+        paragraph.classList.remove('visible');
+      });
     }
-
-    // Reveal paragraphs on scroll with a stagger effect
-    paragraphs.forEach((paragraph, index) => {
-      const rect = paragraph.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight - 100;
-      
-      if (isVisible) {
-        setTimeout(() => {
-          paragraph.classList.add('visible');
-        }, index * 100);
-      }
-    });
   };
-
+  
+  handleScroll();
   window.addEventListener('scroll', handleScroll);
-
-
 });
