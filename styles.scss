@@ -70,6 +70,23 @@ header {
   p {
     font-size: 24px;
     margin: 20px 0;
+    display: inline-flex;
+    align-items: center;
+    .cta-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #8000ff;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      border-radius: 4px;
+      
+      svg {
+          width: 30px;
+          height: 30px;
+      }
+    }
   }
 }
 
@@ -353,17 +370,60 @@ header {
 }
 
 .component-content {
+  background-color: black;
+  color: white;
+  padding: 40px;
+  font-family: Arial, sans-serif;
   max-width: 600px;
+  text-align: left;
 
-  h1 {
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
+  .category {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2;
   }
 
   p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-family: GT Sectra Fine,Palatino;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    background-color: $background-color;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px 10px 0;
+    font-size: 2rem;
+    text-decoration: none;
+    .cta-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #8000ff;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      border-radius: 4px;
+      
+      svg {
+          width: 30px;
+          height: 30px;
+      }
+    }
   }
 }
 
@@ -419,15 +479,15 @@ header {
         overflow: hidden;
         height: 400px;
         transition: all 0.3s ease;
-      
+
         &:nth-child(1) {
           align-self: flex-start;
         }
-      
+
         &:nth-child(2) {
           align-self: flex-end;
         }
-      
+
         h3 {
           font-size: 1.25rem;
           margin-bottom: 0.75rem;
@@ -436,7 +496,7 @@ header {
           bottom: 1rem;
           transition: all 0.3s ease;
         }
-      
+
         .card-extra {
           position: absolute;
           bottom: -100%;
@@ -448,14 +508,14 @@ header {
           transition: all 0.6s ease;
           text-align: left;
         }
-      
+
         &:hover {
           .card-extra {
             transform: translateY(0);
             opacity: 1;
-            bottom: 17rem; 
+            bottom: 17rem;
           }
-          
+
           h3 {
             bottom: calc(4rem + 100%);
           }
@@ -464,7 +524,6 @@ header {
     }
   }
 }
-
 
 .container {
   max-width: 1200px;
@@ -495,15 +554,15 @@ header {
   gap: $gap-size;
 
   .column {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-      a {
-          color: $text-color;
-          text-decoration: none;
-          margin-bottom: 10px;
-          font-size: 1em;
-      }
+    a {
+      color: $text-color;
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
   }
 }
 
@@ -519,7 +578,7 @@ header {
   align-items: center;
 
   img {
-      max-width: 50%;
-      height: auto;
+    max-width: 50%;
+    height: auto;
   }
 }
