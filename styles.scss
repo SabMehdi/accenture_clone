@@ -80,7 +80,6 @@ header {
       width: 40px;
       height: 40px;
       margin-left: 10px;
-      border-radius: 4px;
       
       svg {
           width: 30px;
@@ -98,39 +97,159 @@ header {
   color: $text-color;
   cursor: pointer;
 }
+$card-gap: 20px;
+$card-height: 400px;
+$card-border-radius: 8px;
+$cta-bg-color: #646cff;
+$cta-hover-bg-color: #535bf2;
+$gradient-color-1: rgba(64, 134, 168, 0.8);
+$gradient-color-2: rgba(89, 149, 126, 0.8);
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $card-gap;
   padding: 20px;
-  align-self: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
-  width: 250px;
-  height: 400px;
-  background-image: url("https://placehold.co/250x400");
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 300px;
-  text-align: center;
-  color: $card-color;
+  position: relative;
+  width: 100%;
+  height: $card-height;
+  border-radius: $card-border-radius;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  --bg-image: none;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+    z-index: 1;
+  }
+
+  &:hover::before {
+    transform: scale(1.1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, $gradient-color-1 0%, $gradient-color-2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  .card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 3;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
 
   h1 {
     font-size: 24px;
     margin: 0 0 10px;
-    color: inherit;
+    color: white;
+    text-align: left;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   p {
     font-size: 16px;
-    color: inherit;
+    color: white;
     margin: 0;
+    text-align: left;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.hidden-text {
+  position: absolute;
+  width: calc(100% - 40px);
+  left: 100%;
+  top: 80px;
+  padding: 20px;
+  transition: left 0.3s ease;
+  box-sizing: border-box;
+
+  .card:hover & {
+    left: 0;
+  }
+}
+
+.cta-button {
+  position: absolute;
+  bottom: -50px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: $cta-bg-color;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: bottom 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: calc(100% - 40px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .card:hover & {
+    bottom: 20px;
+  }
+
+  &:hover {
+    background-color: $cta-hover-bg-color;
+  }
+}
+
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -209,6 +328,44 @@ header {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
+      h3{
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      p{
+        font-size: 2rem;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        font-weight: 400;
+      }
+        .learn-more{
+          display: inline-flex;
+          background-color: $background-color;
+          align-items: center;
+          color: white;
+          font-weight: bold;
+          padding: 10px 15px 10px 0;
+          font-size: 2rem;
+          text-decoration: none;
+          .cta-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #8000ff;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            svg {
+                width: 30px;
+                height: 30px;
+            }
+          }
+        }
+      
     }
 
     &-inner {
@@ -417,7 +574,6 @@ header {
       width: 40px;
       height: 40px;
       margin-left: 10px;
-      border-radius: 4px;
       
       svg {
           width: 30px;
@@ -526,7 +682,6 @@ header {
 }
 
 .container {
-  max-width: 1200px;
   margin: auto;
   padding: 40px 20px;
   display: flex;

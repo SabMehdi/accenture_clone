@@ -48,6 +48,68 @@ document.addEventListener("DOMContentLoaded", function () {
       playBtn.setAttribute("hidden", "true");
     });
   }
+
+  function getAverageColor(canvas, startX, width, height) {
+    const ctx = canvas.getContext("2d");
+    const imageData = ctx.getImageData(startX, 0, width, height);
+    const data = imageData.data;
+    let r = 0,
+      g = 0,
+      b = 0;
+    let count = 0;
+
+    for (let i = 0; i < data.length; i += 4) {
+      r += data[i];
+      g += data[i + 1];
+      b += data[i + 2];
+      count++;
+    }
+
+    return {
+      r: Math.round(r / count),
+      g: Math.round(g / count),
+      b: Math.round(b / count),
+    };
+  }
+
+  function rgbToRgba(r, g, b, alpha) {
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  const card = document.querySelectorAll(".card");
+  card.forEach((card) => {
+    const imageUrl = card.dataset.image;
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = imageUrl;
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const halfWidth = canvas.width / 2;
+      const color1 = getAverageColor(canvas, 0, halfWidth, canvas.height);
+      const color2 = getAverageColor(
+        canvas,
+        halfWidth,
+        halfWidth,
+        canvas.height
+      );
+
+      card.style.setProperty("--bg-image", `url(${imageUrl})`);
+      card.style.setProperty(
+        "--gradient-color-1",
+        rgbToRgba(color1.r, color1.g, color1.b, 0.8)
+      );
+      card.style.setProperty(
+        "--gradient-color-2",
+        rgbToRgba(color2.r, color2.g, color2.b, 0.8)
+      );
+    };
+  });
   let currentIndex = 0;
 
   function moveSlide(direction) {
