@@ -8,6 +8,11 @@ $transition-duration: 0.4s;
 $fade-duration: 0.6s;
 $gap-size: 40px;
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0 200px;
   font-family: Arial, sans-serif;
@@ -18,43 +23,290 @@ body {
   height: 200vh;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: $background-color;
-  z-index: 1000;
-}
+
 
 .navbar {
+  background-color: #000000;
+  height: 80px; /* Adjust as needed */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
-  background-color: $background-color;
-  margin: 0 auto;
-  max-width: calc(100% - 400px);
+  font-size: 1.1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid #333; /* Subtle line like image */
 }
 
-.logo {
-  font-size: 24px;
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  z-index: 1;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px; /* Add padding */
+  align-items: center;
+}
+
+.navbar-logo {
+  color: #fff;
+  justify-self: start;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.8rem; /* Adjust size */
   font-weight: bold;
-  color: $primary-color;
+  display: flex;
+  align-items: center;
+}
+
+.logo-arrow {
+  color: #A100FF; /* Accenture purple */
+  margin-left: 2px; /* Adjust spacing */
+  font-weight: bold; /* Make it bolder if needed */
+  font-size: 2.2rem; /* Slightly larger */
+  line-height: 1; /* Adjust vertical alignment */
+}
+
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+}
+
+.nav-item {
+  height: 80px; /* Match navbar height */
+  position: relative; /* Needed for dropdown positioning */
 }
 
 .nav-links {
-  list-style: none;
+  color: #fff;
   display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
 
-  li {
-    margin: 0 15px;
+.nav-links:hover {
+  color: #A100FF; /* Hover color */
+  border-bottom: 3px solid #A100FF; /* Optional hover indicator */
+}
+
+.nav-links i.dropdown-arrow {
+  margin-left: 5px;
+  font-size: 0.7em; /* Smaller arrow */
+}
+
+
+/* Right Side Items */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.nav-icon-link,
+.nav-locale {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1.5rem; /* Spacing */
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon-link i,
+.nav-locale i {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.nav-icon-link:hover,
+.nav-locale:hover {
+  color: #A100FF;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 80px; /* Position below the navbar */
+  left: 0;
+  background-color: #222; /* Dark background like image */
+  min-width: 500px; /* Adjust as needed */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+  z-index: 10;
+  padding: 20px;
+  text-align: left;
+  justify-content: center;
+  gap: 30px;
+}
+
+.dropdown-column {
+  display: flex; /* Important for column layout */
+  width: 100%; /* Take full width of the column */
+  vertical-align: top;
+  break-inside: avoid-column; /* Prevent columns breaking inside */
+  gap: 30px;
+}
+
+
+.dropdown-column h4 {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+.dropdown-content a {
+  color: white;
+  padding: 8px 0px; /* Adjust padding */
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem; /* Slightly smaller */
+}
+
+.dropdown-content a:hover {
+  color: #A100FF;
+  background-color: transparent; /* No background on hover */
+}
+
+/* Show dropdown on hover (Desktop) */
+.nav-item.dropdown:hover .dropdown-content {
+  display: flex; /* Show dropdown on hover */
+  position: fixed;
+  right: 0;
+}
+
+
+/* Mobile Menu Icon */
+.menu-icon {
+  display: none; /* Hidden on desktop */
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 960px) {
+  .navbar-container {
+      padding: 0 20px; /* Adjust padding */
   }
 
-  a {
-    text-decoration: none;
-    color: $text-color;
-    font-size: 16px;
+  .nav-menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      /* height: calc(100vh - 80px); Remove fixed height */
+      position: absolute;
+      top: -1000px; /* Start hidden off-screen */
+      left: 0;
+      opacity: 1;
+      transition: all 0.5s ease;
+      background: #111; /* Darker mobile menu background */
+      padding-top: 2rem; /* Add some top padding */
+      padding-bottom: 2rem; /* Add some bottom padding */
+  }
+
+  .nav-menu.active {
+      top: 80px; /* Bring it down below navbar */
+      opacity: 1;
+      z-index: 99;
+  }
+
+  .nav-item {
+      width: 100%;
+      height: auto; /* Auto height for list items */
+  }
+
+   .nav-item.dropdown {
+      /* Adjust dropdown parent for mobile */
+  }
+
+
+  .nav-links {
+      text-align: center;
+      padding: 1.5rem 1rem; /* Increase padding for touch */
+      width: 100%;
+      display: block; /* Make links full width */
+      border-bottom: 1px solid #333; /* Separator lines */
+  }
+
+   .nav-links:hover {
+      color: #A100FF;
+      border-bottom: 1px solid #333; /* Keep separator on hover */
+      background-color: #222; /* Slight hover background */
+  }
+
+  .nav-links i.dropdown-arrow {
+      float: right; /* Move arrow to the right */
+      margin-left: 0;
+      margin-right: 10px;
+      transition: transform 0.3s ease; /* Smooth arrow rotation */
+  }
+
+  .nav-links.open i.dropdown-arrow {
+       transform: rotate(180deg); /* Rotate arrow when open */
+  }
+
+  .navbar-right {
+      display: none; /* Hide desktop right items */
+  }
+
+  /* Mobile specific list items (added via JS) */
+   .nav-item.mobile-only {
+       width: 100%;
+       height: auto;
+   }
+  .nav-item.mobile-only .nav-links {
+       text-align: center;
+       padding: 1.5rem 1rem;
+       width: 100%;
+       display: block;
+       border-bottom: 1px solid #333;
+   }
+   .nav-item.mobile-only .nav-links:hover {
+      color: #A100FF;
+      border-bottom: 1px solid #333;
+      background-color: #222;
+  }
+
+  .menu-icon {
+      display: block; /* Show burger icon */
+  }
+
+  /* Mobile Dropdown adjustments */
+  .dropdown-content {
+      position: static; /* No absolute positioning in mobile */
+      display: none; /* Hidden by default, toggled by JS */
+      background-color: #333; /* Slightly different background */
+      width: 100%;
+      min-width: unset;
+      box-shadow: none;
+      padding: 0 0 10px 30px; /* Indent dropdown items */
+      column-count: 1; /* Single column on mobile */
+  }
+
+   .dropdown-content.active {
+      display: block; /* Show when active */
+  }
+
+  .dropdown-column {
+      padding-top: 10px;
+  }
+
+  .dropdown-column h4 {
+      display: none; /* Hide column titles in mobile dropdown */
+  }
+
+  .dropdown-content a {
+      padding: 10px 0px;
+      font-size: 1rem;
   }
 }
 
@@ -300,50 +552,12 @@ $transition-duration: 0.3s;
   justify-content: center;
 }
 
-.dropdown-content {
-  background-color: #202020;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-}
-
-.dropdown-column {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-
-  h4 {
-    color: $primary-color;
-    margin-bottom: 10px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin: 5px 0;
-      color: $text-color;
-    }
-  }
-}
-
-.dropdown-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  padding-left: 0;
-}
 
 .carousel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: -200px;
-  margin-right: -200px;
+  
   .carousel {
     position: relative;
     overflow: hidden;

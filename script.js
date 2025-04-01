@@ -1,22 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.querySelector(".dropdown");
-  const dropdownContent = document.querySelector(".dropdown-container");
   const slideIndicator = document.querySelector(".slide-indicator");
   const totalItems = document.querySelectorAll(".carousel-item").length;
 
-  dropdown.addEventListener("click", function () {
-    if (dropdownContent.style.display === "flex") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "flex";
-    }
-  });
 
-  document.addEventListener("click", function (event) {
-    if (!dropdown.contains(event.target)) {
-      dropdownContent.style.display = "none";
-    }
-  });
 
   let autoSlideInterval;
 
@@ -174,4 +160,74 @@ document.addEventListener("DOMContentLoaded", function () {
   
   handleScroll();
   window.addEventListener('scroll', handleScroll);
+
+
+  const menu = document.getElementById('mobile-menu');
+const menuLinks = document.getElementById('nav-menu-list');
+const expertisesToggle = document.getElementById('expertises-toggle');
+const expertisesDropdown = expertisesToggle.nextElementSibling; // Get the dropdown content
+const navbarRight = document.querySelector('.navbar-right'); // Get the right side container
+
+// --- Burger Menu Toggle ---
+menu.addEventListener('click', () => {
+    menu.classList.toggle('is-active'); // Optional: for styling the burger icon itself
+    menuLinks.classList.toggle('active');
+
+    // If menu is closing and expertises dropdown is open, close it too
+    if (!menuLinks.classList.contains('active') && expertisesDropdown.classList.contains('active')) {
+        expertisesDropdown.classList.remove('active');
+        expertisesToggle.classList.remove('open');
+    }
+});
+
+// --- Mobile Dropdown Toggle ---
+expertisesToggle.addEventListener('click', (e) => {
+    // Only prevent default and toggle on smaller screens (where burger is visible)
+    if (window.innerWidth <= 960) {
+        e.preventDefault(); // Prevent link navigation only on mobile toggle
+        expertisesToggle.classList.toggle('open'); // For arrow rotation
+        expertisesDropdown.classList.toggle('active');
+    }
+});
+
+// --- Move Right-Side Items to Mobile Menu ---
+function setupMobileMenu() {
+    if (window.innerWidth <= 960) {
+        // Check if items haven't already been moved
+        if (!menuLinks.querySelector('.mobile-only')) {
+             // Clone or create items for mobile menu
+            const searchItem = document.createElement('li');
+            searchItem.classList.add('nav-item', 'mobile-only');
+            searchItem.innerHTML = `<a href="#" class="nav-links"><i class="fas fa-search"></i> Search</a>`;
+            menuLinks.appendChild(searchItem);
+
+            const localeItem = document.createElement('li');
+            localeItem.classList.add('nav-item', 'mobile-only');
+            localeItem.innerHTML = `<a href="#" class="nav-links"><i class="fas fa-globe"></i> France</a>`;
+            menuLinks.appendChild(localeItem);
+        }
+    } else {
+        // Screen is larger, remove mobile-only items if they exist
+        const mobileOnlyItems = menuLinks.querySelectorAll('.mobile-only');
+        mobileOnlyItems.forEach(item => item.remove());
+
+         // Ensure main menu and dropdown are correctly reset if window resized while open
+         menu.classList.remove('is-active');
+         menuLinks.classList.remove('active');
+         expertisesDropdown.classList.remove('active');
+         expertisesToggle.classList.remove('open');
+    }
+}
+
+// Initial setup on load
+setupMobileMenu();
+
+// Adjust mobile menu items on window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        setupMobileMenu();
+    }, 250); // Debounce resize event
+});
 });
