@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   let currentIndex = 0;
 
-  function moveSlide(direction) {
+  window.moveSlide=function moveSlide(direction) {
     const carouselInner = document.querySelector(".carousel-inner");
 
     currentIndex += direction;
