@@ -245,9 +245,12 @@ body {
 // ##### MOBILE STYLES (Max Width 960px) ########
 // ##############################################
 
+// ##############################################
+// ##### MOBILE STYLES (Max Width 960px) ########
+// ##############################################
+
 @media screen and (max-width: ($desktop-breakpoint - 1px)) {
   // --- Show Burger / Hide Desktop Right ---
-  // (These are typically outside the .nav-menu block, but related)
   .menu-icon {
     display: block; // Show the burger icon
   }
@@ -351,6 +354,8 @@ body {
 
       &:last-of-type {
         // Remove border from the last actual nav item before the footer
+        // Note: This might target the footer if it's an LI, adjust if needed.
+        // If footer isn't an LI, this should be fine.
         border-bottom: none;
       }
 
@@ -358,6 +363,14 @@ body {
       &:hover > .dropdown-content {
         display: none;
       }
+
+      // --- CORRECTED STATE RULE: Show dropdown content when nav-item is active ---
+      &.submenu-active {
+        > .dropdown-content {
+          display: flex; // Use flex because we set flex-direction: column on it
+        }
+      }
+      // --- END CORRECTED STATE RULE ---
     }
 
     // --- Mobile Nav Link Styling (The A tags) ---
@@ -376,6 +389,7 @@ body {
       &:hover {
         background-color: rgba($white, 0.05); // Subtle hover feedback
         color: $white; // Keep text color on hover (or change if desired)
+        border-bottom: none; // Ensure no desktop border shows on mobile hover
       }
 
       // --- Mobile Arrow Handling ---
@@ -394,7 +408,7 @@ body {
     // --- Mobile Submenu Styling (The .dropdown-content) ---
     .dropdown-content {
       // --- Core Submenu Panel Styles (Overlay) ---
-      display: none; // Hidden by default, shown via JS/CSS state
+      display: none; // Hidden by default, shown via the .nav-item.submenu-active rule above
       position: absolute; // Position relative to the fixed .nav-menu
       top: 0;
       left: 0;
@@ -408,10 +422,7 @@ body {
       flex-direction: column; // Stack submenu header and nav area
       align-items: stretch; // Stretch children
 
-      // --- State: When parent item is active ---
-      .nav-item.submenu-active & {
-        display: flex; // Show the submenu overlay
-      }
+      // --- State rule removed from here ---
 
       // --- Ignore Desktop Structure Elements for Layout ---
       // This prevents desktop columns from interfering with mobile flex layout
@@ -476,7 +487,9 @@ body {
           }
           // Container for links within a section
           .dropdown-column {
+             // Removed display: contents here if it was added previously, not needed if wrappers above handle it
             .dropdown-column-types {
+               // Removed display: contents here if it was added previously, not needed if wrappers above handle it
               a {
                 // Actual submenu links
                 color: $white;
@@ -488,6 +501,7 @@ body {
 
                 &:hover {
                   color: $accent-purple;
+                  background-color: transparent; // Ensure no bg color on hover
                 }
               }
             }
@@ -504,9 +518,9 @@ body {
       border-top: 1px solid $light-dark-bg;
       width: 100%;
       flex-shrink: 0; // Prevent footer from shrinking
+      margin-top: auto; // Push footer to the bottom if content is short
 
-      a {
-        // Footer text links (Contact, Careers, etc.)
+      a:not(.social-icons a) { // Target only text links, exclude social icons
         color: $grey-text;
         text-decoration: none;
         display: block; // Each link on its own line
@@ -534,4 +548,4 @@ body {
       }
     } // End .mobile-menu-footer
   } // End .nav-menu (mobile styles)
-} // End @media screen and (max-width: 960px)
+} // End @media screen and (max-width: ...)

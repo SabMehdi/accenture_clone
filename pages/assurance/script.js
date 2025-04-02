@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- Burger Menu Toggle ---
     menuIcon.addEventListener('click', () => {
-        // menuIcon.classList.toggle('is-active'); // Optional: for styling the burger icon itself
-        navMenu.classList.add('active'); // Use add, removal is handled by close button or resize
+        navMenu.classList.add('active'); // Show the menu panel
+        menuIcon.style.display = 'none'; // <<< HIDE the burger icon
     });
 
     // --- Close Button ---
@@ -20,19 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Mobile Submenu Open ---
     dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', (e) => {
-            // Only activate submenu logic on mobile
             if (window.innerWidth <= mobileBreakpoint) {
-                e.preventDefault(); // Prevent default link behavior on mobile tap
-
+                e.preventDefault();
                 const parentItem = toggle.closest('.nav-item.dropdown');
                 if (parentItem) {
-                    // Activate the specific submenu
                     parentItem.classList.add('submenu-active');
-                    // Add class to main menu to hide other top-level items
                     navMenu.classList.add('submenu-visible');
                 }
             }
-            // On desktop, the default link behavior might be desired, or nothing if it's just a hover menu
         });
     });
 
@@ -41,9 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener('click', () => {
             const parentItem = button.closest('.nav-item.dropdown');
             if (parentItem) {
-                // Deactivate the specific submenu
                 parentItem.classList.remove('submenu-active');
-                // Remove class from main menu to show top-level items again
                 navMenu.classList.remove('submenu-visible');
             }
         });
@@ -52,15 +45,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Helper Function to Close Menu and Reset States ---
     function closeMobileMenu() {
         navMenu.classList.remove('active');
-        navMenu.classList.remove('submenu-visible'); // Ensure this is removed
+        navMenu.classList.remove('submenu-visible');
 
-        // Find any active submenu item and deactivate it
         const activeSubmenu = navMenu.querySelector('.nav-item.submenu-active');
         if (activeSubmenu) {
             activeSubmenu.classList.remove('submenu-active');
         }
 
-        // menuIcon.classList.remove('is-active'); // Optional burger style reset
+        // Check if we are still in mobile view before showing the burger
+        // This prevents it from showing if resized to desktop while menu was open
+        if (window.innerWidth <= mobileBreakpoint) {
+             menuIcon.style.display = 'block'; // <<< SHOW the burger icon again
+        }
+        // If window is wider than breakpoint, CSS rules should already hide it,
+        // but setting it explicitly ensures it's hidden if JS ever showed it incorrectly.
+        else {
+             menuIcon.style.display = 'none';
+        }
     }
 
     // --- Close Menu on Resize to Desktop ---
@@ -68,22 +69,31 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+            // Always check the current state on resize finish
             if (window.innerWidth > mobileBreakpoint) {
-                // If menu is open when resizing to desktop, close it
+                // If menu is active when resizing to desktop, close it
                 if (navMenu.classList.contains('active')) {
-                   closeMobileMenu();
+                   closeMobileMenu(); // This will now also handle burger display
                 }
+                 // Ensure burger is hidden on desktop regardless of menu state
+                 menuIcon.style.display = 'none';
+            } else {
+                // If resizing back to mobile AND the menu is NOT active,
+                // ensure the burger icon is visible (CSS should handle this, but JS can reinforce)
+                 if (!navMenu.classList.contains('active')) {
+                    menuIcon.style.display = 'block';
+                 }
+                 // If menu IS active on mobile, burger should remain hidden (handled by open/close logic)
             }
-        }, 250); // Debounce resize event
+        }, 250);
     });
 
     // --- Optional: Close menu if clicking outside of it on mobile ---
     document.addEventListener('click', (event) => {
-        // Check if menu is active, click is outside menu and outside burger icon
         if (navMenu.classList.contains('active') &&
             !navMenu.contains(event.target) &&
-            !menuIcon.contains(event.target)) {
-            closeMobileMenu();
+            !menuIcon.contains(event.target)) { // Make sure click wasn't on the (now hidden) burger space
+            closeMobileMenu(); // This will now also show the burger
         }
     });
 
