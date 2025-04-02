@@ -1,33 +1,36 @@
-$primary-color: #a100ff;
-$background-color: #000;
-$text-color: #fff;
-$card-color: rgb(255, 0, 0);
-$spacer-height: 300vh;
-$body-margin-offset: -200px;
-$transition-duration: 0.4s;
-$fade-duration: 0.6s;
-$gap-size: 40px;
+// SCSS Variables
+$accent-purple: #A100FF;
+$white: #fff;
+$black: #000;
+$dark-bg: #111; // Mobile menu background
+$medium-dark-bg: #222; // Dropdown background
+$light-dark-bg: #333; // Borders, mobile dropdown bg
+$grey-text: #ccc; // Dropdown h4
+$cta-purple: #8000ff; // Hero icon bg
+$button-blue: #646cff; // Card button bg
+$button-blue-hover: #535bf2; // Card button hover bg
+$navbar-height: 80px;
 
+// Global Reset
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-body {
-  margin: 0 200px;
-  font-family: Arial, sans-serif;
-  background-color: $background-color;
-  color: $text-color;
-  text-align: center;
 
-  height: 200vh;
+body {
+  margin: 0 200px; // Consider if this global margin is intended or should be on a wrapper
+  font-family: Arial, sans-serif;
+  background-color: $black;
+  color: $white;
+  text-align: center; // Base text alignment
+  height: 200vh; // For demonstration/scroll testing
 }
 
-
-
+// Navbar Styles
 .navbar {
-  background-color: #000000;
-  height: 80px; /* Adjust as needed */
+  background-color: $black;
+  height: $navbar-height;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,281 +38,288 @@ body {
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid #333; /* Subtle line like image */
-}
+  border-bottom: 1px solid $light-dark-bg; /* Subtle line like image */
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  z-index: 1;
-  width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 25px; /* Add padding */
-  align-items: center;
-}
-
-.navbar-logo {
-  color: #fff;
-  justify-self: start;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1.8rem; /* Adjust size */
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-.logo-arrow {
-  color: #A100FF; /* Accenture purple */
-  margin-left: 2px; /* Adjust spacing */
-  font-weight: bold; /* Make it bolder if needed */
-  font-size: 2.2rem; /* Slightly larger */
-  line-height: 1; /* Adjust vertical alignment */
-}
-
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  text-align: center;
-}
-
-.nav-item {
-  height: 80px; /* Match navbar height */
-  position: relative; /* Needed for dropdown positioning */
-}
-
-.nav-links {
-  color: #fff;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 0 1rem;
-  height: 100%;
-  cursor: pointer;
-}
-
-.nav-links:hover {
-  color: #A100FF; /* Hover color */
-  border-bottom: 3px solid #A100FF; /* Optional hover indicator */
-}
-
-.nav-links i.dropdown-arrow {
-  margin-left: 5px;
-  font-size: 0.7em; /* Smaller arrow */
-}
-
-
-/* Right Side Items */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-
-.nav-icon-link,
-.nav-locale {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 1.5rem; /* Spacing */
-  display: flex;
-  align-items: center;
-}
-
-.nav-icon-link i,
-.nav-locale i {
-  margin-right: 5px; /* Space between icon and text */
-}
-
-.nav-icon-link:hover,
-.nav-locale:hover {
-  color: #A100FF;
-}
-
-/* Dropdown Menu Styling */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 80px; /* Position below the navbar */
-  left: 0;
-  background-color: #222; /* Dark background like image */
-  min-width: 500px; /* Adjust as needed */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
-  z-index: 10;
-  padding: 20px;
-  text-align: left;
-  justify-content: center;
-  gap: 30px;
-}
-
-.dropdown-column {
-  display: flex; /* Important for column layout */
-  width: 100%; /* Take full width of the column */
-  vertical-align: top;
-  break-inside: avoid-column; /* Prevent columns breaking inside */
-  gap: 30px;
-}
-
-
-.dropdown-column h4 {
-  color: #ccc;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-
-.dropdown-content a {
-  color: white;
-  padding: 8px 0px; /* Adjust padding */
-  text-decoration: none;
-  display: block;
-  font-size: 0.95rem; /* Slightly smaller */
-}
-
-.dropdown-content a:hover {
-  color: #A100FF;
-  background-color: transparent; /* No background on hover */
-}
-
-/* Show dropdown on hover (Desktop) */
-.nav-item.dropdown:hover .dropdown-content {
-  display: flex; /* Show dropdown on hover */
-  position: fixed;
-  right: 0;
-}
-
-
-/* Mobile Menu Icon */
-.menu-icon {
-  display: none; /* Hidden on desktop */
-  color: #fff;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-
-/* Mobile Responsive Styles */
-@media screen and (max-width: 960px) {
   .navbar-container {
-      padding: 0 20px; /* Adjust padding */
-  }
+    display: flex;
+    justify-content: space-between;
+    height: $navbar-height;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 25px; /* Add padding */
+    align-items: center;
 
-  .nav-menu {
+    .navbar-logo {
+      color: $white;
+      justify-self: start;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1.8rem; /* Adjust size */
+      font-weight: bold;
       display: flex;
-      flex-direction: column;
-      width: 100%;
-      /* height: calc(100vh - 80px); Remove fixed height */
-      position: absolute;
-      top: -1000px; /* Start hidden off-screen */
-      left: 0;
-      opacity: 1;
-      transition: all 0.5s ease;
-      background: #111; /* Darker mobile menu background */
-      padding-top: 2rem; /* Add some top padding */
-      padding-bottom: 2rem; /* Add some bottom padding */
-  }
+      align-items: center;
 
-  .nav-menu.active {
-      top: 80px; /* Bring it down below navbar */
-      opacity: 1;
-      z-index: 99;
-  }
+      .logo-arrow {
+        color: $accent-purple; /* Accenture purple */
+        margin-left: 2px; /* Adjust spacing */
+        font-weight: bold; /* Make it bolder if needed */
+        font-size: 2.2rem; /* Slightly larger */
+        line-height: 1; /* Adjust vertical alignment */
+      }
+    }
 
-  .nav-item {
-      width: 100%;
-      height: auto; /* Auto height for list items */
-  }
+    .menu-icon {
+      display: none; /* Hidden on desktop */
+      color: $white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
 
-   .nav-item.dropdown {
-      /* Adjust dropdown parent for mobile */
-  }
-
-
-  .nav-links {
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
       text-align: center;
-      padding: 1.5rem 1rem; /* Increase padding for touch */
-      width: 100%;
-      display: block; /* Make links full width */
-      border-bottom: 1px solid #333; /* Separator lines */
-  }
 
-   .nav-links:hover {
-      color: #A100FF;
-      border-bottom: 1px solid #333; /* Keep separator on hover */
-      background-color: #222; /* Slight hover background */
-  }
+      .nav-item {
+        height: $navbar-height; /* Match navbar height */
+        position: relative; /* Needed for dropdown positioning */
 
-  .nav-links i.dropdown-arrow {
-      float: right; /* Move arrow to the right */
-      margin-left: 0;
-      margin-right: 10px;
-      transition: transform 0.3s ease; /* Smooth arrow rotation */
-  }
+        .nav-links {
+          color: $white;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          padding: 0 1rem;
+          height: 100%;
+          cursor: pointer;
 
-  .nav-links.open i.dropdown-arrow {
-       transform: rotate(180deg); /* Rotate arrow when open */
-  }
+          &:hover {
+            color: $accent-purple; /* Hover color */
+            border-bottom: 3px solid $accent-purple; /* Optional hover indicator */
+          }
 
-  .navbar-right {
-      display: none; /* Hide desktop right items */
-  }
+          i.dropdown-arrow {
+            margin-left: 5px;
+            font-size: 0.7em; /* Smaller arrow */
+          }
+        }
 
-  /* Mobile specific list items (added via JS) */
-   .nav-item.mobile-only {
-       width: 100%;
-       height: auto;
-   }
-  .nav-item.mobile-only .nav-links {
-       text-align: center;
-       padding: 1.5rem 1rem;
-       width: 100%;
-       display: block;
-       border-bottom: 1px solid #333;
-   }
-   .nav-item.mobile-only .nav-links:hover {
-      color: #A100FF;
-      border-bottom: 1px solid #333;
-      background-color: #222;
-  }
+        // Dropdown Specific Styling (Desktop)
+        &.dropdown {
+          &:hover .dropdown-content {
+            display: flex; /* Show dropdown on hover */
+            position: fixed; // Keep original fixed positioning logic if intended
+            right: 0; // Keep original positioning logic if intended
+            // Note: 'fixed' + 'right:0' might behave unexpectedly depending on viewport width
+            // Consider 'absolute' positioning relative to .nav-item if issues arise
+          }
 
-  .menu-icon {
-      display: block; /* Show burger icon */
-  }
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            top: $navbar-height; /* Position below the navbar */
+            left: 0; // Aligns with the start of the nav item
+            background-color: $medium-dark-bg; /* Dark background like image */
+            min-width: 500px; /* Adjust as needed */
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            padding: 20px;
+            text-align: left;
+            justify-content: center; // Center the wrappers if width allows
+            gap: 30px; // Gap between wrappers
 
-  /* Mobile Dropdown adjustments */
-  .dropdown-content {
-      position: static; /* No absolute positioning in mobile */
-      display: none; /* Hidden by default, toggled by JS */
-      background-color: #333; /* Slightly different background */
-      width: 100%;
-      min-width: unset;
-      box-shadow: none;
-      padding: 0 0 10px 30px; /* Indent dropdown items */
-      column-count: 1; /* Single column on mobile */
-  }
+            .dropdown-wrapper {
+              display: flex; // Arrange title and column vertically
+              flex-direction: column;
 
-   .dropdown-content.active {
-      display: block; /* Show when active */
-  }
+              h4 {
+                color: $grey-text;
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+              }
 
-  .dropdown-column {
-      padding-top: 10px;
-  }
+              .dropdown-column {
+                display: flex; /* Important for column layout */
+                width: 100%; /* Take full width of the column */
+                vertical-align: top;
+                gap: 30px; // Gap between actual link columns
 
-  .dropdown-column h4 {
-      display: none; /* Hide column titles in mobile dropdown */
-  }
+                .dropdown-column-types {
+                  display: flex;
+                  flex-direction: column; // Links stack vertically
 
-  .dropdown-content a {
-      padding: 10px 0px;
-      font-size: 1rem;
-  }
-}
+                  a {
+                    color: $white;
+                    padding: 8px 0px; /* Adjust padding */
+                    text-decoration: none;
+                    display: block;
+                    font-size: 0.95rem; /* Slightly smaller */
 
+                    &:hover {
+                      color: $accent-purple;
+                      background-color: transparent; /* No background on hover */
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } // end &.dropdown
+      } // end .nav-item
+    } // end .nav-menu
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      color: $white;
+
+      .nav-icon-link,
+      .nav-locale {
+        color: $white;
+        text-decoration: none;
+        margin-left: 1.5rem; /* Spacing */
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 5px; /* Space between icon and text */
+        }
+
+        &:hover {
+          color: $accent-purple;
+        }
+      }
+    } // end .navbar-right
+  } // end .navbar-container
+
+  // Mobile Responsive Styles (nested within .navbar)
+  @media screen and (max-width: 960px) {
+    .navbar-container {
+      padding: 0 20px; /* Adjust padding */
+
+      .nav-menu {
+        display: flex; // Keep display flex for active state control
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: -1000px; /* Start hidden off-screen */
+        left: 0;
+        opacity: 1; // Opacity transition not strictly needed if using top
+        transition: top 0.5s ease; // Transition the 'top' property
+        background: $dark-bg; /* Darker mobile menu background */
+        padding-top: 2rem; /* Add some top padding */
+        padding-bottom: 2rem; /* Add some bottom padding */
+
+        &.active {
+          top: $navbar-height; /* Bring it down below navbar */
+          z-index: 99; // Ensure it's above content but below sticky navbar if needed
+        }
+
+        .nav-item {
+          width: 100%;
+          height: auto; /* Auto height for list items */
+
+          .nav-links {
+            text-align: center;
+            padding: 1.5rem 1rem; /* Increase padding for touch */
+            width: 100%;
+            display: block; /* Make links full width */
+            border-bottom: 1px solid $light-dark-bg; /* Separator lines */
+
+            &:hover {
+              color: $accent-purple;
+              border-bottom: 1px solid $light-dark-bg; /* Keep separator on hover */
+              background-color: $medium-dark-bg; /* Slight hover background */
+            }
+
+            i.dropdown-arrow {
+              float: right; /* Move arrow to the right */
+              margin-left: 0;
+              margin-right: 10px;
+              transition: transform 0.3s ease; /* Smooth arrow rotation */
+            }
+
+            &.open i.dropdown-arrow { // Assuming JS adds 'open' class
+              transform: rotate(180deg); /* Rotate arrow when open */
+            }
+          }
+
+          // Mobile dropdown adjustments (nested within .nav-item)
+          &.dropdown .dropdown-content {
+            position: static; /* No absolute positioning in mobile */
+            display: none; /* Hidden by default, toggled by JS */
+            background-color: $light-dark-bg; /* Slightly different background */
+            width: 100%;
+            min-width: unset;
+            box-shadow: none;
+            padding: 0 0 10px 30px; /* Indent dropdown items */
+
+            &.active { // Assuming JS adds 'active' class
+              display: block; /* Show when active */
+            }
+
+            // Remove wrappers/columns structure for mobile if simplifying
+            .dropdown-wrapper {
+                padding-top: 10px;
+                h4 {
+                    display: none; // Hide column titles
+                }
+                .dropdown-column {
+                    flex-direction: column; // Ensure single column structure
+                    gap: 0; // Reset gap if needed
+                    .dropdown-column-types {
+                        a {
+                          padding: 10px 0px;
+                          font-size: 1rem;
+                          &:hover {
+                              // Keep hover effect if desired
+                              color: $accent-purple;
+                              background-color: transparent;
+                          }
+                        }
+                    }
+                }
+            }
+          } // end mobile .dropdown-content
+
+          // Mobile only items (added via JS)
+          &.mobile-only {
+            width: 100%;
+            height: auto;
+            .nav-links { // Reuse existing nav-link styles where possible
+              text-align: center;
+              padding: 1.5rem 1rem;
+              width: 100%;
+              display: block;
+              border-bottom: 1px solid $light-dark-bg;
+              &:hover {
+                color: $accent-purple;
+                border-bottom: 1px solid $light-dark-bg;
+                background-color: $medium-dark-bg;
+              }
+            }
+          } // end .mobile-only
+
+        } // end mobile .nav-item
+      } // end mobile .nav-menu
+
+      .navbar-right {
+        display: none; /* Hide desktop right items */
+      }
+
+      .menu-icon {
+        display: block; /* Show burger icon */
+      }
+    } // end mobile .navbar-container
+  } // end @media
+} // end .navbar
+
+// Hero Section
 .hero {
   padding: 100px 20px;
 
@@ -324,60 +334,34 @@ body {
     margin: 20px 0;
     display: inline-flex;
     align-items: center;
+
     .cta-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #8000ff;
+      background-color: $cta-purple; // Use variable
       width: 40px;
       height: 40px;
       margin-left: 10px;
-      
+
       svg {
-          width: 30px;
-          height: 30px;
+        width: 30px;
+        height: 30px;
       }
     }
   }
+
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    background-color: $accent-purple; // Use variable
+    color: $white;
+    cursor: pointer;
+  }
 }
 
-.cta-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  border: none;
-  background-color: $primary-color;
-  color: $text-color;
-  cursor: pointer;
-}// Variables
-$font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-$text-color: rgba(255, 255, 255, 0.87);
-$bg-color: #242424;
-$primary-color: #646cff;
-$hover-color: #535bf2;
-$card-height: 400px;
-$border-radius: 8px;
-$transition-duration: 0.3s;
-
-// Mixins
-@mixin absolute-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-@mixin text-shadow($size) {
-  text-shadow: $size $size ($size * 2) rgba(0, 0, 0, 0.3);
-}
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-}
-
-
-// Card Container
+// Card Container & Cards
 .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -389,31 +373,33 @@ $transition-duration: 0.3s;
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
 }
 
-// Card styles
 .card {
   position: relative;
   width: 100%;
-  height: $card-height;
-  border-radius: $border-radius;
+  height: 400px;
+  border-radius: 8px;
   overflow: hidden;
-  transition: transform $transition-duration ease;
+  transition: transform 0.3s ease;
+  // CSS Custom Properties for dynamic values
   --bg-image: none;
   --gradient-color-1: rgba(64, 134, 168, 0.8);
   --gradient-color-2: rgba(89, 149, 126, 0.8);
 
   &::before {
-    content: '';
-    @include absolute-fill;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
@@ -426,15 +412,15 @@ $transition-duration: 0.3s;
   }
 
   &::after {
-    content: '';
-    @include absolute-fill;
-    background: linear-gradient(
-      45deg,
-      var(--gradient-color-1) 0%,
-      var(--gradient-color-2) 100%
-    );
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
     opacity: 0;
-    transition: opacity $transition-duration ease;
+    transition: opacity 0.3s ease;
     z-index: 2;
   }
 
@@ -442,31 +428,34 @@ $transition-duration: 0.3s;
     opacity: 1;
   }
 
-  // Card Content
   .card-content {
-    @include absolute-fill;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     padding: 20px;
     box-sizing: border-box;
     z-index: 3;
-    transition: transform $transition-duration ease;
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-  }
 
-  h1 {
-    font-size: 24px;
-    margin: 0 0 10px;
-    color: white;
-    text-align: left;
-    @include text-shadow(2px);
-  }
+    h1 {
+      font-size: 24px;
+      margin: 0 0 10px;
+      color: white;
+      text-align: left;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
 
-  p {
-    font-size: 16px;
-    color: white;
-    margin: 0;
-    text-align: left;
-    @include text-shadow(1px);
+    p {
+      font-size: 16px;
+      color: white;
+      margin: 0;
+      text-align: left;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
   }
 
   .hidden-text {
@@ -475,7 +464,7 @@ $transition-duration: 0.3s;
     left: 100%;
     top: 100px;
     padding: 20px;
-    transition: left $transition-duration ease;
+    transition: left 0.3s ease;
     box-sizing: border-box;
   }
 
@@ -483,170 +472,172 @@ $transition-duration: 0.3s;
     left: 0;
   }
 
-  // CTA Button
   .cta-button {
     position: absolute;
-    bottom: -50px;
+    bottom: -50px; // Start hidden below
     right: 20px;
     padding: 10px 20px;
-    background-color: $primary-color;
+    background-color: $button-blue; // Use variable
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: bottom $transition-duration ease, background-color $transition-duration ease;
+    transition: bottom 0.3s ease, background-color 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     max-width: calc(100% - 40px);
-    @include flex-center;
+    display: flex;
+    align-items: center;
     gap: 8px;
+    z-index: 4; // Ensure button is above gradient overlay
 
-    &:hover {
-      background-color: $hover-color;
-    }
-
-    .cta-icon {
-      @include flex-center;
+    .cta-icon { // Nested styles for icon within this button
+      display: flex;
+      align-items: center;
       width: 20px;
       height: 20px;
-
       svg {
         width: 100%;
         height: 100%;
       }
     }
+
+    &:hover {
+      background-color: $button-blue-hover; // Use variable
+    }
   }
 
   &:hover .cta-button {
-    bottom: 20px;
+    bottom: 20px; // Reveal on hover
   }
 }
 
+// Generic CTA Icon (if used elsewhere standalone)
 .cta-icon {
   display: inline-flex;
   align-items: center;
-  width: 20px;
-  height: 20px;
-
+  width: 20px; // Default size, override where needed
+  height: 20px; // Default size, override where needed
   svg {
     width: 100%;
     height: 100%;
   }
 }
 
+// Standalone Dropdown Component (if different from navbar)
 .dropdown {
   position: relative;
   cursor: pointer;
   text-align: left;
+
+  .dropdown-container { // Assumes this is the content part
+    display: none;
+    position: absolute;
+    background-color: $medium-dark-bg; // Example bg
+    border-top: 1px solid $button-blue; // Example border
+    z-index: 1000;
+    left: 0;
+    width: 100vw; // Example full width
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
-.dropdown-container {
-  display: none;
-  position: absolute;
-  background-color: #202020;
-  border-top: 1px solid $primary-color;
-  z-index: 1000;
-  left: 0;
-  width: 100vw;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  flex-direction: row;
-  justify-content: center;
-}
-
-
+// Carousel Container
 .carousel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
   .carousel {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
     align-self: center;
+  }
 
-    &-text {
-      text-align: left;
-      margin: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+  .carousel-text {
+    text-align: left;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
-      h3{
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        line-height: 1.2;
-      }
-
-      p{
-        font-size: 2rem;
-        margin-bottom: 20px;
-        line-height: 1.5;
-        font-weight: 400;
-      }
-        .learn-more{
-          display: inline-flex;
-          background-color: $background-color;
-          align-items: center;
-          color: white;
-          font-weight: bold;
-          padding: 10px 15px 10px 0;
-          font-size: 2rem;
-          text-decoration: none;
-          .cta-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #8000ff;
-            width: 40px;
-            height: 40px;
-            margin-left: 10px;
-            svg {
-                width: 30px;
-                height: 30px;
-            }
-          }
-        }
-      
+    h3 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.2;
     }
 
-    &-inner {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      width: 95%;
+    p {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-weight: 400;
     }
 
-    &-item {
-      display: flex;
-      flex-direction: row;
-      min-width: 100%;
-      box-sizing: border-box;
-
-      img {
-        width: 50%;
-        display: block;
-      }
-    }
-
-    &-control {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
+    .learn-more {
+      display: inline-flex;
+      background-color: $black; // Example background
+      align-items: center;
       color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 15px 10px 0;
+      font-size: 2rem;
+      text-decoration: none;
 
-      &.prev {
-        left: 10px;
+      .cta-icon { // Specific styling for this icon instance
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $cta-purple; // Use variable
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+        svg {
+          width: 30px;
+          height: 30px;
+        }
       }
+    }
+  }
 
-      &.next {
-        right: 10px;
-      }
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 95%; // Check if this width is intentional
+  }
+
+  .carousel-item {
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+    box-sizing: border-box;
+
+    img {
+      width: 50%;
+      display: block;
+    }
+  }
+
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+
+    &.prev {
+      left: 10px;
+    }
+    &.next {
+      right: 10px;
     }
   }
 
@@ -655,7 +646,7 @@ $transition-duration: 0.3s;
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
-    margin: 20px 300px;
+    margin: 20px 300px; // Large horizontal margin
 
     .carousel-play-buttons {
       display: flex;
@@ -664,13 +655,12 @@ $transition-duration: 0.3s;
       .nav-button.play {
         width: 50px;
         height: 50px;
-        background-color: #222;
+        background-color: $medium-dark-bg;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-
         &:hover {
-          background-color: #444;
+          background-color: #444; // Slightly lighter hover
         }
       }
     }
@@ -680,19 +670,18 @@ $transition-duration: 0.3s;
       align-items: center;
       gap: 15px;
 
-      .nav-button {
+      .nav-button { // General nav buttons (prev/next)
         width: 50px;
         height: 50px;
-        background-color: #222;
+        background-color: $medium-dark-bg;
         border: none;
         border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-
         &:hover {
-          background-color: #444;
+          background-color: #444; // Slightly lighter hover
         }
       }
 
@@ -704,8 +693,9 @@ $transition-duration: 0.3s;
   }
 }
 
+// Scroll Container & Sticky Component
 .scroll-container {
-  height: 100vh;
+  height: 100vh; // Example height
   position: relative;
 }
 
@@ -716,8 +706,9 @@ $transition-duration: 0.3s;
   width: 100%;
   z-index: 10;
   left: 0;
-  margin-left: $body-margin-offset;
-  margin-right: $body-margin-offset;
+  // Adjust negative margins carefully, might depend on parent padding/margin
+  margin-left: -200px;
+  margin-right: -200px;
 }
 
 .scroll-indicator {
@@ -733,6 +724,21 @@ $transition-duration: 0.3s;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+// Add bounce keyframes if not defined globally elsewhere
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+}
+
+
+// Parallax Cards Container
 .cards-container {
   position: relative;
 
@@ -743,74 +749,84 @@ $transition-duration: 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    z-index: 0; // Background behind cards
 
     h2 {
-      font-size: 7rem;
+      font-size: 7rem; // Large text
     }
   }
+
   .cards-wrapper {
     position: relative;
-    z-index: 1;
+    z-index: 1; // Cards above background
 
     .cards-content {
-      min-height: 100vh;
+      min-height: 100vh; // Ensure scroll space
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 8rem 1rem;
+      align-items: center; // Center align the content block
+      padding: 8rem 1rem; // Vertical padding
 
       .card-parallax {
-        background-image: url("https://placehold.co/610x406");
+        background-image: url("https://placehold.co/610x406"); // Placeholder
         padding: 1.5rem;
-        margin-bottom: 8rem;
-        max-width: 28rem;
+        margin-bottom: 8rem; // Spacing between cards
+        max-width: 28rem; // Card max width
         width: 100%;
         background-size: cover;
         background-position: center;
         position: relative;
-        overflow: hidden;
-        height: 400px;
-        transition: all 0.3s ease;
+        overflow: hidden; // Hide overflowing extra text
+        height: 400px; // Fixed height
+        transition: all 0.3s ease; // General transition for potential effects
 
         &:nth-child(1) {
-          align-self: flex-start;
+          align-self: flex-start; // Align first card left
         }
-
         &:nth-child(2) {
-          align-self: flex-end;
+          align-self: flex-end; // Align second card right
         }
+        // Add more nth-child rules for alternating alignment if needed
 
         h3 {
           font-size: 1.25rem;
           margin-bottom: 0.75rem;
-          color: #1f2937;
+          color: #1f2937; // Dark text color for contrast on light placeholder
           position: absolute;
-          bottom: 1rem;
-          transition: all 0.3s ease;
+          bottom: 1rem; // Position heading at bottom initially
+          left: 1.5rem; // Align with padding
+          right: 1.5rem; // Ensure it doesn't overflow
+          transition: all 0.3s ease; // Transition for hover effect
         }
 
         .card-extra {
           position: absolute;
-          bottom: -100%;
+          bottom: -100%; // Start hidden below the card
           left: 1.5rem;
           right: 1.5rem;
           padding: 1rem;
-          transform: translateY(100%);
+          transform: translateY(100%); // Ensure fully hidden
           opacity: 0;
-          transition: all 0.6s ease;
+          transition: all 0.6s ease; // Slower transition for reveal
           text-align: left;
+          color: $white; // Assuming dark overlay or background on hover
+          // Need background/overlay on hover for text visibility
         }
 
         &:hover {
+           // Example: Add an overlay on hover
+           // &::after { ... overlay styles ... }
+
           .card-extra {
             transform: translateY(0);
             opacity: 1;
-            bottom: 17rem;
+            bottom: 17rem; // Position revealed text (adjust as needed)
           }
 
           h3 {
-            bottom: calc(4rem + 100%);
+            // Move heading up when extra text is shown
+            bottom: calc(17rem + 1rem); // Position above revealed text + padding
+            // Adjust calculation based on revealed text height and desired spacing
           }
         }
       }
@@ -818,139 +834,148 @@ $transition-duration: 0.3s;
   }
 }
 
+// Generic Layout Container (like Footer section)
 .container {
   margin: auto;
   padding: 40px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.text-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.headline {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: $gap-size;
-}
-
-.links {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: $gap-size;
-
-  .column {
+  .text-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    text-align: left;
 
-    a {
-      color: $text-color;
-      text-decoration: none;
-      margin-bottom: 10px;
-      font-size: 1em;
+    .headline {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+
+        a {
+          color: rgba(255, 255, 255, 0.87);
+          text-decoration: none;
+          margin-bottom: 10px;
+          font-size: 1em;
+          &:hover {
+              color: $accent-purple; // Example hover
+          }
+        }
+      }
+    }
+
+    .footer { // Assuming this is text within the text-container
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+  }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      max-width: 50%; // Image takes up half the container max
+      height: auto;
     }
   }
 }
 
-.footer {
-  font-size: 0.9em;
-  margin-top: $gap-size;
-}
 
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  img {
-    max-width: 50%;
-    height: auto;
-  }
-}
+// Scroll Effect Wrapper (Image Reveal/Content Slide)
 .scroll-effect-wrapper {
   position: relative;
-  height: 300vh; 
+  height: 300vh; // Height determines scroll duration
 }
 
 .scroll-section {
   position: sticky;
   top: 0;
-  height: 100vh; 
-  width: 100%;   
-  display: flex;
-  flex-direction: row;
-  overflow: hidden; 
-}
-
-.scroll-image-container {
-  position: relative; 
-  top: auto;        
-  left: auto;
-  width: 100vw;     
   height: 100vh;
-  transform-origin: left center;
-  transition: width 0.3s ease-out; 
-  flex-shrink: 0; 
-}
-
-.hero-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.content {
-  position: relative;
-  top: auto;       
-  right: auto;
-  width: 50vw;     
-  height: 100vh;
-  padding: 2rem 4rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto;
-  opacity: 0;
-  transform: translateX(100%); 
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  flex-shrink: 0; 
-}
+  flex-direction: row; // Image and content side-by-side
+  overflow: hidden; // Clip content moving outside bounds
 
-.content.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+  .scroll-image-container {
+    position: relative; // Changed from original - check effect
+    // top: auto; // Not needed if relative
+    // left: auto; // Not needed if relative
+    width: 100vw; // Start full width
+    height: 100vh;
+    transform-origin: left center; // Scale/shrink from left
+    transition: width 0.3s ease-out; // Animate width change (if needed by JS)
+    flex-shrink: 0; // Prevent image container from shrinking due to flex layout initially
 
-.content-section {
-  padding: 2rem 0;
-  max-width: 800px; 
-  text-align: left;
-}
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+  }
 
-.content-section h2 {
-  margin-bottom: 1.5rem;
-  font-size: 2.5rem;
-}
+  .content {
+    position: relative; // Changed from original - check effect
+    // top: auto; // Not needed if relative
+    // right: auto; // Not needed if relative
+    width: 50vw; // Target width
+    height: 100vh;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto; // Allow content scrolling if needed
+    opacity: 0; // Start hidden
+    transform: translateX(100%); // Start off-screen right
+    transition: opacity 0.8s ease, transform 0.8s ease; // Animate reveal
+    flex-shrink: 0; // Prevent content from shrinking
 
-.paragraph-reveal {
-  opacity: 1;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+    &.visible { // Class added by JS when content should appear
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .content-section {
+      padding: 2rem 0;
+      max-width: 800px;
+      text-align: left;
+
+      h2 {
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+      }
+
+      .paragraph-reveal {
+        // Initial state (if different from default) - not strictly needed if using JS for class toggle
+        opacity: 1; // Start visible once parent .content.visible
+        transform: translateY(30px); // Optional start position for animation
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); // Animate properties
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+
+        // Example of animating on reveal (if JS adds a class to paragraphs too)
+        // &.visible {
+        //   opacity: 1;
+        //   transform: translateY(0);
+        // }
+      }
+    }
+  }
 }
-/* 
-.paragraph-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-} */
