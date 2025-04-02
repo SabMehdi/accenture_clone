@@ -167,6 +167,12 @@ body {
   .submenu-header{
     display: none;
   }
+  .submenu-nav {
+    display: inline-flex; // <<< CHANGE: Arrange wrappers horizontally on desktop
+    gap: 30px;          // <<< ADD: Space between the horizontal wrappers
+    width: 100%;        // <<< ADD: Allow it to take available width if needed
+    justify-content: center; // Align wrappers to the start (left)
+  }
   .dropdown-wrapper {
     display: flex; // Arrange title and column vertically
     flex-direction: column;
@@ -212,7 +218,9 @@ body {
 }
 // --- Desktop Dropdown Trigger ---
 .nav-item.dropdown:hover > .dropdown-content {
-  display: flex; // Show the dropdown on hover
+  display: flex;
+  position: fixed; // Show the dropdown on hover
+  right: 0;
 }
 
 // =========================================
