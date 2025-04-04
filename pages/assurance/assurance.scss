@@ -847,3 +847,116 @@ $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768p
     }
   }
 }
+
+
+// ===== STATS SECTION STYLES =====
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* --- Stats Variables --- */
+$stats-bg: #000000; // Same as hero background
+$stats-text: #ffffff;
+$stats-purple: #a100ff; // Accent purple from main nav potentially? Or adjust.
+$stats-desc-text: #e0e0e0; // Slightly off-white for description
+
+$stats-padding-y: 80px; // Vertical padding top/bottom for the section
+$stats-padding-x: 20px; // Horizontal padding for the container consistency
+$stats-max-width: 1200px; // Max width of content area
+$stats-grid-gap: 40px; // Gap between stat items
+$stats-line-height: 4px;
+$stats-line-width: 40px;
+$stats-breakpoint: 768px; // When the columns stack (adjust if needed)
+
+/* --- Stats Base Styles --- */
+.stats-section {
+  background-color: $stats-bg;
+  color: $stats-text;
+  padding: $stats-padding-y 0;
+
+  .stats-container {
+    max-width: $stats-max-width;
+    margin: 0 auto;
+    padding: 0 $stats-padding-x;
+
+    .stats-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem); // Responsive font size
+      font-weight: bold;
+      margin: 0 0 60px 0; // Space below title
+      text-align: left; // Align title left as in image
+    }
+
+    .stats-grid {
+      display: grid;
+      // Create 3 equal columns on desktop
+      grid-template-columns: repeat(3, 1fr);
+      gap: $stats-grid-gap; // Gap between columns (and rows when stacked)
+
+      .stat-item {
+        // No extra styles needed here unless you want borders, specific padding, etc.
+
+        .stat-line {
+          height: $stats-line-height;
+          width: $stats-line-width;
+          background-color: $stats-purple;
+          margin: 0 0 20px 0; // Space below line
+        }
+
+        .stat-number {
+          font-size: clamp(3rem, 8vw, 5rem); // Large responsive number
+          font-weight: bold;
+          line-height: 1.1;
+          margin: 0 0 15px 0; // Space below number
+          display: inline; // Keep percent sign tight
+
+          .percent-sign {
+            font-size: 0.6em; // Smaller percentage sign
+            vertical-align: baseline; // Align with number baseline
+            margin-left: 2px;
+          }
+        }
+
+        .stat-description {
+          font-size: clamp(0.9rem, 2vw, 1rem); // Responsive description text
+          line-height: 1.6;
+          color: $stats-desc-text;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+/* --- Stats Responsive Styles --- */
+@media (max-width: ($stats-breakpoint - 1px)) {
+  .stats-section {
+    padding: ($stats-padding-y * 0.7) 0; // Reduce padding slightly
+
+    .stats-container {
+      .stats-title {
+        text-align: center; // Center title on mobile
+        margin-bottom: 40px;
+      }
+
+      .stats-grid {
+        // Switch to a single column layout
+        grid-template-columns: 1fr;
+        gap: 50px; // Adjust vertical gap between stacked items
+
+        .stat-item {
+          text-align: center; // Center content within each item
+
+          .stat-line {
+            // Center the line
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15px;
+          }
+
+          .stat-number {
+             margin-bottom: 10px;
+             display: block; // Ensure centering works well
+          }
+        }
+      }
+    }
+  }
+}
