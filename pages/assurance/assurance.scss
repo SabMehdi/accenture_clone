@@ -1483,3 +1483,101 @@ $partner-gap: 1.5rem; // Gap between cards
   //   padding: 0; // Remove horizontal padding if it causes issues
   // }
 }
+
+
+// --- Performance Section Variables ---
+$performance-bg-color: #E3002B; // Approx bright red from image
+$performance-text-color: #ffffff;
+$performance-line-color: rgba(255, 255, 255, 0.5); // Semi-transparent white for lines
+$performance-card-gap: 1.5rem; // Gap between cards
+$performance-serif-font: 'Times New Roman', Times, serif; // Font similar to image
+$performance-card-height-desktop: 350px; // Define fixed desktop height
+$performance-card-height-mobile: 280px;  // Define fixed mobile height (can be same as desktop if preferred)
+
+
+// --- Performance Section Styles ---
+.performance-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+// --- Wrapper for Cards ---
+.performance-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap; // Allow wrapping
+  gap: $performance-card-gap;
+}
+
+// --- Individual Card Styling ---
+.performance-card {
+  // **Width is dynamic**: Based on flex-basis to fit 3 cards across
+  flex: 1 1 calc(33.333% - #{$performance-card-gap} * 2 / 3);
+  // **Height is fixed**: Use the defined variable
+  height: $performance-card-height-desktop;
+
+  // Keep min-width for very narrow screens before wrapping occurs
+  min-width: 280px;
+
+  background-color: $performance-bg-color;
+  position: relative;
+  overflow: hidden; // Important: content exceeding fixed height will be hidden
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; // Push content towards the bottom
+
+  // Add the background pattern - REPLACE with your actual image path
+  background-image: url('path/to/your/red-abstract-lines.svg'); // Use SVG or PNG
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+}
+
+// --- Card Content Area ---
+.performance-card .card-content {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem 2rem;
+}
+
+// --- Card Title Styling ---
+.performance-card .card-title {
+  color: $performance-text-color;
+  font-family: $performance-serif-font;
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+
+
+// --- Responsive Adjustments ---
+@media (max-width: 960px) {
+    // --- Performance Section Responsive ---
+    .performance-card {
+        // **Width is dynamic**: Take full available width
+        flex-basis: 100%;
+        // **Height is fixed**: Use the defined mobile height variable
+        height: $performance-card-height-mobile;
+        // Remove or adjust min-width if 100% basis is desired even on very narrow screens
+         min-width: 0; // Allows it to shrink below 280px if viewport is tiny
+    }
+
+    .performance-card .card-title {
+        font-size: 1.6rem; // Slightly smaller font on mobile
+    }
+}
+
+@media (max-width: 576px) {
+    .performance-card .card-content {
+        padding: 1.5rem; // Reduce padding on very small screens
+    }
+     .performance-card .card-title {
+        font-size: 1.4rem;
+    }
+    // Height is already set by the 960px breakpoint, no need to repeat unless
+    // you want a *different* fixed height for very small screens.
+    // .performance-card {
+    //   height: 250px; // Example: Even shorter on extra small screens
+    // }
+}
