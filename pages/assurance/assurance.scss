@@ -1581,3 +1581,139 @@ $performance-card-height-mobile: 280px;  // Define fixed mobile height (can be s
     //   height: 250px; // Example: Even shorter on extra small screens
     // }
 }
+
+/////////////////// // ===== TEAM SECTION STYLES =====
+// --- Team Section Variables ---
+$team-bg-color: #000000; // Same black background
+$team-text-color: #ffffff;
+$team-title-color: #cccccc; // Slightly lighter grey for title
+$team-gap: 2.5rem; // Gap between grid items (adjust as needed)
+$team-image-size: 120px; // Width and height of the image container
+
+// --- Team Section Styles ---
+.team-section {
+  background-color: $team-bg-color;
+  color: $team-text-color;
+  padding: 4rem 0;
+
+  .container { // Optional container
+      max-width: 1100px; // Adjust max-width as needed for 2 columns
+      margin: 0 auto;
+      padding: 0 1.5rem;
+  }
+}
+
+.team-main-title {
+  font-size: 2.5rem; // Consistent title size
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+  color: $team-text-color;
+}
+
+// --- Team Grid Layout ---
+.team-grid {
+  display: grid;
+  // Desktop: 2 equal columns
+  grid-template-columns: repeat(2, 1fr);
+  gap: $team-gap; // Rows and column gap
+}
+
+// --- Individual Team Card ---
+.team-card {
+  background-color: $team-bg-color; // Or transparent if section bg is the same
+  display: flex;
+  align-items: flex-start; // Align items to the top
+  gap: 1.5rem; // Gap between image and content
+}
+
+// --- Team Card Image ---
+.team-card__image {
+  flex: 0 0 $team-image-size; // Fixed width, don't grow/shrink
+  width: $team-image-size;
+  height: auto; // Let height be determined by image aspect ratio (or set to $team-image-size for square)
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto; // Maintain aspect ratio
+    // Optional: make images black and white
+    filter: grayscale(100%);
+    // Optional: if you want square images that crop:
+    // height: 100%;
+    // object-fit: cover;
+  }
+}
+
+// --- Team Card Content ---
+.team-card__content {
+  flex: 1; // Allow content to take remaining space
+  padding-top: 0.25rem; // Small padding to align top edge text slightly better with image top
+}
+
+.team-card__name {
+  font-size: 1.5rem; // Adjust size
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: $team-text-color;
+}
+
+.team-card__title {
+  font-size: 1rem; // Adjust size
+  line-height: 1.5;
+  color: $team-title-color;
+  margin: 0 0 1rem 0;
+}
+
+// --- Team Card Social Link ---
+.team-card__social {
+  margin-top: 1rem; // Space above icon
+  a {
+    color: $team-text-color;
+    text-decoration: none;
+    font-size: 1.2rem; // Size of the LinkedIn icon
+    display: inline-block; // Allows hover effects if needed
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: color.adjust($team-text-color, $lightness:30%); // Make icon brighter on hover
+    }
+  }
+}
+
+
+// --- Responsive Adjustments ---
+@media (max-width: 960px) {
+    .team-grid {
+        // Mobile: Switch to 1 column
+        grid-template-columns: 1fr;
+        // You might want a larger gap when stacked vertically
+        gap: $team-gap * 1.5;
+    }
+
+    // Optional: Adjust card alignment or image size on mobile if needed
+    .team-card {
+      align-items: center; // Center image and text vertically if preferred when stacked
+    }
+    .team-card__image {
+       flex-basis: 100px; // Smaller image on mobile?
+       width: 100px;
+    }
+    .team-card__name {
+       font-size: 1.3rem;
+    }
+    .team-card__title {
+       font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-card {
+        // Example: Stack image above text on very small screens
+        // flex-direction: column;
+        // align-items: flex-start; // Align left again
+        // text-align: left;
+    }
+    // .team-card__image {
+    //     margin-bottom: 1rem; // Add space below image if stacked
+    // }
+}
