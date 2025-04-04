@@ -1149,3 +1149,176 @@ $card-gap: 1.5rem; // Gap between cards in the second row
     font-size: 1.5rem;
   }
 }
+/////
+/// // ===== SEGMENTS SECTION STYLES =====
+
+// --- Segments Section Variables (adjust as needed) ---
+$segments-bg-color: #000000; // Black background
+$segments-text-primary: #ffffff; // White text
+$segments-text-secondary: #a0a0a0; // Grey text for inactive items
+$segments-accent-color: #8a2be2; // Purple accent (use your existing $accent-color if preferred)
+$segments-nav-width: 35%; // Width of the left navigation column
+$segments-gap: 15rem;     // Gap between nav and content
+
+section{  
+  margin: 0 200px;
+}
+
+// --- Segments Section General Styles ---
+.segments-section {
+  background-color: $segments-bg-color;
+  color: $segments-text-primary;
+  padding: 4rem 0; // Vertical padding
+
+  // Optional container for centering and max-width
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem; // Horizontal padding
+  }
+}
+
+.segments-main-title {
+  font-size: 2.5rem; // Adjust size as needed
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+.segments-container {
+  display: flex;
+  gap: $segments-gap;
+}
+
+// --- Left Navigation ---
+.segments-nav {
+  flex: 0 0 $segments-nav-width; // Don't grow, don't shrink, fixed basis
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 1.5rem; // Space between nav items
+  }
+
+  .segment-trigger {
+    background: none;
+    border: none;
+    padding: 0.5rem 0; // Adjust padding
+    margin: 0;
+    font-family: inherit; // Use body font
+    font-size: 1.8rem; // Large clickable text
+    font-weight: bold;
+    color: $segments-text-secondary; // Default greyish color
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative; // Needed for the ::before pseudo-element
+
+    &::before { // The small square indicator
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $segments-accent-color;
+        position: absolute;
+        left: -25px; // Position to the left of the text
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0; // Hidden by default
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      color:color.adjust($segments-text-secondary, $lightness: 15%); // Lighten on hover
+    }
+
+    &.active {
+      color: $segments-text-primary; // Bright white when active
+
+      &::before {
+          opacity: 1; // Show the square when active
+      }
+    }
+  }
+}
+
+// --- Right Content Area ---
+.segments-content {
+  flex: 1; // Takes remaining space
+  min-width: 0; // Prevents content from overflowing flex container
+}
+
+.segment-pane {
+  display: none; // Hide all panes by default
+
+  &.active {
+    display: block; // Show the active one
+    // Add animation if desired (fade in)
+    // animation: fadeIn 0.5s ease-in-out;
+  }
+}
+
+.segment-content-title {
+  font-size: 1.5rem; // Adjust size
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: $segments-text-primary;
+}
+
+.segment-pane p {
+  font-size: 1rem; // Adjust size
+  line-height: 1.6;
+  color: $segments-text-primary; // Or lighter grey if preferred
+  margin-bottom: 1.5rem;
+}
+
+.segment-image-wrapper {
+  margin-top: 1.5rem; // Space above image
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    // Optional: add border-radius, etc.
+  }
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: 992px) {
+    .segments-container {
+        flex-direction: column; // Stack nav and content
+        gap: 2rem; // Adjust gap for stacked layout
+    }
+
+    .segments-nav {
+        flex-basis: auto; // Reset flex-basis
+        width: 100%;
+        margin-bottom: 1.5rem; // Add space below nav when stacked
+
+        .segment-trigger {
+            font-size: 1.5rem; // Slightly smaller text on mobile
+             &::before {
+                 left: -20px; // Adjust indicator position slightly
+             }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .segments-main-title {
+        font-size: 2rem;
+    }
+    .segments-nav .segment-trigger {
+        font-size: 1.3rem;
+    }
+    .segment-content-title {
+        font-size: 1.3rem;
+    }
+}
+
+// --- Optional Fade-in Animation ---
+// @keyframes fadeIn {
+//   from { opacity: 0; }
+//   to { opacity: 1; }
+// }

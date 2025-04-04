@@ -127,5 +127,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   }
-    
+   /////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   const segmentTriggers = document.querySelectorAll('.segments-nav .segment-trigger');
+   const segmentPanes = document.querySelectorAll('.segments-content .segment-pane');
+
+   if (segmentTriggers.length === 0 || segmentPanes.length === 0) {
+       console.warn("Segments navigation or content panes not found.");
+       return; // Exit if elements aren't found
+   }
+
+   // Function to switch segments
+   function switchSegment(targetSegmentId) {
+       // Deactivate all triggers and panes
+       segmentTriggers.forEach(trigger => trigger.classList.remove('active'));
+       segmentPanes.forEach(pane => pane.classList.remove('active'));
+
+       // Find the matching trigger and pane
+       const activeTrigger = document.querySelector(`.segment-trigger[data-segment="${targetSegmentId}"]`);
+       const activePane = document.querySelector(`.segment-pane[data-segment="${targetSegmentId}"]`);
+
+       // Activate the selected ones
+       if (activeTrigger) {
+           activeTrigger.classList.add('active');
+       }
+       if (activePane) {
+           activePane.classList.add('active');
+       } else {
+           console.warn(`Content pane for segment "${targetSegmentId}" not found.`);
+       }
+   }
+
+   // Add click event listeners to triggers
+   segmentTriggers.forEach(trigger => {
+       trigger.addEventListener('click', (event) => {
+           const targetSegment = event.target.dataset.segment;
+           if (targetSegment) {
+               switchSegment(targetSegment);
+           }
+       });
+
+       // Optional: Add keyboard support (Enter/Space)
+       trigger.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault(); // Prevent default space scroll/enter submit
+                const targetSegment = event.target.dataset.segment;
+                if (targetSegment) {
+                    switchSegment(targetSegment);
+                }
+            }
+        });
+   });
 });

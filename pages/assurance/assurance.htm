@@ -242,58 +242,146 @@
       </div>
     </section>
 
-
     <section class="card-section">
-      <h3 class="section-title">Featured Articles</h3> 
+      <h3 class="section-title">Featured Articles</h3>
 
       <!-- Row 1: Single Horizontal Card -->
       <div class="card-row card-row--single">
-          <div class="card card--horizontal">
-              <div class="card__image-wrapper">
-                  <img src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off" alt="Person walking through a corridor of hanging, illuminated strands">
-              </div>
-              <div class="card__content">
-                  <p class="card__category">Déclarations de sinistre avec l'IA</p>
-                  <h2 class="card__title">Les déclarations de sinistre : un moment de vérité</h2>
-                  <!-- Added Link for the first card -->
-                  <a href="#" class="card__link" aria-label="Read more">
-                      <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-              </div>
+        <div class="card card--horizontal">
+          <div class="card__image-wrapper">
+            <img
+              src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off"
+              alt="Person walking through a corridor of hanging, illuminated strands">
           </div>
+          <div class="card__content">
+            <p class="card__category">Déclarations de sinistre avec l'IA</p>
+            <h2 class="card__title">Les déclarations de sinistre : un moment de
+              vérité</h2>
+            <!-- Added Link for the first card -->
+            <a href="#" class="card__link" aria-label="Read more">
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
       </div>
-  
+
       <!-- Row 2: Two Vertical Cards -->
       <div class="card-row card-row--double">
-          <div class="card card--vertical">
-              <div class="card__image-wrapper">
-                  <img src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off" alt="Person walking through a corridor of hanging, illuminated strands">
-              </div>
-              <div class="card__content">
-                  <p class="card__category">Déclarations de sinistre avec l'IA</p>
-                  <h2 class="card__title">Les déclarations de sinistre : un moment de vérité</h2>
-                  <!-- Replaced SVG with Font Awesome icon -->
-                  <a href="#" class="card__link" aria-label="Read more">
-                     <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-              </div>
+        <div class="card card--vertical">
+          <div class="card__image-wrapper">
+            <img
+              src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off"
+              alt="Person walking through a corridor of hanging, illuminated strands">
           </div>
-  
-          <div class="card card--vertical">
-              <div class="card__image-wrapper">
-                  <img src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off" alt="Person walking through a corridor of hanging, illuminated strands">
-              </div>
-              <div class="card__content">
-                   <p class="card__category">Déclarations de sinistre avec l'IA</p>
-                   <h2 class="card__title">Les déclarations de sinistre : un moment de vérité</h2>
-                   <!-- Replaced SVG with Font Awesome icon -->
-                   <a href="#" class="card__link" aria-label="Read more">
-                       <i class="fa-solid fa-arrow-right"></i>
-                   </a>
-              </div>
+          <div class="card__content">
+            <p class="card__category">Déclarations de sinistre avec l'IA</p>
+            <h2 class="card__title">Les déclarations de sinistre : un moment de
+              vérité</h2>
+            <!-- Replaced SVG with Font Awesome icon -->
+            <a href="#" class="card__link" aria-label="Read more">
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
+        </div>
+
+        <div class="card card--vertical">
+          <div class="card__image-wrapper">
+            <img
+              src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-insurance-index-mosaic-image1?ts=1721773189250&wid=625&fit=constrain&dpr=off"
+              alt="Person walking through a corridor of hanging, illuminated strands">
+          </div>
+          <div class="card__content">
+            <p class="card__category">Déclarations de sinistre avec l'IA</p>
+            <h2 class="card__title">Les déclarations de sinistre : un moment de
+              vérité</h2>
+            <!-- Replaced SVG with Font Awesome icon -->
+            <a href="#" class="card__link" aria-label="Read more">
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
       </div>
-  </section>
+    </section>
+
+    <section class="segments-section">
+      <div class="container">
+        <!-- Optional: Add a container for width control -->
+        <h2 class="segments-main-title">Segments couverts</h2>
+
+        <div class="segments-container">
+          <!-- Left Navigation -->
+          <nav class="segments-nav">
+            <ul>
+              <li>
+                <button class="segment-trigger active"
+                  data-segment="biens-risques">
+                  Biens et risques divers
+                </button>
+              </li>
+              <li>
+                <button class="segment-trigger" data-segment="assurance-vie">
+                  Assurance vie et rente
+                </button>
+              </li>
+              <li>
+                <button class="segment-trigger"
+                  data-segment="avantages-collectifs">
+                  Avantages collectifs et volontaires
+                </button>
+              </li>
+              <!-- Add more list items with buttons here if needed -->
+            </ul>
+          </nav>
+
+          <!-- Right Content Area -->
+          <div class="segments-content">
+            <!-- Segment 1 Content (Visible by default) -->
+            <div class="segment-pane active" data-segment="biens-risques">
+              <h3 class="segment-content-title">Biens et risques divers</h3>
+              <p>De l'assurance habitation et automobile à l'assurance cyber et
+                spécialisée, nous travaillons avec des clients de tous les
+                secteurs de l'assurance dommages et intérêts, tant personnels
+                que commerciaux.</p>
+              <div class="segment-image-wrapper">
+                <img src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-Property-Casualty:rad-16x9?ts=1739270949363&fit=constrain&dpr=on,1.5&wid=480"
+                  alt="Two women arranging pottery on a table">
+                <!-- Use the actual crop provided: https://i.imgur.com/uN3R09b.png -->
+              </div>
+            </div>
+
+            <!-- Segment 2 Content (Hidden by default) -->
+            <div class="segment-pane" data-segment="assurance-vie">
+              <h3 class="segment-content-title">Assurance vie et rente</h3>
+              <p>Description pour l'assurance vie et rente. Nous offrons des
+                solutions complètes pour sécuriser votre avenir financier et
+                celui de vos proches.</p>
+              <div class="segment-image-wrapper">
+                <img
+                  src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-Life-Annuity:rad-16x9?ts=1739270949288&fit=constrain&dpr=on,1.5&wid=480"
+                  alt="Placeholder Vie et Rente">
+                <!-- Replace with actual image -->
+              </div>
+            </div>
+
+            <!-- Segment 3 Content (Hidden by default) -->
+            <div class="segment-pane" data-segment="avantages-collectifs">
+              <h3 class="segment-content-title">Avantages collectifs et
+                volontaires</h3>
+              <p>Contenu sur les avantages collectifs et volontaires. Protégez
+                vos employés avec des régimes d'assurance groupe adaptés à vos
+                besoins.</p>
+              <div class="segment-image-wrapper">
+                <img
+                  src="https://dynamicmedia.accenture.com/is/image/accenture/Accenture-Group-Voluntary-Benefits:rad-16x9?ts=1739270949327&fit=constrain&dpr=on,1.5&wid=480"
+                  alt="Placeholder Avantages Collectifs">
+                <!-- Replace with actual image -->
+              </div>
+            </div>
+            <!-- Add more content panes here matching the button data-segment values -->
+          </div>
+        </div>
+      </div>
+    </section>
     <main
       style="height: 150vh; padding-top: 160px; padding-left: 20px; padding-right: 20px; text-align: center; background: #eee; color:#333;">
       <!-- IMPORTANT: Adjusted padding-top = navbar-height (80px) + purple-nav-height (60px) + buffer (20px) -->
