@@ -754,3 +754,96 @@ $purple-breakpoint-mobile: 960px;
     }
   }
 }
+
+// ===== HERO SECTION STYLES =====
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* --- Hero Variables --- */
+$hero-bg: #000000;
+$hero-text: #ffffff;
+$hero-padding-y: 60px; // Vertical padding top/bottom for the section
+$hero-padding-x: 20px; // Horizontal padding for the container consistency
+$hero-max-width: 1200px; // Max width of content area (like navbars)
+$hero-gap: 40px;       // Space between image and text columns
+$hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768px or 960px)
+
+/* --- Hero Base Styles --- */
+.hero-section {
+  background-color: $hero-bg;
+  color: $hero-text;
+  padding: $hero-padding-y 0;
+  overflow: hidden; // Helps contain elements
+
+  .hero-container {
+    max-width: $hero-max-width;
+    margin: 0 auto;
+    padding: 0 $hero-padding-x;
+    display: flex;
+    align-items: center; // Vertically align items in columns
+    gap: $hero-gap;      // Space between columns
+
+    .hero-image-col {
+      flex: 1 1 55%; // Allow shrinking, prefer 55% width initially
+      max-width: 55%; // Ensure it doesn't exceed this on large screens if text is short
+
+      .hero-illustration {
+        display: block;   // Remove extra space below image
+        width: 100%;     // Make image scale within its column
+        height: auto;    // Maintain aspect ratio
+      }
+    }
+
+    .hero-text-col {
+      flex: 1 1 45%; // Allow shrinking, prefer 45% width
+      max-width: 45%;
+
+      .hero-headline {
+        font-size: clamp(2rem, 5vw, 3.2rem); // Responsive font size (min, preferred, max)
+        font-weight: bold;
+        line-height: 1.2;
+        margin: 0 0 25px 0; // Space below headline
+      }
+
+      .hero-paragraph {
+        font-size: clamp(1rem, 2.5vw, 1.15rem); // Responsive font size
+        line-height: 1.6;
+        margin: 0;
+        color: #e0e0e0; // Slightly off-white for paragraph if desired
+      }
+    }
+  }
+}
+
+/* --- Hero Responsive Styles --- */
+@media (max-width: ($hero-breakpoint - 1px)) {
+  .hero-section {
+    padding: ($hero-padding-y * 0.7) 0; // Slightly reduce padding on mobile
+
+    .hero-container {
+      flex-direction: column; // Stack columns vertically
+      text-align: center;    // Center text when stacked
+      gap: 30px;             // Adjust vertical gap
+
+      .hero-image-col {
+        flex-basis: auto; // Reset flex properties
+        max-width: 85%;   // Limit image width a bit, centered due to container margin auto
+        order: 1;         // Keep image first
+      }
+
+      .hero-text-col {
+        flex-basis: auto; // Reset flex properties
+        max-width: 100%;  // Allow text to take full width
+        order: 2;         // Text comes after image
+
+        .hero-headline {
+          // Font size already responsive via clamp()
+          margin-bottom: 20px; // Adjust margin if needed
+        }
+
+        .hero-paragraph {
+           // Font size already responsive via clamp()
+        }
+      }
+    }
+  }
+}
