@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assurance</title>
     <link rel="stylesheet" href="out.css" />
-    <!-- Optional: Add Font Awesome for icons -->
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-    <script defer src="script.js"></script> <!-- Added defer attribute -->
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script defer src="script.js"></script>
   </head>
   <body>
     <nav class="navbar">
@@ -23,169 +21,180 @@
           <i class="fas fa-bars"></i>
         </div>
 
-    <!-- Navigation Menu Structure -->
-    <ul class="nav-menu" id="nav-menu-list">
-      <!-- Mobile Only Header (Shown via CSS Media Query) -->
-      <div class="mobile-menu-header">
-        <button class="close-menu-btn" id="close-menu">
-          <i class="fas fa-times"></i>
-        </button>
-        <!-- Removed the duplicate UL and content from here -->
-        <div class="mobile-header-right">
-           <a href="#" class="nav-icon-link"><i class="fas fa-search"></i></a>
-           <a href="#" class="nav-locale">
-             <i class="fas fa-globe"></i> France
-             <i class="fas fa-chevron-down"></i>
-           </a>
-         </div>
-      </div>
-
-      <!-- === Main Navigation Items (Visible on Desktop, stacked on Mobile) === -->
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-links" id="expertises-toggle">
-          Expertises
-          <!-- Desktop Arrow -->
-          <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
-          <!-- Mobile Arrow -->
-          <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
-        </a>
-        <!-- Submenu Content (Same structure as before) -->
-        <div class="dropdown-content">
-          <!-- Submenu Header (Mobile) -->
-          <div class="submenu-header">
-            <button class="submenu-back-btn">
-              <i class="fas fa-chevron-left"></i>
-              <span>Expertises</span>
+        <ul class="nav-menu" id="nav-menu-list">
+          <div class="mobile-menu-header">
+            <button class="close-menu-btn" id="close-menu">
+              <i class="fas fa-times"></i>
             </button>
-          </div>
-          <!-- Submenu Links Area -->
-          <div class="submenu-nav">
-            <div class="dropdown-wrapper">
-              <h4>Expertises</h4>
-              <div class="dropdown-column">
-                <div class="dropdown-column-types">
-                  <a href="#">Automatisation</a>
-                  <a href="#">Budget base zéro (ZBB)</a>
-                  <a href="#">Business Process Services</a>
-                  <a href="#">Cloud</a>
-                  <a href="#">Conduite du changement</a>
-                  <a href="#">Conseil en technologies</a>
-                  <a href="#">Développement durable</a>
-                  <a href="#">E-commerce</a>
-                  <a href="#">Expérience Client</a>
-                  <a href="#">Finance</a>
-                  <a href="#">Fusions et acquisitions</a>
-                  <a href="#">Infrastructure</a>
-                </div>
-                <!-- Removed duplicate column for brevity -->
-              </div>
-            </div>
-            <div class="dropdown-wrapper">
-              <h4>Secteurs d'activité</h4>
-              <div class="dropdown-column">
-                <div class="dropdown-column-types">
-                  <a href="#">Aéronautique et Défense</a>
-                  <a href="#">Assurance</a>
-                  <a href="#">Automobile</a>
-                  <a href="#">Banque</a>
-                  <a href="#">Biens et services de consommation</a>
-                  <a href="#">Capital Markets</a>
-                  <a href="#">Chimie</a>
-                  <a href="#">Communications et Médias</a>
-                  <a href="#">Energie</a>
-                  <a href="#">High-tech</a>
-                </div>
-                 <!-- Removed duplicate column for brevity -->
-              </div>
+            <div class="mobile-header-right">
+              <a href="#" class="nav-icon-link"><i class="fas fa-search"></i></a>
+              <a href="#" class="nav-locale">
+                <i class="fas fa-globe"></i> France
+                <i class="fas fa-chevron-down"></i>
+              </a>
             </div>
           </div>
-        </div>
-      </li>
 
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-links">
-          Découvrir Accenture
-          <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
-          <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
-        </a>
-        <div class="dropdown-content">
-          <div class="submenu-header">
-            <button class="submenu-back-btn">
-              <i class="fas fa-chevron-left"></i>
-              <span>Découvrir Accenture</span>
-            </button>
-          </div>
-          <div class="submenu-nav">
-            <div class="dropdown-wrapper">
-              <h4>À propos</h4>
-              <div class="dropdown-column">
-                <div class="dropdown-column-types">
-                  <a href="#">Qui sommes-nous ?</a>
-                  <a href="#">Notre histoire</a>
-                  <a href="#">Nos valeurs</a>
-                  <a href="#">Leadership</a>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-links" id="expertises-toggle">
+              Expertises
+              <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+              <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+            </a>
+            <div class="dropdown-content">
+              <div class="submenu-header">
+                <button class="submenu-back-btn">
+                  <i class="fas fa-chevron-left"></i>
+                  <span>Expertises</span>
+                </button>
+              </div>
+              <div class="submenu-nav">
+                <div class="dropdown-wrapper">
+                  <h4>Expertises</h4>
+                  <div class="dropdown-column">
+                    <div class="dropdown-column-types">
+                      <a href="#">Automatisation</a>
+                      <a href="#">Budget base zéro (ZBB)</a>
+                      <a href="#">Business Process Services</a>
+                      <a href="#">Cloud</a>
+                      <a href="#">Conduite du changement</a>
+                      <a href="#">Conseil en technologies</a>
+                      <a href="#">Développement durable</a>
+                      <a href="#">E-commerce</a>
+                      <a href="#">Expérience Client</a>
+                      <a href="#">Finance</a>
+                      <a href="#">Fusions et acquisitions</a>
+                      <a href="#">Infrastructure</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-wrapper">
+                  <h4>Secteurs d'activité</h4>
+                  <div class="dropdown-column">
+                    <div class="dropdown-column-types">
+                      <a href="#">Aéronautique et Défense</a>
+                      <a href="#">Assurance</a>
+                      <a href="#">Automobile</a>
+                      <a href="#">Banque</a>
+                      <a href="#">Biens et services de consommation</a>
+                      <a href="#">Capital Markets</a>
+                      <a href="#">Chimie</a>
+                      <a href="#">Communications et Médias</a>
+                      <a href="#">Energie</a>
+                      <a href="#">High-tech</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </li>
+          </li>
 
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-links">
-          Carrières
-          <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
-          <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
-        </a>
-        <div class="dropdown-content">
-          <div class="submenu-header">
-            <button class="submenu-back-btn">
-              <i class="fas fa-chevron-left"></i>
-              <span>Carrières</span>
-            </button>
-          </div>
-          <div class="submenu-nav">
-            <div class="dropdown-wrapper">
-              <h4>Rejoignez-nous</h4>
-              <div class="dropdown-column">
-                <div class="dropdown-column-types">
-                  <a href="#">Offres d'emploi</a>
-                  <a href="#">Stages et Alternance</a>
-                  <a href="#">La vie chez Accenture</a>
-                  <a href="#">Processus de recrutement</a>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-links">
+              Découvrir Accenture
+              <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+              <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+            </a>
+            <div class="dropdown-content">
+              <div class="submenu-header">
+                <button class="submenu-back-btn">
+                  <i class="fas fa-chevron-left"></i>
+                  <span>Découvrir Accenture</span>
+                </button>
+              </div>
+              <div class="submenu-nav">
+                <div class="dropdown-wrapper">
+                  <h4>À propos</h4>
+                  <div class="dropdown-column">
+                    <div class="dropdown-column-types">
+                      <a href="#">Qui sommes-nous ?</a>
+                      <a href="#">Notre histoire</a>
+                      <a href="#">Nos valeurs</a>
+                      <a href="#">Leadership</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </li>
+          </li>
 
-      <!-- Mobile Only Footer (Shown via CSS Media Query) -->
-      <div class="mobile-menu-footer">
-        <a href="#">Contact Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Locations</a>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-    </ul> <!-- End nav-menu -->
-        <!-- Desktop Right-Side Icons -->
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-links">
+              Carrières
+              <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+              <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+            </a>
+            <div class="dropdown-content">
+              <div class="submenu-header">
+                <button class="submenu-back-btn">
+                  <i class="fas fa-chevron-left"></i>
+                  <span>Carrières</span>
+                </button>
+              </div>
+              <div class="submenu-nav">
+                <div class="dropdown-wrapper">
+                  <h4>Rejoignez-nous</h4>
+                  <div class="dropdown-column">
+                    <div class="dropdown-column-types">
+                      <a href="#">Offres d'emploi</a>
+                      <a href="#">Stages et Alternance</a>
+                      <a href="#">La vie chez Accenture</a>
+                      <a href="#">Processus de recrutement</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <div class="mobile-menu-footer">
+            <a href="#">Contact Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Locations</a>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </ul>
         <div class="navbar-right">
           <a href="#" class="nav-icon-link"><i class="fas fa-search"></i></a>
           <a href="#" class="nav-locale">
             <i class="fas fa-globe"></i> France
           </a>
         </div>
-      </div> <!-- End navbar-container -->
-    </nav> <!-- End navbar -->
+      </div>
+    </nav>
 
-    <!-- Example Page Content (Optional) -->
-    <main style="height: 150vh; padding: 100px 20px; text-align: center;">
+    <nav class="purple-nav-navbar" id="purpleNavbar">
+      <div class="purple-nav-container">
+        <a href="#" class="purple-nav-brand">Assurance</a>
+        <button class="purple-nav-toggle" id="purpleNavToggle" aria-label="Toggle secondary navigation" aria-expanded="false" aria-controls="purpleNavMenu">
+          <i class="fas fa-chevron-down purple-toggle-icon"></i>
+        </button>
+        <ul class="purple-nav-menu" id="purpleNavMenu">
+          <li class="purple-nav-item">
+            <a href="#" class="purple-nav-link">Nos activités</a>
+          </li>
+          <li class="purple-nav-item">
+            <a href="#" class="purple-nav-link">Nos partenaires</a>
+          </li>
+          <li class="purple-nav-item">
+            <a href="#" class="purple-nav-link">Dirigeants</a>
+          </li>
+          <li class="purple-nav-item">
+            <a href="#" class="purple-nav-link">Carrières</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main style="height: 150vh; padding-top: 160px; padding-left: 20px; padding-right: 20px; text-align: center; background: #eee; color:#333;">
+       <!-- IMPORTANT: Adjusted padding-top = navbar-height (80px) + purple-nav-height (60px) + buffer (20px) -->
       <h1>Page Content Goes Here</h1>
-      <p>Scroll down to see sticky nav.</p>
+      <p>Scroll down to see sticky navs.</p>
+      <p>The top navbar (Accenture) should function independently from the purple one below it.</p>
     </main>
 
   </body>

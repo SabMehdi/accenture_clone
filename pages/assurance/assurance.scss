@@ -1,6 +1,8 @@
 // =========================================
 // Variables
 // =========================================
+@use "sass:color";
+
 $accent-purple: #a100ff;
 $white: #fff;
 $black: #000;
@@ -164,13 +166,13 @@ body {
   text-align: left;
   justify-content: center; // Center the wrappers if width allows
   gap: 30px; // Gap between wrappers
-  .submenu-header{
+  .submenu-header {
     display: none;
   }
   .submenu-nav {
     display: inline-flex; // <<< CHANGE: Arrange wrappers horizontally on desktop
-    gap: 30px;          // <<< ADD: Space between the horizontal wrappers
-    width: 100%;        // <<< ADD: Allow it to take available width if needed
+    gap: 30px; // <<< ADD: Space between the horizontal wrappers
+    width: 100%; // <<< ADD: Allow it to take available width if needed
     justify-content: center; // Align wrappers to the start (left)
   }
   .dropdown-wrapper {
@@ -495,9 +497,9 @@ body {
           }
           // Container for links within a section
           .dropdown-column {
-             // Removed display: contents here if it was added previously, not needed if wrappers above handle it
+            // Removed display: contents here if it was added previously, not needed if wrappers above handle it
             .dropdown-column-types {
-               // Removed display: contents here if it was added previously, not needed if wrappers above handle it
+              // Removed display: contents here if it was added previously, not needed if wrappers above handle it
               a {
                 // Actual submenu links
                 color: $white;
@@ -528,7 +530,8 @@ body {
       flex-shrink: 0; // Prevent footer from shrinking
       margin-top: auto; // Push footer to the bottom if content is short
 
-      a:not(.social-icons a) { // Target only text links, exclude social icons
+      a:not(.social-icons a) {
+        // Target only text links, exclude social icons
         color: $grey-text;
         text-decoration: none;
         display: block; // Each link on its own line
@@ -557,3 +560,197 @@ body {
     } // End .mobile-menu-footer
   } // End .nav-menu (mobile styles)
 } // End @media screen and (max-width: ...)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* --- Variables for Purple Navbar --- */
+$purple-nav-bg: #3a006f;
+$purple-nav-active-bg: #6a00a8;
+$purple-nav-text: #ffffff;
+$purple-nav-hover-bg: rgba(255, 255, 255, 0.1);
+// VVVV FIXED VVVV Use color.adjust from sass:color module
+$purple-nav-mobile-bg: color.adjust(
+  $purple-nav-bg,
+  $lightness: -5%
+); // Slightly darker for mobile dropdown
+
+$purple-nav-height: 60px;
+$purple-nav-padding-x: 20px; // Horizontal padding for the main navbar
+$purple-nav-link-padding-x: 18px; // Horizontal padding for links
+$purple-nav-link-padding-y-mobile: 15px; // Vertical padding for mobile links
+
+$purple-nav-brand-size: 1.3em;
+$purple-nav-link-size: 0.95em;
+
+$purple-nav-underline-thickness: 2px;
+$purple-nav-underline-offset: 10px; // Distance from bottom
+
+$purple-nav-transition: background-color 0.3s ease, max-height 0.3s ease-in-out;
+$purple-nav-max-width: 1200px;
+$purple-nav-z-index: 998; // <<<< IMPORTANT: Below Accenture nav z-index (999)
+
+$purple-breakpoint-mobile: 960px;
+
+/* --- Base Styles for Purple Navbar --- */
+.purple-nav-navbar {
+  background-color: $purple-nav-bg;
+  color: $purple-nav-text;
+  padding: 0 $purple-nav-padding-x;
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky; // Stays in flow until it hits the top offset
+  // VVVV IMPORTANT VVVV Adjust this based on the ACTUAL height of the FIRST navbar (.navbar)
+  top: $navbar-height; // Use the variable defined for the first navbar
+  z-index: $purple-nav-z-index;
+
+  .purple-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $purple-nav-height;
+    max-width: $purple-nav-max-width;
+    margin: 0 auto;
+    position: relative; // Needed for absolute positioning of mobile menu if used
+
+    .purple-nav-brand {
+      color: $purple-nav-text;
+      text-decoration: none;
+      font-size: $purple-nav-brand-size;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .purple-nav-toggle {
+      display: none; // Hidden Desktop
+      background: none;
+      border: none;
+      color: $purple-nav-text;
+      cursor: pointer;
+      padding: 5px; // Padding around the icon
+      margin-left: 15px;
+      line-height: 1; // Helps center icon vertically sometimes
+
+      .purple-toggle-icon { // Targets the <i> tag now
+        display: inline-block; // Needed for transform
+        font-size: 1.4rem; // Adjust icon size as desired (try 1.2rem, 1.4rem, 1.6rem)
+        transition: transform 0.3s ease-in-out; // Animate rotation
+        vertical-align: middle; // Helps vertical alignment
+      }
+    }
+
+    .purple-nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+
+      .purple-nav-item {
+        display: flex;
+        align-items: center;
+
+        .purple-nav-link {
+          color: $purple-nav-text;
+          text-decoration: none;
+          padding: 0 $purple-nav-link-padding-x;
+          display: flex;
+          align-items: center;
+          height: 100%;
+          position: relative;
+          font-size: $purple-nav-link-size;
+          transition: background-color 0.3s ease; // Use specific transition
+
+          &:hover {
+            background-color: $purple-nav-hover-bg;
+          }
+        }
+
+        &.purple-nav-active {
+          background-color: $purple-nav-active-bg;
+
+          .purple-nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: $purple-nav-underline-offset;
+            left: $purple-nav-link-padding-x;
+            right: $purple-nav-link-padding-x;
+            height: $purple-nav-underline-thickness;
+            background-color: $purple-nav-text;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* --- Purple Nav Mobile Media Query --- */
+@media (max-width: ($purple-breakpoint-mobile - 1px)) {
+  .purple-nav-navbar {
+    .purple-nav-container {
+      .purple-nav-toggle {
+        display: block; // Show toggle button on mobile
+      }
+
+      .purple-nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: $purple-nav-height; // Below the purple navbar
+        left: 0;
+        width: 100%;
+        background-color: $purple-nav-mobile-bg; // Use the adjusted color variable
+        padding: 0;
+        height: auto;
+        max-height: 0; // Start hidden
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        margin: 0;
+
+        .purple-nav-item {
+          width: 100%;
+          height: auto;
+          border-bottom: 1px solid rgba($purple-nav-text, 0.1);
+          margin: 0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &.purple-nav-active {
+            .purple-nav-link::after {
+              display: none; // Hide desktop underline on mobile
+            }
+          }
+
+          .purple-nav-link {
+            width: 100%;
+            padding: $purple-nav-link-padding-y-mobile $purple-nav-padding-x;
+            height: auto;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            position: static; // Reset position if needed
+
+            &::after {
+              display: none; // Ensure underline is hidden
+            }
+          }
+        }
+      }
+    }
+
+    /* --- State Class Applied to purple-nav-navbar --- */
+    &.purple-menu-open {
+      .purple-nav-menu {
+        max-height: 500px; // Or enough to show items
+        transition: max-height 0.4s ease-in;
+      }
+      .purple-nav-toggle {
+        .purple-toggle-icon {
+          transform: rotate(180deg); // Flips chevron-down to look like chevron-up
+        }
+      }
+    }
+  }
+}
