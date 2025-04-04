@@ -1618,3 +1618,115 @@ $careers-svg-path: 'https://www.accenture.com/etc.clientlibs/cio-sites/clientlib
          max-width: 300px; // Limit max width
      }
 }
+
+// =========================================
+// ===== FOOTER STYLES ====================
+$accent-purple: #8a2be2;
+
+.site-footer {
+  background-color: #080808;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .footer-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    .footer-tagline {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+
+      .footer-nav-column {
+        display: flex;
+        flex-direction: column;
+
+        a {
+          color: rgba(255, 255, 255, 0.87);
+          text-decoration: none;
+          margin-bottom: 10px;
+          font-size: 1em;
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: $accent-purple;
+          }
+        }
+      }
+    }
+
+    .footer-copyright {
+      font-size: 0.9em;
+      margin-top: 40px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .footer-branding {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      max-width: 50%;
+      height: auto;
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+
+    .footer-info {
+      width: 100%;
+    }
+
+    .footer-branding {
+      width: 100%;
+      justify-content: flex-start;
+      margin-top: 20px;
+
+      img {
+        max-width: 30%;
+      }
+    }
+
+    .footer-nav {
+      gap: 20px 40px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-tagline {
+    font-size: 1.5em;
+  }
+}
