@@ -1,6 +1,3 @@
-// =========================================
-// Variables
-// =========================================
 @use "sass:color";
 @use "sass:math"; // Needed for division potentially
 
@@ -15,9 +12,6 @@ $navbar-height: 80px;
 $mobile-menu-transition: right 0.4s ease-in-out;
 $desktop-breakpoint: 961px; // Point at which mobile styles turn off
 
-// =========================================
-// Reset & Body
-// =========================================
 * {
   box-sizing: border-box;
   padding: 0;
@@ -27,12 +21,8 @@ body {
   font-family: Arial, sans-serif;
   background-color: $black;
   color: $white;
-  // Add margin/padding to a main content wrapper if needed, avoid on body
 }
 
-// =========================================
-// Navbar Base & Container
-// =========================================
 .navbar {
   background-color: $black;
   height: $navbar-height;
@@ -41,7 +31,7 @@ body {
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 999; // Ensure navbar stays on top
   border-bottom: 1px solid $light-dark-bg;
 
   .navbar-container {
@@ -55,9 +45,6 @@ body {
   }
 }
 
-// =========================================
-// Logo
-// =========================================
 .navbar-logo {
   color: $white;
   text-decoration: none;
@@ -65,7 +52,7 @@ body {
   font-weight: bold;
   display: flex;
   align-items: center;
-  flex-shrink: 0; // Prevent shrinking
+  flex-shrink: 0; // Prevent shrinking when space is limited
 
   .logo-arrow {
     color: $accent-purple;
@@ -76,45 +63,35 @@ body {
   }
 }
 
-// =========================================
-// Burger Menu Icon (Mobile Only)
-// =========================================
 .menu-icon {
-  display: none; // Hidden by default
+  display: none; // Hidden on desktop
   color: $white;
   font-size: 1.8rem;
   cursor: pointer;
-  z-index: 1001; // Above menu during transition overlap
+  z-index: 1001; // Above mobile menu during transition overlap
   position: relative;
 }
 
-// =========================================
-// Navigation Menu List (<ul class="nav-menu">)
-// =========================================
 .nav-menu {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex; // Default: Desktop Horizontal Layout
+  display: flex;
   align-items: center;
   height: 100%;
+
+  // These are shown only when the mobile menu is active
   .mobile-menu-header,
   .mobile-menu-footer {
-    display: none; // Make them visible and use flex layout
+    display: none;
   }
 }
 
-// =========================================
-// Navigation Items (<li class="nav-item">)
-// =========================================
 .nav-item {
   height: 100%;
-  position: relative; // Crucial for absolute positioning of dropdown
+  position: relative; // Crucial for absolutely positioned dropdown
 }
 
-// =========================================
-// Navigation Links (<a class="nav-links">)
-// =========================================
 .nav-links {
   color: $white;
   text-decoration: none;
@@ -125,19 +102,16 @@ body {
   cursor: pointer;
   white-space: nowrap;
 
-  // --- Desktop Hover Effect ---
   &:hover {
     color: $accent-purple;
     border-bottom: 3px solid $accent-purple;
   }
 
-  // --- Arrow Icons ---
   .dropdown-arrow {
-    margin-left: 8px; // Consistent spacing
-    font-size: 0.8em; // Default size
+    margin-left: 8px;
+    font-size: 0.8em;
   }
 
-  // Default: Show Desktop Arrow, Hide Mobile Arrow
   .mobile-arrow {
     display: none;
   }
@@ -146,36 +120,34 @@ body {
   }
 }
 
-// =========================================
-// Dropdown Content Area (<div class="dropdown-content">)
-// =========================================
-// =========================================
-// Dropdown Content Area (<div class="dropdown-content">) - DESKTOP
-// =========================================
 .dropdown-content {
-  display: none;
+  display: none; // Hidden by default
   position: absolute;
-  top: $navbar-height; /* Position below the navbar */
+  top: $navbar-height; // Position below the navbar
   left: 0; // Aligns with the start of the nav item
-  background-color: $medium-dark-bg; /* Dark background like image */
-  min-width: 500px; /* Adjust as needed */
+  background-color: $medium-dark-bg;
+  min-width: 500px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+  z-index: 10; // Below navbar but above page content
   padding: 20px;
   text-align: left;
-  justify-content: center; // Center the wrappers if width allows
-  gap: 30px; // Gap between wrappers
+  justify-content: center;
+  gap: 30px;
+
+  // Hidden on desktop, shown on mobile
   .submenu-header {
     display: none;
   }
+
   .submenu-nav {
-    display: inline-flex; // <<< CHANGE: Arrange wrappers horizontally on desktop
-    gap: 30px; // <<< ADD: Space between the horizontal wrappers
-    width: 100%; // <<< ADD: Allow it to take available width if needed
-    justify-content: center; // Align wrappers to the start (left)
+    display: inline-flex; // Arrange wrappers horizontally on desktop
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
   }
+
   .dropdown-wrapper {
-    display: flex; // Arrange title and column vertically
+    display: flex;
     flex-direction: column;
 
     h4 {
@@ -187,10 +159,10 @@ body {
     }
 
     .dropdown-column {
-      display: flex; /* Important for column layout */
-      width: 100%; /* Take full width of the column */
+      display: flex;
+      width: 100%;
       vertical-align: top;
-      gap: 30px; // Gap between actual link columns
+      gap: 30px;
 
       .dropdown-column-types {
         display: flex;
@@ -198,37 +170,29 @@ body {
 
         a {
           color: $white;
-          padding: 8px 0px; /* Adjust padding */
+          padding: 8px 0px;
           text-decoration: none;
           display: block;
-          font-size: 0.95rem; /* Slightly smaller */
+          font-size: 0.95rem;
 
           &:hover {
             color: $accent-purple;
-            background-color: transparent; /* No background on hover */
+            background-color: transparent; // No background on link hover
           }
         }
       }
     }
   }
 }
-// --- Desktop Dropdown Trigger ---
-// This remains the same, it targets the display property of the block above
+
 .nav-item.dropdown:hover > .dropdown-content {
-  display: flex; // Override display: none and apply the flex rules defined inside .dropdown-content
-}
-// --- Desktop Dropdown Trigger ---
-.nav-item.dropdown:hover > .dropdown-content {
-  display: flex;
-  position: fixed; // Show the dropdown on hover
-  right: 0;
+  display: flex; // Show the dropdown
+  position: fixed;
+  right: 0; // Align to right edge of viewport
 }
 
-// =========================================
-// Navbar Right Section (Desktop)
-// =========================================
 .navbar-right {
-  display: flex; // Visible on desktop
+  display: flex;
   align-items: center;
   color: $white;
 
@@ -250,77 +214,65 @@ body {
   }
 }
 
-// ##############################################
-// ##### MOBILE STYLES (Max Width 960px) ########
-// ##############################################
 
-// ##############################################
-// ##### MOBILE STYLES (Max Width 960px) ########
-// ##############################################
-
+// =========================================
+// ============ MOBILE STYLES ==============
+// =========================================
 @media screen and (max-width: ($desktop-breakpoint - 1px)) {
-  // --- Show Burger / Hide Desktop Right ---
   .menu-icon {
     display: block; // Show the burger icon
   }
   .navbar-right {
-    display: none; // Hide desktop search/locale
+    display: none; // Hide desktop icons
   }
 
-  // --- Mobile Nav Menu Container (The slide-out panel) ---
   .nav-menu {
-    // --- Core Mobile Panel Styles ---
-    display: flex; // Use flex for vertical structure (header, items, footer)
-    flex-direction: column; // Stack children vertically
-    position: fixed; // Take over viewport
+    display: flex;
+    flex-direction: column;
+    position: fixed;
     top: 0;
-    right: -100%; // Start off-screen to the right
-    width: 100%; // Full width
-    height: 100%; // Full height
-    height: 100vh; // Full viewport height (for better mobile compatibility)
-    background-color: $dark-bg; // Mobile menu background
-    z-index: 1000; // Ensure it's above page content
-    transition: right 0.4s ease-in-out; // Slide animation
-    overflow-y: auto; // Allow scrolling if content exceeds height
-    overflow-x: hidden; // Prevent horizontal scrolling
-    align-items: stretch; // Make children (header, li, footer) stretch full width
-    text-align: left; // Default text alignment for items inside
+    right: -100%; // Start off-screen
+    width: 100%;
+    height: 100vh; // Full viewport height
+    background-color: $dark-bg;
+    z-index: 1000; // Above page content
+    transition: $mobile-menu-transition; // Slide animation
+    overflow-y: auto; // Allow scrolling for long menus
+    overflow-x: hidden;
+    align-items: stretch;
+    text-align: left;
 
-    // --- State: When the menu is open ---
     &.active {
       right: 0; // Slide into view
 
       // Show mobile header/footer ONLY when menu is active
       .mobile-menu-header,
       .mobile-menu-footer {
-        display: flex; // Make them visible and use flex layout
+        display: flex;
       }
     }
 
-    // --- State: When a submenu is visible ---
-    // This hides other top-level items when drilling down
+    // Hides other top-level items when drilling down into a submenu
     &.submenu-visible {
-      // Target direct children LIs that are nav items
       > li.nav-item {
         display: none; // Hide all top-level items...
         &.submenu-active {
-          display: block; // ...except the one whose submenu is active...
+          display: block; // ...except the active one...
           > .nav-links {
-            display: none; // ...but hide its trigger link (e.g., "Expertises >").
+            display: none; // ...but hide its trigger link.
           }
         }
       }
     }
 
-    // --- Mobile Menu Header (Inside the slide-out) ---
     .mobile-menu-header {
-      display: none; // Hidden by default, shown by &.active rule above
+      display: none; // Shown by &.active rule
       height: $navbar-height;
       align-items: center;
-      justify-content: space-between; // Push close button and right icons apart
+      justify-content: space-between;
       padding: 0 20px;
       border-bottom: 1px solid $light-dark-bg;
-      flex-shrink: 0; // Prevent header from shrinking
+      flex-shrink: 0; // Prevent shrinking
 
       .close-menu-btn {
         color: $white;
@@ -329,17 +281,17 @@ body {
         background: none;
         border: none;
         padding: 5px; // Easier tap target
-        margin-left: -5px; // Align visually
+        margin-left: -5px; // Visual alignment tweak
       }
 
       .mobile-header-right {
         display: flex;
         align-items: center;
-        gap: 1.5rem; // Space between search and locale
+        gap: 1.5rem;
 
         .nav-icon-link,
         .nav-locale {
-          display: flex; // Use flex for icon + text alignment if needed later
+          display: flex;
           color: $white;
           text-decoration: none;
           align-items: center;
@@ -354,101 +306,86 @@ body {
       }
     }
 
-    // --- Mobile Nav Item Styling (The LI elements) ---
     .nav-item {
       height: auto; // Override fixed desktop height
-      width: 100%; // Take full width of the panel
-      position: static; // CRITICAL: Override desktop `relative`. Submenu positions relative to `.nav-menu` now.
-      border-bottom: 1px solid $light-dark-bg; // Separator line between items
+      width: 100%;
+      // CRITICAL: Override desktop `relative`. Submenu now positions relative to fixed `.nav-menu`.
+      position: static;
+      border-bottom: 1px solid $light-dark-bg;
 
       &:last-of-type {
         // Remove border from the last actual nav item before the footer
-        // Note: This might target the footer if it's an LI, adjust if needed.
-        // If footer isn't an LI, this should be fine.
+        // Check structure if footer is also an LI
         border-bottom: none;
       }
 
-      // Hide desktop hover effect for dropdowns
+      // Hide desktop hover effect for dropdowns on mobile
       &:hover > .dropdown-content {
         display: none;
       }
 
-      // --- CORRECTED STATE RULE: Show dropdown content when nav-item is active ---
       &.submenu-active {
         > .dropdown-content {
-          display: flex; // Use flex because we set flex-direction: column on it
+          display: flex; // Show the nested dropdown/submenu panel
         }
       }
-      // --- END CORRECTED STATE RULE ---
     }
 
-    // --- Mobile Nav Link Styling (The A tags) ---
     .nav-links {
-      display: flex; // Layout link text and arrow
-      justify-content: space-between; // Push arrow to the right
+      display: flex;
+      justify-content: space-between; // Push arrow to right
       align-items: center;
       padding: 1rem 2rem; // Generous padding for tapping
-      height: auto; // Override desktop height
-      font-size: 1.2rem; // Readable mobile font size
+      height: auto;
+      font-size: 1.2rem;
       color: $white;
       text-decoration: none;
-      width: 100%; // Ensure link fills the item
-      border: none; // Remove any desktop border effects
+      width: 100%;
+      border: none; // Remove desktop border effects
 
       &:hover {
         background-color: rgba($white, 0.05); // Subtle hover feedback
-        color: $white; // Keep text color on hover (or change if desired)
-        border-bottom: none; // Ensure no desktop border shows on mobile hover
+        color: $white;
+        border-bottom: none; // Ensure no desktop border
       }
 
-      // --- Mobile Arrow Handling ---
       .dropdown-arrow {
-        font-size: 1.1em; // Adjust arrow size if needed
-        margin-left: 10px; // Space before arrow
+        font-size: 1.1em;
+        margin-left: 10px;
       }
-      .desktop-arrow {
-        display: none;
-      } // Hide desktop down arrow
-      .mobile-arrow {
-        display: inline-block;
-      } // Show mobile right arrow
+      .desktop-arrow { display: none; } // Hide desktop down arrow
+      .mobile-arrow { display: inline-block; } // Show mobile right arrow
     }
 
-    // --- Mobile Submenu Styling (The .dropdown-content) ---
-    .dropdown-content {
-      // --- Core Submenu Panel Styles (Overlay) ---
-      display: none; // Hidden by default, shown via the .nav-item.submenu-active rule above
+    .dropdown-content { // Mobile Submenu Panel
+      display: none; // Hidden by default, shown via .nav-item.submenu-active
       position: absolute; // Position relative to the fixed .nav-menu
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%; // Full height overlay
-      height: 100vh;
+      height: 100vh; // Full height overlay
       background: $dark-bg; // Same background as main mobile menu
       z-index: 20; // Above the main nav items within the panel
-      padding: 0; // Reset padding
-      margin: 0; // Reset margin
-      flex-direction: column; // Stack submenu header and nav area
-      align-items: stretch; // Stretch children
-
-      // --- State rule removed from here ---
+      padding: 0;
+      margin: 0;
+      flex-direction: column; // Stack header and nav area
+      align-items: stretch;
 
       // --- Ignore Desktop Structure Elements for Layout ---
-      // This prevents desktop columns from interfering with mobile flex layout
+      // Allows mobile flex layout to work without interference from desktop wrappers/columns
       > .dropdown-wrapper,
       > .dropdown-wrapper > .dropdown-column,
       > .dropdown-wrapper > .dropdown-column > .dropdown-column-types {
         display: contents; // Pass children through structurally
       }
 
-      // --- Mobile Submenu Header (Back Button Area) ---
-      .submenu-header {
-        display: flex; // Make visible & use flex
+      .submenu-header { // Mobile Submenu Header (Back Button Area)
+        display: flex;
         align-items: center;
-        padding: 0 10px; // Padding around back button
+        padding: 0 10px;
         height: $navbar-height;
         border-bottom: 1px solid $light-dark-bg;
-        flex-shrink: 0; // Prevent shrinking
+        flex-shrink: 0;
         width: 100%;
 
         .submenu-back-btn {
@@ -463,78 +400,70 @@ body {
           text-align: left;
 
           i {
-            margin-right: 10px; // Space between arrow and text
-            font-size: 1.4rem; // Back arrow size
+            margin-right: 10px;
+            font-size: 1.4rem;
           }
           span {
-            font-weight: bold; // Title text
+            font-weight: bold;
           }
         }
       }
 
-      // --- Mobile Submenu Links Area (Scrollable) ---
-      .submenu-nav {
-        display: block; // Make visible
-        padding: 1rem 0; // Padding for the scrollable link area
+      .submenu-nav { // Mobile Submenu Links Area (Scrollable)
+        display: block;
+        padding: 1rem 0;
         flex-grow: 1; // Take remaining vertical space
         overflow-y: auto; // Allow scrolling of links
         width: 100%;
 
-        // Styling for the groups within the submenu (e.g., "Expertises", "Secteurs")
         .dropdown-wrapper {
-          padding: 0 2rem; // Indent submenu sections
-          margin-bottom: 1.5rem; // Space between sections
+          padding: 0 2rem;
+          margin-bottom: 1.5rem;
 
-          h4 {
-            // Section titles (e.g., "Expertises")
+          h4 { // Section titles (e.g., "Expertises")
             color: $grey-text;
             font-size: 0.9rem;
             margin-bottom: 10px;
             font-weight: bold;
             text-transform: uppercase;
-            padding-top: 0.5rem; // Space above title within its wrapper
+            padding-top: 0.5rem;
           }
-          // Container for links within a section
+
           .dropdown-column {
-            // Removed display: contents here if it was added previously, not needed if wrappers above handle it
             .dropdown-column-types {
-              // Removed display: contents here if it was added previously, not needed if wrappers above handle it
-              a {
-                // Actual submenu links
+              a { // Actual submenu links
                 color: $white;
-                padding: 10px 0px; // Vertical padding, no horizontal (handled by wrapper)
+                padding: 10px 0px;
                 text-decoration: none;
                 display: block; // Make links take full width for tapping
                 font-size: 1rem;
-                white-space: normal; // Allow link text to wrap on mobile
+                white-space: normal; // Allow link text to wrap
 
                 &:hover {
                   color: $accent-purple;
-                  background-color: transparent; // Ensure no bg color on hover
+                  background-color: transparent;
                 }
               }
             }
           }
         }
-      } // End .submenu-nav
-    } // End .dropdown-content (mobile submenu)
+      }
+    }
 
-    // --- Mobile Menu Footer (Inside the slide-out) ---
     .mobile-menu-footer {
-      display: none; // Hidden by default, shown by &.active rule above
-      flex-direction: column; // Stack links and social icons vertically
-      padding: 1rem 2rem 1.5rem 2rem; // Padding around footer content
+      display: none; // Shown by &.active rule
+      flex-direction: column;
+      padding: 1rem 2rem 1.5rem 2rem;
       border-top: 1px solid $light-dark-bg;
       width: 100%;
-      flex-shrink: 0; // Prevent footer from shrinking
-      margin-top: auto; // Push footer to the bottom if content is short
+      flex-shrink: 0;
+      margin-top: auto; // Push footer to the bottom
 
-      a:not(.social-icons a) {
-        // Target only text links, exclude social icons
+      a:not(.social-icons a) { // Target only text links, exclude social icons
         color: $grey-text;
         text-decoration: none;
         display: block; // Each link on its own line
-        padding: 0.5rem 0; // Vertical spacing for links
+        padding: 0.5rem 0;
         font-size: 1rem;
         text-align: left;
         &:hover {
@@ -544,39 +473,35 @@ body {
 
       .social-icons {
         display: flex;
-        gap: 1.5rem; // Space between social icons
-        margin-top: 1rem; // Space above social icons
-        a {
-          // Social icon links
-          font-size: 1.5rem; // Icon size
-          padding: 0; // Reset padding from text links
+        gap: 1.5rem;
+        margin-top: 1rem;
+        a { // Social icon links
+          font-size: 1.5rem;
+          padding: 0;
           color: $grey-text;
           &:hover {
             color: $white;
           }
         }
       }
-    } // End .mobile-menu-footer
-  } // End .nav-menu (mobile styles)
-} // End @media screen and (max-width: ...)
+    }
+  }
+}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* --- Variables for Purple Navbar --- */
+// =========================================
+// ===== SECOND (PURPLE) NAVBAR STYLES =====
+// =========================================
 $purple-nav-bg: #3a006f;
 $purple-nav-active-bg: #6a00a8;
 $purple-nav-text: #ffffff;
 $purple-nav-hover-bg: rgba(255, 255, 255, 0.1);
-// VVVV FIXED VVVV Use color.adjust from sass:color module
-$purple-nav-mobile-bg: color.adjust(
-  $purple-nav-bg,
-  $lightness: -5%
-); // Slightly darker for mobile dropdown
+$purple-nav-mobile-bg: color.adjust($purple-nav-bg, $lightness: -5%); // Slightly darker for mobile dropdown
 
 $purple-nav-height: 60px;
-$purple-nav-padding-x: 20px; // Horizontal padding for the main navbar
-$purple-nav-link-padding-x: 18px; // Horizontal padding for links
-$purple-nav-link-padding-y-mobile: 15px; // Vertical padding for mobile links
+$purple-nav-padding-x: 20px;
+$purple-nav-link-padding-x: 18px;
+$purple-nav-link-padding-y-mobile: 15px;
 
 $purple-nav-brand-size: 1.3em;
 $purple-nav-link-size: 0.95em;
@@ -586,20 +511,19 @@ $purple-nav-underline-offset: 10px; // Distance from bottom
 
 $purple-nav-transition: background-color 0.3s ease, max-height 0.3s ease-in-out;
 $purple-nav-max-width: 1200px;
-$purple-nav-z-index: 998; // <<<< IMPORTANT: Below Accenture nav z-index (999)
+$purple-nav-z-index: 998; // IMPORTANT: Below main navbar z-index (999)
 
 $purple-breakpoint-mobile: 960px;
 
-/* --- Base Styles for Purple Navbar --- */
 .purple-nav-navbar {
   background-color: $purple-nav-bg;
   color: $purple-nav-text;
   padding: 0 $purple-nav-padding-x;
   width: 100%;
   box-sizing: border-box;
-  position: sticky; // Stays in flow until it hits the top offset
-  // VVVV IMPORTANT VVVV Adjust this based on the ACTUAL height of the FIRST navbar (.navbar)
-  top: $navbar-height; // Use the variable defined for the first navbar
+  position: sticky;
+  // IMPORTANT: Sticks below the first navbar
+  top: $navbar-height;
   z-index: $purple-nav-z-index;
 
   .purple-nav-container {
@@ -608,7 +532,7 @@ $purple-breakpoint-mobile: 960px;
     align-items: center;
     height: $purple-nav-height;
     margin: 0 auto;
-    position: relative; // Needed for absolute positioning of mobile menu if used
+    position: relative; // Needed for absolute positioned mobile menu
 
     .purple-nav-brand {
       color: $purple-nav-text;
@@ -619,21 +543,20 @@ $purple-breakpoint-mobile: 960px;
     }
 
     .purple-nav-toggle {
-      display: none; // Hidden Desktop
+      display: none; // Hidden on desktop
       background: none;
       border: none;
       color: $purple-nav-text;
       cursor: pointer;
-      padding: 5px; // Padding around the icon
+      padding: 5px;
       margin-left: 15px;
-      line-height: 1; // Helps center icon vertically sometimes
+      line-height: 1;
 
       .purple-toggle-icon {
-        // Targets the <i> tag now
-        display: inline-block; // Needed for transform
-        font-size: 1.4rem; // Adjust icon size as desired (try 1.2rem, 1.4rem, 1.6rem)
+        display: inline-block;
+        font-size: 1.4rem;
         transition: transform 0.3s ease-in-out; // Animate rotation
-        vertical-align: middle; // Helps vertical alignment
+        vertical-align: middle;
       }
     }
 
@@ -642,7 +565,7 @@ $purple-breakpoint-mobile: 960px;
       padding: 0;
       margin: 0;
       display: flex;
-      align-items: stretch;
+      align-items: stretch; // Make items fill height
       height: 100%;
 
       .purple-nav-item {
@@ -656,9 +579,9 @@ $purple-breakpoint-mobile: 960px;
           display: flex;
           align-items: center;
           height: 100%;
-          position: relative;
+          position: relative; // For underline pseudo-element
           font-size: $purple-nav-link-size;
-          transition: background-color 0.3s ease; // Use specific transition
+          transition: background-color 0.3s ease;
 
           &:hover {
             background-color: $purple-nav-hover-bg;
@@ -683,25 +606,24 @@ $purple-breakpoint-mobile: 960px;
   }
 }
 
-/* --- Purple Nav Mobile Media Query --- */
-@media (max-width: ($purple-breakpoint-mobile - 1px)) {
+@media (max-width: ($purple-breakpoint-mobile - 1px)) { // Purple Nav Mobile Styles
   .purple-nav-navbar {
     .purple-nav-container {
       .purple-nav-toggle {
-        display: block; // Show toggle button on mobile
+        display: block; // Show toggle on mobile
       }
 
       .purple-nav-menu {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: $purple-nav-height; // Below the purple navbar
+        top: $purple-nav-height; // Position below the purple navbar itself
         left: 0;
         width: 100%;
-        background-color: $purple-nav-mobile-bg; // Use the adjusted color variable
+        background-color: $purple-nav-mobile-bg;
         padding: 0;
         height: auto;
-        max-height: 0; // Start hidden
+        max-height: 0; // Start hidden (height animates)
         overflow: hidden;
         transition: max-height 0.3s ease-out;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
@@ -729,147 +651,133 @@ $purple-breakpoint-mobile: 960px;
             height: auto;
             justify-content: flex-start;
             box-sizing: border-box;
-            position: static; // Reset position if needed
+            position: static;
 
             &::after {
-              display: none; // Ensure underline is hidden
+              display: none; // Ensure desktop underline is hidden
             }
           }
         }
       }
     }
 
-    /* --- State Class Applied to purple-nav-navbar --- */
-    &.purple-menu-open {
+    &.purple-menu-open { // State Class Applied to navbar when mobile menu is open
       .purple-nav-menu {
-        max-height: 500px; // Or enough to show items
+        max-height: 500px; // Animate height to reveal items
         transition: max-height 0.4s ease-in;
       }
       .purple-nav-toggle {
         .purple-toggle-icon {
-          transform: rotate(
-            180deg
-          ); // Flips chevron-down to look like chevron-up
+          transform: rotate(180deg); // Flips chevron-down icon
         }
       }
     }
   }
 }
 
-// ===== HERO SECTION STYLES =====
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* --- Hero Variables --- */
+// =========================================
+// ===== HERO SECTION STYLES =============
+// =========================================
 $hero-bg: #000000;
 $hero-text: #ffffff;
-$hero-padding-y: 60px; // Vertical padding top/bottom for the section
-$hero-padding-x: 20px; // Horizontal padding for the container consistency
-$hero-max-width: 1200px; // Max width of content area (like navbars)
-$hero-gap: 40px; // Space between image and text columns
-$hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768px or 960px)
+$hero-padding-y: 60px;
+$hero-padding-x: 20px;
+$hero-max-width: 1200px;
+$hero-gap: 40px;
+$hero-breakpoint: 960px; // When columns stack
 
-/* --- Hero Base Styles --- */
 .hero-section {
   background-color: $hero-bg;
   color: $hero-text;
   padding: $hero-padding-y 0;
-  overflow: hidden; // Helps contain elements
+  overflow: hidden;
 
   .hero-container {
+    max-width: $hero-max-width; // Apply max width
     margin: 0 auto;
     padding: 0 $hero-padding-x;
     display: flex;
-    align-items: center; // Vertically align items in columns
-    gap: $hero-gap; // Space between columns
+    align-items: center;
+    gap: $hero-gap;
 
     .hero-image-col {
-      flex: 1 1 55%; // Allow shrinking, prefer 55% width initially
-      max-width: 55%; // Ensure it doesn't exceed this on large screens if text is short
+      flex: 1 1 55%;
+      max-width: 55%;
 
       .hero-illustration {
-        display: block; // Remove extra space below image
-        width: 100%; // Make image scale within its column
-        height: auto; // Maintain aspect ratio
+        display: block; // Prevents extra space below image
+        width: 100%;
+        height: auto;
       }
     }
 
     .hero-text-col {
-      flex: 1 1 45%; // Allow shrinking, prefer 45% width
+      flex: 1 1 45%;
       max-width: 45%;
 
       .hero-headline {
-        font-size: clamp(
-          2rem,
-          5vw,
-          3.2rem
-        ); // Responsive font size (min, preferred, max)
+        font-size: clamp(2rem, 5vw, 3.2rem); // Responsive font size (min, preferred, max)
         font-weight: bold;
         line-height: 1.2;
-        margin: 0 0 25px 0; // Space below headline
+        margin: 0 0 25px 0;
       }
 
       .hero-paragraph {
-        font-size: clamp(1rem, 2.5vw, 1.15rem); // Responsive font size
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
         line-height: 1.6;
         margin: 0;
-        color: #e0e0e0; // Slightly off-white for paragraph if desired
+        color: #e0e0e0; // Slightly off-white for contrast
       }
     }
   }
 }
 
-/* --- Hero Responsive Styles --- */
-@media (max-width: ($hero-breakpoint - 1px)) {
+@media (max-width: ($hero-breakpoint - 1px)) { // Hero Responsive Styles
   .hero-section {
-    padding: ($hero-padding-y * 0.7) 0; // Slightly reduce padding on mobile
+    padding: ($hero-padding-y * 0.7) 0; // Slightly reduce padding
 
     .hero-container {
-      flex-direction: column; // Stack columns vertically
-      text-align: center; // Center text when stacked
+      flex-direction: column; // Stack columns
+      text-align: center; // Center text
       gap: 30px; // Adjust vertical gap
 
       .hero-image-col {
-        flex-basis: auto; // Reset flex properties
-        max-width: 85%; // Limit image width a bit, centered due to container margin auto
-        order: 1; // Keep image first
+        flex-basis: auto;
+        max-width: 85%; // Limit image width when stacked
+        order: 1; // Image first
       }
 
       .hero-text-col {
-        flex-basis: auto; // Reset flex properties
-        max-width: 100%; // Allow text to take full width
-        order: 2; // Text comes after image
+        flex-basis: auto;
+        max-width: 100%;
+        order: 2; // Text second
 
         .hero-headline {
-          // Font size already responsive via clamp()
-          margin-bottom: 20px; // Adjust margin if needed
-        }
-
-        .hero-paragraph {
-          // Font size already responsive via clamp()
+          margin-bottom: 20px;
         }
       }
     }
   }
 }
 
-// ===== STATS SECTION STYLES =====
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* --- Stats Variables --- */
-$stats-bg: #000000; // Same as hero background
+// =========================================
+// ===== STATS SECTION STYLES ============
+// =========================================
+$stats-bg: #000000;
 $stats-text: #ffffff;
-$stats-purple: #a100ff; // Accent purple from main nav potentially? Or adjust.
-$stats-desc-text: #e0e0e0; // Slightly off-white for description
+$stats-purple: #a100ff;
+$stats-desc-text: #e0e0e0;
 
-$stats-padding-y: 80px; // Vertical padding top/bottom for the section
-$stats-padding-x: 20px; // Horizontal padding for the container consistency
-$stats-max-width: 1200px; // Max width of content area
-$stats-grid-gap: 40px; // Gap between stat items
+$stats-padding-y: 80px;
+$stats-padding-x: 20px;
+$stats-max-width: 1200px;
+$stats-grid-gap: 40px;
 $stats-line-height: 4px;
 $stats-line-width: 40px;
-$stats-breakpoint: 768px; // When the columns stack (adjust if needed)
+$stats-breakpoint: 768px; // When columns stack
 
-/* --- Stats Base Styles --- */
 .stats-section {
   background-color: $stats-bg;
   color: $stats-text;
@@ -883,36 +791,33 @@ $stats-breakpoint: 768px; // When the columns stack (adjust if needed)
     .stats-title {
       font-size: clamp(1.8rem, 4vw, 2.5rem); // Responsive font size
       font-weight: bold;
-      margin: 0 0 60px 0; // Space below title
-      text-align: left; // Align title left as in image
+      margin: 0 0 60px 0;
+      text-align: left;
     }
 
     .stats-grid {
       display: grid;
-      // Create 3 equal columns on desktop
-      grid-template-columns: repeat(3, 1fr);
-      gap: $stats-grid-gap; // Gap between columns (and rows when stacked)
+      grid-template-columns: repeat(3, 1fr); // 3 equal columns on desktop
+      gap: $stats-grid-gap;
 
       .stat-item {
-        // No extra styles needed here unless you want borders, specific padding, etc.
-
         .stat-line {
           height: $stats-line-height;
           width: $stats-line-width;
           background-color: $stats-purple;
-          margin: 0 0 20px 0; // Space below line
+          margin: 0 0 20px 0;
         }
 
         .stat-number {
           font-size: clamp(3rem, 8vw, 5rem); // Large responsive number
           font-weight: bold;
           line-height: 1.1;
-          margin: 0 0 15px 0; // Space below number
+          margin: 0 0 15px 0;
           display: inline; // Keep percent sign tight
 
           .percent-sign {
             font-size: 0.6em; // Smaller percentage sign
-            vertical-align: baseline; // Align with number baseline
+            vertical-align: baseline;
             margin-left: 2px;
           }
         }
@@ -928,10 +833,9 @@ $stats-breakpoint: 768px; // When the columns stack (adjust if needed)
   }
 }
 
-/* --- Stats Responsive Styles --- */
-@media (max-width: ($stats-breakpoint - 1px)) {
+@media (max-width: ($stats-breakpoint - 1px)) { // Stats Responsive Styles
   .stats-section {
-    padding: ($stats-padding-y * 0.7) 0; // Reduce padding slightly
+    padding: ($stats-padding-y * 0.7) 0;
 
     .stats-container {
       .stats-title {
@@ -940,16 +844,14 @@ $stats-breakpoint: 768px; // When the columns stack (adjust if needed)
       }
 
       .stats-grid {
-        // Switch to a single column layout
-        grid-template-columns: 1fr;
-        gap: 50px; // Adjust vertical gap between stacked items
+        grid-template-columns: 1fr; // Switch to a single column
+        gap: 50px; // Adjust vertical gap
 
         .stat-item {
-          text-align: center; // Center content within each item
+          text-align: center;
 
           .stat-line {
-            // Center the line
-            margin-left: auto;
+            margin-left: auto; // Center the line
             margin-right: auto;
             margin-bottom: 15px;
           }
@@ -964,85 +866,75 @@ $stats-breakpoint: 768px; // When the columns stack (adjust if needed)
   }
 }
 
-// ===== CARD GRID SECTION STYLES =====
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// --- Add this line at the very top ---
 
-// --- Variables ---
-$bg-color-card: #000000; // Dark grey background
-$text-color-primary: #ffffff; // White text
+// =========================================
+// ===== CARD GRID SECTION STYLES ========
+// =========================================
+$bg-color-card: #000000;
+$text-color-primary: #ffffff;
 $text-color-secondary: #d0d0d0; // Lighter grey for category
-$accent-color: #8a2be2; // Purple accent (approximated)
+$accent-color: #8a2be2; // Purple accent
 
-$font-family-sans: sans-serif;
-$base-font-size: 16px;
-$base-padding: 1.5rem; // Standard padding for content
-$card-gap: 1.5rem; // Gap between cards in the second row
+$base-padding: 1.5rem;
+$card-gap: 1.5rem;
 
-// --- Section Container ---
 .card-section {
-  margin: 0 auto; // Center the section
+  margin: 0 auto;
   .section-title {
-    font-size: 2rem; // Example size
-    color: $text-color-primary; // Use existing variable
-    margin-bottom: 2rem; // Add space below the title
-    text-align: left; // Or center, right as needed
+    font-size: 2rem;
+    color: $text-color-primary;
+    margin-bottom: 2rem;
+    text-align: left;
   }
 }
 
-// --- Card Row ---
 .card-row {
   display: flex;
-  margin-bottom: $card-gap; // Space between rows
+  margin-bottom: $card-gap;
 
-  // Modifier for the row with two cards
-  &--double {
-    gap: $card-gap; // Space between the two cards
+  &--double { // Modifier for the row with two cards
+    gap: $card-gap;
   }
 }
 
-// --- Card Base Styles ---
 .card {
   background-color: $bg-color-card;
-  overflow: hidden; // Ensures image corners don't stick out if rounded
+  overflow: hidden;
   display: flex;
-  position: relative; // Still potentially useful for descendants
-  width: 100%; // Default to full width within its container
+  position: relative;
+  width: 100%;
 }
 
-// --- Card Content Area ---
 .card__content {
   padding: $base-padding;
-  position: relative; // Needed for absolute positioning of the link AND the pseudo-element
-  padding-top: $base-padding + 1rem; // Extra padding top to make space for the line
+  position: relative; // For absolutely positioned children (link, ::before)
+  padding-top: $base-padding + 1rem; // Extra padding top for the line
   display: flex;
-  flex-direction: column; // Stack content vertically by default
-  flex-grow: 1; // Ensure content area tries to grow (helps push link down in vertical)
+  flex-direction: column;
+  flex-grow: 1; // Allows content area to grow
 
   // Purple line above category
   &::before {
     content: "";
     display: block;
     position: absolute;
-    top: $base-padding; // Position it within the top padding
+    top: $base-padding;
     left: $base-padding;
-    width: 40px; // Width of the purple line
-    height: 4px; // Thickness of the line
+    width: 40px;
+    height: 4px;
     background-color: $accent-color;
   }
 }
 
-// --- Image Wrapper ---
 .card__image-wrapper {
   img {
-    display: block; // Remove extra space below image
+    display: block;
     width: 100%;
-    height: 100%; // Make image fill wrapper height
-    object-fit: cover; // Cover the area, cropping if needed
+    height: 100%; // Fill wrapper height
+    object-fit: cover; // Cover area, crop if needed
   }
 }
 
-// --- Text Elements ---
 .card__category {
   font-size: 0.75rem;
   font-weight: bold;
@@ -1053,132 +945,114 @@ $card-gap: 1.5rem; // Gap between cards in the second row
 }
 
 .card__title {
-  font-size: 1.75rem; // Larger title size
+  font-size: 1.75rem;
   font-weight: bold;
   color: $text-color-primary;
   line-height: 1.3;
-  margin-bottom: 1rem; // Space below title
-  // Removed flex-grow from here, added to parent .card__content
+  margin-bottom: 1rem;
 }
 
-// --- Link Button (Arrow) - Applied to ALL Cards Now ---
 .card__link {
   background-color: $accent-color;
   color: $text-color-primary;
   width: 40px;
   height: 40px;
-  font-size: 1.1rem; // Adjust icon size if needed
-  display: inline-flex; // Use inline-flex for alignment
+  font-size: 1.1rem;
+  display: inline-flex; // For centering icon
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  position: absolute; // Position relative to the parent .card__content
+  position: absolute;
   bottom: $base-padding;
   right: $base-padding;
   transition: background-color 0.2s ease;
-  margin-top: auto; // Helps push it down if content is short in flex column
-
-  // No specific SVG styling needed anymore
+  margin-top: auto; // Pushes to bottom in flex column
 
   &:hover,
   &:focus {
-    background-color: color.adjust(
-      $accent-color,
-      $lightness: -5%
-    ); // Darken on hover/focus
-    outline: none; // Remove default focus outline if desired
+    background-color: color.adjust($accent-color, $lightness: -5%); // Darken
+    outline: none;
   }
 }
 
-// --- Horizontal Card Modifier ---
 .card--horizontal {
   flex-direction: row; // Image left, text right
-  align-items: stretch; // Stretch items to fill height
+  align-items: stretch;
 
   .card__image-wrapper {
-    flex: 0 0 45%; // Image takes up 45% of width, doesn't grow/shrink
+    flex: 0 0 45%; // Fixed width, doesn't grow/shrink
   }
 
   .card__content {
-    flex: 1 1 auto; // Content takes remaining space, can grow/shrink
-    justify-content: center; // Vertically center content block within its space
+    flex: 1 1 auto; // Takes remaining space
+    justify-content: center; // Vertically center content block
   }
-
-  // REMOVED: Rule that hid the link
-  // .card__link {
-  //   display: none;
-  // }
 }
 
-// --- Vertical Card Modifier ---
 .card--vertical {
-  flex-direction: column; // Image top, text bottom (default)
+  flex-direction: column; // Image top, text bottom (default flex direction)
 
   .card__image-wrapper {
     width: 100%;
-    height: 400px; // Give image a fixed height in vertical layout
+    height: 400px; // Fixed image height in vertical layout
   }
-
-  // .card__content already has flex-grow: 1
 }
 
-// --- Responsive Adjustments ---
-@media (max-width: 768px) {
+@media (max-width: 768px) { // Card Grid Responsive
   .card-row {
-    flex-direction: column; // Stack cards vertically on smaller screens
-    gap: $card-gap; // Keep gap between stacked cards
+    flex-direction: column; // Stack cards vertically
+    gap: $card-gap;
   }
 
   .card--horizontal {
     flex-direction: column; // Stack horizontal card content vertically too
 
     .card__image-wrapper {
-      flex-basis: auto; // Reset flex-basis
+      flex-basis: auto;
       width: 100%;
-      height: 250px; // Give image a fixed height when stacked
-      max-width: none; // Reset max-width
+      height: 250px; // Fixed height when stacked
+      max-width: none;
     }
     .card__content {
       justify-content: flex-start; // Align top when stacked
     }
   }
 
-  // Adjust title size on smaller screens
   .card__title {
-    font-size: 1.5rem;
+    font-size: 1.5rem; // Smaller title on mobile
   }
 }
-/////
-/// // ===== SEGMENTS SECTION STYLES =====
 
-// --- Segments Section Variables (adjust as needed) ---
-$segments-bg-color: #000000; // Black background
-$segments-text-primary: #ffffff; // White text
+
+// =========================================
+// ===== SEGMENTS SECTION STYLES =========
+// =========================================
+$segments-bg-color: #000000;
+$segments-text-primary: #ffffff;
 $segments-text-secondary: #a0a0a0; // Grey text for inactive items
-$segments-accent-color: #8a2be2; // Purple accent (use your existing $accent-color if preferred)
-$segments-nav-width: 35%; // Width of the left navigation column
-$segments-gap: 15rem;     // Gap between nav and content
+$segments-accent-color: #8a2be2;
+$segments-nav-width: 35%;
+$segments-gap: 15rem;
 
-section{  
+// Global section margin - consider scoping this if not all sections need it
+section {
   margin: 0 200px;
 }
 
-// --- Segments Section General Styles ---
 .segments-section {
   background-color: $segments-bg-color;
   color: $segments-text-primary;
-  padding: 4rem 0; // Vertical padding
+  padding: 4rem 0;
 
-  // Optional container for centering and max-width
   .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem; // Horizontal padding
+      padding: 0 1.5rem;
   }
 }
 
 .segments-main-title {
-  font-size: 2.5rem; // Adjust size as needed
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2.5rem;
 }
@@ -1188,9 +1062,8 @@ section{
   gap: $segments-gap;
 }
 
-// --- Left Navigation ---
 .segments-nav {
-  flex: 0 0 $segments-nav-width; // Don't grow, don't shrink, fixed basis
+  flex: 0 0 $segments-nav-width; // Fixed width basis
   ul {
     list-style: none;
     padding: 0;
@@ -1198,31 +1071,32 @@ section{
   }
 
   li {
-    margin-bottom: 1.5rem; // Space between nav items
+    margin-bottom: 1.5rem;
   }
 
   .segment-trigger {
     background: none;
     border: none;
-    padding: 0.5rem 0; // Adjust padding
+    padding: 0.5rem 0;
     margin: 0;
-    font-family: inherit; // Use body font
-    font-size: 1.8rem; // Large clickable text
+    font-family: inherit;
+    font-size: 1.8rem;
     font-weight: bold;
-    color: $segments-text-secondary; // Default greyish color
+    color: $segments-text-secondary; // Default inactive color
     text-align: left;
     cursor: pointer;
     transition: color 0.3s ease;
-    position: relative; // Needed for the ::before pseudo-element
+    position: relative; // For ::before indicator
 
-    &::before { // The small square indicator
+    // The small square indicator
+    &::before {
         content: '';
         display: block;
         width: 10px;
         height: 10px;
         background-color: $segments-accent-color;
         position: absolute;
-        left: -25px; // Position to the left of the text
+        left: -25px;
         top: 50%;
         transform: translateY(-50%);
         opacity: 0; // Hidden by default
@@ -1230,23 +1104,21 @@ section{
     }
 
     &:hover {
-      color:color.adjust($segments-text-secondary, $lightness: 15%); // Lighten on hover
+      color:color.adjust($segments-text-secondary, $lightness: 15%); // Lighten slightly
     }
 
     &.active {
-      color: $segments-text-primary; // Bright white when active
-
+      color: $segments-text-primary; // Bright white
       &::before {
-          opacity: 1; // Show the square when active
+          opacity: 1; // Show indicator
       }
     }
   }
 }
 
-// --- Right Content Area ---
 .segments-content {
   flex: 1; // Takes remaining space
-  min-width: 0; // Prevents content from overflowing flex container
+  min-width: 0; // Prevents overflow issues in flex layouts
 }
 
 .segment-pane {
@@ -1254,57 +1126,53 @@ section{
 
   &.active {
     display: block; // Show the active one
-    // Add animation if desired (fade in)
-    // animation: fadeIn 0.5s ease-in-out;
   }
 }
 
 .segment-content-title {
-  font-size: 1.5rem; // Adjust size
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: $segments-text-primary;
 }
 
 .segment-pane p {
-  font-size: 1rem; // Adjust size
+  font-size: 1rem;
   line-height: 1.6;
-  color: $segments-text-primary; // Or lighter grey if preferred
+  color: $segments-text-primary;
   margin-bottom: 1.5rem;
 }
 
 .segment-image-wrapper {
-  margin-top: 1.5rem; // Space above image
+  margin-top: 1.5rem;
   img {
     max-width: 100%;
     height: auto;
     display: block;
-    // Optional: add border-radius, etc.
   }
 }
 
-// --- Responsive Adjustments ---
-@media (max-width: 992px) {
+@media (max-width: 992px) { // Segments Responsive
     .segments-container {
         flex-direction: column; // Stack nav and content
-        gap: 2rem; // Adjust gap for stacked layout
+        gap: 2rem;
     }
 
     .segments-nav {
-        flex-basis: auto; // Reset flex-basis
+        flex-basis: auto; // Reset flex basis
         width: 100%;
-        margin-bottom: 1.5rem; // Add space below nav when stacked
+        margin-bottom: 1.5rem;
 
         .segment-trigger {
-            font-size: 1.5rem; // Slightly smaller text on mobile
+            font-size: 1.5rem; // Smaller text on mobile
              &::before {
-                 left: -20px; // Adjust indicator position slightly
+                 left: -20px; // Adjust indicator position
              }
         }
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 576px) { // Segments Small Mobile Responsive
     .segments-main-title {
         font-size: 2rem;
     }
@@ -1316,79 +1184,66 @@ section{
     }
 }
 
-// --- Optional Fade-in Animation ---
-// @keyframes fadeIn {
-//   from { opacity: 0; }
-//   to { opacity: 1; }
-// }
 
-
-///// // ===== PARTNERS SECTION STYLES =====
-
-// --- Partners Section Variables ---
+// =========================================
+// ===== PARTNERS SECTION STYLES (Slider) ====
+// =========================================
 $partners-bg-color: #000000;
 $partners-text-color: #ffffff;
-$partners-card-bg: transparent; // Or a very dark grey if needed #1a1a1a;
+$partners-card-bg: transparent;
 $partners-button-bg: #2d2d2d;
 $partners-button-hover-bg: #444444;
 $partner-gap: 1.5rem; // Gap between cards
 
-// --- Partners Section General Styles ---
 .partners-section {
-  margin: 0;
+  margin: 0; // Override global section margin if needed
   background-color: $partners-bg-color;
   color: $partners-text-color;
   padding: 4rem 0;
-  position: relative; // Needed if positioning nav absolutely relative to section
+  position: relative;
 
-  .container { // Using the same container class as before
+  .container {
       padding: 0 1.5rem;
   }
 }
 
 .partners-main-title {
-  font-size: 2.5rem; // Same as .segments-main-title
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2.5rem;
 }
 
-// --- Slider Structure ---
 .partners-slider {
-  position: relative; // For absolute positioning of nav buttons if needed
+  position: relative; // For positioning nav buttons
 }
 
 .partners-viewport {
-  overflow: hidden; // This is crucial for the slider effect
-  margin: 0 calc($partner-gap / 2); // Adjust viewport slightly if needed for edge gaps
+  overflow: hidden; // Crucial for slider effect
+  margin: 0 calc($partner-gap / 2); // Optional adjustment for edge gaps
   padding: 0 calc($partner-gap / 2); // Counteract margin adjustment
 }
 
 .partners-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out; // Smooth sliding animation
-  padding-bottom: 1rem; // Add padding if cards have shadows or borders that get cut off
+  display: flex; // Layout cards horizontally
+  transition: transform 0.5s ease-in-out; // Slide animation
+  padding-bottom: 1rem; // Space below cards if needed (e.g., for shadows)
 }
 
-// --- Partner Card Styling ---
 .partner-card {
   background-color: $partners-card-bg;
-  // Calculate basis to show 2 cards + a bit of the 3rd.
-  // This might need slight adjustment depending on exact gap/padding.
-  // Aiming for slightly less than 1/2 width. 48% often works well with gap.
-  flex: 0 0 calc(50% - #{$partner-gap}); // Adjust if needed
-  // Or try a slightly smaller value to guarantee preview space:
-  // flex: 0 0 calc(100% / 2.2 - #{$partner-gap});
-  min-width: 280px; // Prevent cards from becoming too small
+  // Flex basis to show ~2.x cards, showing part of the next one. Adjust as needed.
+  flex: 0 0 calc(50% - #{$partner-gap});
+  min-width: 280px; // Prevent cards becoming too small
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between; // Pushes link to bottom
-  min-height: 250px; // Give cards a minimum height
+  min-height: 250px; // Ensure consistent card height
 }
 
 .partner-logo {
   margin-bottom: 1.5rem;
-  min-height: 40px; // Ensure space even if logo fails to load
+  min-height: 40px; // Ensure space even if logo doesn't load
   img {
     max-height: 100px; // Control logo height
     width: auto; // Maintain aspect ratio
@@ -1400,7 +1255,7 @@ $partner-gap: 1.5rem; // Gap between cards
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  flex-grow: 1; // Allows description to take up space and push link down
+  flex-grow: 1; // Allows description to take available space
 }
 
 .partner-link {
@@ -1408,29 +1263,24 @@ $partner-gap: 1.5rem; // Gap between cards
   text-decoration: none;
   font-weight: bold;
   font-size: 0.9rem;
-  display: inline-flex; // Align text and icon
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem; // Space between text and icon
 
   i {
-      font-size: 0.75rem; // Slightly smaller icon
+      font-size: 0.75rem;
   }
 
   &:hover {
-    text-decoration: underline; // Or change color
+    text-decoration: underline;
   }
 }
 
-// --- Navigation Buttons ---
 .partners-nav {
   display: flex;
-  justify-content: flex-end; // Position buttons to the right
+  justify-content: flex-end; // Position buttons to the right by default
   gap: 0.75rem;
-  margin-top: 1.5rem; // Space above buttons
-  // Alternatively, use absolute positioning:
-  // position: absolute;
-  // bottom: -2.5rem; // Adjust as needed
-  // right: 0; // Or use container padding 'right' value
+  margin-top: 1.5rem;
 }
 
 .slider-btn {
@@ -1450,252 +1300,208 @@ $partner-gap: 1.5rem; // Gap between cards
     background-color: $partners-button-hover-bg;
   }
 
-  &:disabled {
+  &:disabled { // Style for disabled state (no more slides)
     opacity: 0.4;
     cursor: not-allowed;
   }
 }
-// --- Responsive Adjustments ---
-@media (max-width: 960px) {
-  // Styles for screens 960px wide and below
 
-  // --- Slider Card Layout ---
+@media (max-width: 960px) { // Partners Slider Responsive
   .partner-card {
-      // Show exactly 1 card
-      flex-basis: 100%;
-      // Override the desktop min-width to allow shrinking on narrow viewports
-      min-width: 0;
+      flex-basis: 100%; // Show exactly 1 card per slide on mobile
+      min-width: 0; // Allow shrinking fully
   }
 
-  // --- Navigation Button Layout ---
    .partners-nav {
-       justify-content: center; // Center buttons below slider
+       justify-content: center; // Center buttons below slider on mobile
    }
 
-  // --- Title Font Size (Optional adjustment) ---
    .partners-main-title {
-      font-size: 2rem; // Adjust title size for smaller screens
+      font-size: 2rem; // Adjust title size
   }
-
-  // --- Optional: Adjust viewport padding/margin if needed ---
-  // .partners-viewport {
-  //   margin: 0; // Remove horizontal margin if it causes issues
-  //   padding: 0; // Remove horizontal padding if it causes issues
-  // }
 }
 
 
-// --- Performance Section Variables ---
-$performance-bg-color: #E3002B; // Approx bright red from image
+// =========================================
+// ===== PERFORMANCE SECTION STYLES ======
+// =========================================
+$performance-bg-color: #E3002B; // Bright red
 $performance-text-color: #ffffff;
-$performance-line-color: rgba(255, 255, 255, 0.5); // Semi-transparent white for lines
-$performance-card-gap: 1.5rem; // Gap between cards
-$performance-serif-font: 'Times New Roman', Times, serif; // Font similar to image
-$performance-card-height-desktop: 350px; // Define fixed desktop height
-$performance-card-height-mobile: 280px;  // Define fixed mobile height (can be same as desktop if preferred)
+$performance-card-gap: 1.5rem;
+$performance-serif-font: 'Times New Roman', Times, serif; // Font similar to image reference
+$performance-card-height-desktop: 350px; // Fixed height on desktop
+$performance-card-height-mobile: 280px;  // Fixed height on mobile
 
-
-// --- Performance Section Styles ---
 .performance-section {
   padding-top: 4rem;
   padding-bottom: 4rem;
+  margin: 0; // Remove section margin if it conflicts with full-width intention
 }
 
-// --- Wrapper for Cards ---
 .performance-cards-wrapper {
   display: flex;
-  flex-wrap: wrap; // Allow wrapping
+  flex-wrap: wrap; // Allow cards to wrap to next line
   gap: $performance-card-gap;
 }
 
-// --- Individual Card Styling ---
 .performance-card {
-  // **Width is dynamic**: Based on flex-basis to fit 3 cards across
+  // Width based on flex-basis to fit 3 cards across, accounting for gap
   flex: 1 1 calc(33.333% - #{$performance-card-gap} * 2 / 3);
-  // **Height is fixed**: Use the defined variable
-  height: $performance-card-height-desktop;
-
-  // Keep min-width for very narrow screens before wrapping occurs
-  min-width: 280px;
-
+  height: $performance-card-height-desktop; // Fixed height
+  min-width: 280px; // Prevent excessive shrinking before wrapping
   background-color: $performance-bg-color;
   position: relative;
-  overflow: hidden; // Important: content exceeding fixed height will be hidden
+  overflow: hidden; // Content exceeding fixed height will be hidden
   display: flex;
   flex-direction: column;
   justify-content: flex-end; // Push content towards the bottom
 
-  // Add the background pattern - REPLACE with your actual image path
-  background-image: url('path/to/your/red-abstract-lines.svg'); // Use SVG or PNG
+  // Add the background pattern - !!! REPLACE with your actual image path !!!
+  background-image: url('path/to/your/red-abstract-lines.svg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-
 }
 
-// --- Card Content Area ---
 .performance-card .card-content {
-  position: relative;
+  position: relative; // Ensure content is above background image pseudo-elements if used
   z-index: 1;
   padding: 1.5rem 2rem;
 }
 
-// --- Card Title Styling ---
 .performance-card .card-title {
   color: $performance-text-color;
   font-family: $performance-serif-font;
   font-size: 1.9rem;
-  font-weight: 500;
+  font-weight: 500; // Medium weight often used in serif headlines
   line-height: 1.3;
   margin: 0;
 }
 
-
-// --- Responsive Adjustments ---
-@media (max-width: 960px) {
-    // --- Performance Section Responsive ---
+@media (max-width: 960px) { // Performance Responsive
     .performance-card {
-        // **Width is dynamic**: Take full available width
-        flex-basis: 100%;
-        // **Height is fixed**: Use the defined mobile height variable
-        height: $performance-card-height-mobile;
-        // Remove or adjust min-width if 100% basis is desired even on very narrow screens
-         min-width: 0; // Allows it to shrink below 280px if viewport is tiny
+        flex-basis: 100%; // Full width on mobile
+        height: $performance-card-height-mobile; // Use mobile fixed height
+         min-width: 0; // Allow shrinking fully if needed
     }
 
     .performance-card .card-title {
-        font-size: 1.6rem; // Slightly smaller font on mobile
+        font-size: 1.6rem; // Slightly smaller font
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 576px) { // Performance Small Mobile Responsive
     .performance-card .card-content {
         padding: 1.5rem; // Reduce padding on very small screens
     }
      .performance-card .card-title {
         font-size: 1.4rem;
     }
-    // Height is already set by the 960px breakpoint, no need to repeat unless
-    // you want a *different* fixed height for very small screens.
-    // .performance-card {
-    //   height: 250px; // Example: Even shorter on extra small screens
-    // }
+    // Height is already set by the 960px breakpoint, adjust only if different height needed here
+    // .performance-card { height: 250px; }
 }
 
-/////////////////// // ===== TEAM SECTION STYLES =====
-// --- Team Section Variables ---
-$team-bg-color: #000000; // Same black background
-$team-text-color: #ffffff;
-$team-title-color: #cccccc; // Slightly lighter grey for title
-$team-gap: 2.5rem; // Gap between grid items (adjust as needed)
-$team-image-size: 120px; // Width and height of the image container
 
-// --- Team Section Styles ---
+// =========================================
+// ===== TEAM SECTION STYLES =============
+// =========================================
+$team-bg-color: #000000;
+$team-text-color: #ffffff;
+$team-title-color: #cccccc; // Lighter grey for job title
+$team-gap: 2.5rem;
+$team-image-size: 120px;
+
 .team-section {
   background-color: $team-bg-color;
   color: $team-text-color;
   padding: 4rem 0;
+  margin: 0; // Override global section margin if needed
 
-  .container { // Optional container
-      max-width: 1100px; // Adjust max-width as needed for 2 columns
+  .container {
+      max-width: 1100px; // Adjusted for 2 columns
       margin: 0 auto;
       padding: 0 1.5rem;
   }
 }
 
 .team-main-title {
-  font-size: 2.5rem; // Consistent title size
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2.5rem;
   color: $team-text-color;
 }
 
-// --- Team Grid Layout ---
 .team-grid {
   display: grid;
-  // Desktop: 2 equal columns
-  grid-template-columns: repeat(2, 1fr);
-  gap: $team-gap; // Rows and column gap
+  grid-template-columns: repeat(2, 1fr); // Desktop: 2 equal columns
+  gap: $team-gap;
 }
 
-// --- Individual Team Card ---
 .team-card {
-  background-color: $team-bg-color; // Or transparent if section bg is the same
+  background-color: $team-bg-color; // Or transparent
   display: flex;
   align-items: flex-start; // Align items to the top
-  gap: 1.5rem; // Gap between image and content
+  gap: 1.5rem; // Space between image and content
 }
 
-// --- Team Card Image ---
 .team-card__image {
-  flex: 0 0 $team-image-size; // Fixed width, don't grow/shrink
+  flex: 0 0 $team-image-size; // Fixed width
   width: $team-image-size;
-  height: auto; // Let height be determined by image aspect ratio (or set to $team-image-size for square)
+  height: auto; // Let image aspect ratio determine height
 
   img {
     display: block;
     width: 100%;
-    height: auto; // Maintain aspect ratio
-    // Optional: make images black and white
-    filter: grayscale(100%);
-    // Optional: if you want square images that crop:
-    // height: 100%;
-    // object-fit: cover;
+    height: auto;
+    filter: grayscale(100%); // Optional: make images black and white
   }
 }
 
-// --- Team Card Content ---
 .team-card__content {
-  flex: 1; // Allow content to take remaining space
-  padding-top: 0.25rem; // Small padding to align top edge text slightly better with image top
+  flex: 1; // Takes remaining space
+  padding-top: 0.25rem; // Small adjustment for text alignment
 }
 
 .team-card__name {
-  font-size: 1.5rem; // Adjust size
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0 0.5rem 0;
   color: $team-text-color;
 }
 
 .team-card__title {
-  font-size: 1rem; // Adjust size
+  font-size: 1rem;
   line-height: 1.5;
   color: $team-title-color;
   margin: 0 0 1rem 0;
 }
 
-// --- Team Card Social Link ---
 .team-card__social {
-  margin-top: 1rem; // Space above icon
+  margin-top: 1rem;
   a {
     color: $team-text-color;
     text-decoration: none;
-    font-size: 1.2rem; // Size of the LinkedIn icon
-    display: inline-block; // Allows hover effects if needed
+    font-size: 1.2rem; // Icon size
+    display: inline-block;
     transition: color 0.2s ease;
 
     &:hover {
-      color: color.adjust($team-text-color, $lightness:30%); // Make icon brighter on hover
+      color: color.adjust($team-text-color, $lightness:30%); // Brighten icon on hover
     }
   }
 }
 
-
-// --- Responsive Adjustments ---
-@media (max-width: 960px) {
+@media (max-width: 960px) { // Team Responsive
     .team-grid {
-        // Mobile: Switch to 1 column
-        grid-template-columns: 1fr;
-        // You might want a larger gap when stacked vertically
-        gap: $team-gap * 1.5;
+        grid-template-columns: 1fr; // Mobile: 1 column
+        gap: $team-gap * 1.5; // Increase gap when stacked
     }
 
-    // Optional: Adjust card alignment or image size on mobile if needed
     .team-card {
-      align-items: center; // Center image and text vertically if preferred when stacked
+      align-items: center; // Center items vertically?
     }
     .team-card__image {
-       flex-basis: 100px; // Smaller image on mobile?
+       flex-basis: 100px; // Smaller image?
        width: 100px;
     }
     .team-card__name {
@@ -1706,14 +1512,109 @@ $team-image-size: 120px; // Width and height of the image container
     }
 }
 
-@media (max-width: 576px) {
-    .team-card {
-        // Example: Stack image above text on very small screens
-        // flex-direction: column;
-        // align-items: flex-start; // Align left again
-        // text-align: left;
+
+// =========================================
+// ===== CAREERS SECTION STYLES ==========
+// =========================================
+$careers-bg-color: #080808;
+$careers-text-color: #ffffff;
+$careers-subtitle-color: #e0e0e0;
+$careers-button-bg: #8a2be2;
+$careers-button-text: #ffffff;
+$careers-button-hover-bg: color.adjust($careers-button-bg, $lightness:10%);
+// !!! IMPORTANT: REPLACE THIS PATH with your actual SVG background image path !!!
+$careers-svg-path: 'https://www.accenture.com/etc.clientlibs/cio-sites/clientlibs/clientlib-rad/resources/images/banner/Banner_Desktop_Left-Illustration.svg';
+
+.careers-section {
+  background-color: $careers-bg-color;
+  color: $careers-text-color;
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden; // Hide overflowing parts of the SVG
+  margin: 0; // Override global section margin if it exists
+
+  background-image: url($careers-svg-path);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; // Scale image to cover section
+
+  .container {
+    position: relative; // Ensure content stays above background
+    z-index: 1;
+    max-width: 1200px; // Example max-width
+    margin: 0 auto;
+    padding: 0 1.5rem; // Example padding
+  }
+}
+
+.careers-content {
+  max-width: 600px; // Limit width of text block on large screens
+  margin-left: 30px; // Specific offset from left edge
+}
+
+.careers-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+}
+
+.careers-subtitle {
+  font-size: 1.1rem;
+  color: $careers-subtitle-color;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.careers-button {
+  display: inline-block;
+  background-color: $careers-button-bg;
+  color: $careers-button-text;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    background-color: $careers-button-hover-bg;
+    color: $careers-button-text;
+    outline: none;
+  }
+}
+
+@media (max-width: 960px) { // Careers Responsive
+    .careers-section {
+        padding: 4rem 0;
+        text-align: center; // Center content on mobile
+        background-position: center center;
     }
-    // .team-card__image {
-    //     margin-bottom: 1rem; // Add space below image if stacked
-    // }
+
+    .careers-content {
+        max-width: none; // Allow content to use container width
+        margin-left: auto; // Center block within container
+        margin-right: auto;
+    }
+
+    .careers-title {
+        font-size: 2.2rem;
+    }
+
+    .careers-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) { // Careers Small Mobile Responsive
+     .careers-title {
+        font-size: 1.8rem;
+    }
+     .careers-button {
+         padding: 0.8rem 1.5rem; // Slightly smaller button padding
+         width: 80%; // Make button wider for easier tapping
+         max-width: 300px; // Limit max width
+     }
 }
