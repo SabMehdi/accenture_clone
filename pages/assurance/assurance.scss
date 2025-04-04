@@ -2,6 +2,7 @@
 // Variables
 // =========================================
 @use "sass:color";
+@use "sass:math"; // Needed for division potentially
 
 $accent-purple: #a100ff;
 $white: #fff;
@@ -19,7 +20,7 @@ $desktop-breakpoint: 961px; // Point at which mobile styles turn off
 // =========================================
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 30px 0; // Reset margin for all elements
   padding: 0;
 }
 
@@ -50,7 +51,6 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    max-width: 1300px; // Adjust as needed
     margin: 0 auto;
     padding: 0 25px;
   }
@@ -608,7 +608,6 @@ $purple-breakpoint-mobile: 960px;
     justify-content: space-between;
     align-items: center;
     height: $purple-nav-height;
-    max-width: $purple-nav-max-width;
     margin: 0 auto;
     position: relative; // Needed for absolute positioning of mobile menu if used
 
@@ -630,7 +629,8 @@ $purple-breakpoint-mobile: 960px;
       margin-left: 15px;
       line-height: 1; // Helps center icon vertically sometimes
 
-      .purple-toggle-icon { // Targets the <i> tag now
+      .purple-toggle-icon {
+        // Targets the <i> tag now
         display: inline-block; // Needed for transform
         font-size: 1.4rem; // Adjust icon size as desired (try 1.2rem, 1.4rem, 1.6rem)
         transition: transform 0.3s ease-in-out; // Animate rotation
@@ -748,7 +748,9 @@ $purple-breakpoint-mobile: 960px;
       }
       .purple-nav-toggle {
         .purple-toggle-icon {
-          transform: rotate(180deg); // Flips chevron-down to look like chevron-up
+          transform: rotate(
+            180deg
+          ); // Flips chevron-down to look like chevron-up
         }
       }
     }
@@ -764,7 +766,7 @@ $hero-text: #ffffff;
 $hero-padding-y: 60px; // Vertical padding top/bottom for the section
 $hero-padding-x: 20px; // Horizontal padding for the container consistency
 $hero-max-width: 1200px; // Max width of content area (like navbars)
-$hero-gap: 40px;       // Space between image and text columns
+$hero-gap: 40px; // Space between image and text columns
 $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768px or 960px)
 
 /* --- Hero Base Styles --- */
@@ -775,21 +777,20 @@ $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768p
   overflow: hidden; // Helps contain elements
 
   .hero-container {
-    max-width: $hero-max-width;
     margin: 0 auto;
     padding: 0 $hero-padding-x;
     display: flex;
     align-items: center; // Vertically align items in columns
-    gap: $hero-gap;      // Space between columns
+    gap: $hero-gap; // Space between columns
 
     .hero-image-col {
       flex: 1 1 55%; // Allow shrinking, prefer 55% width initially
       max-width: 55%; // Ensure it doesn't exceed this on large screens if text is short
 
       .hero-illustration {
-        display: block;   // Remove extra space below image
-        width: 100%;     // Make image scale within its column
-        height: auto;    // Maintain aspect ratio
+        display: block; // Remove extra space below image
+        width: 100%; // Make image scale within its column
+        height: auto; // Maintain aspect ratio
       }
     }
 
@@ -798,7 +799,11 @@ $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768p
       max-width: 45%;
 
       .hero-headline {
-        font-size: clamp(2rem, 5vw, 3.2rem); // Responsive font size (min, preferred, max)
+        font-size: clamp(
+          2rem,
+          5vw,
+          3.2rem
+        ); // Responsive font size (min, preferred, max)
         font-weight: bold;
         line-height: 1.2;
         margin: 0 0 25px 0; // Space below headline
@@ -821,19 +826,19 @@ $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768p
 
     .hero-container {
       flex-direction: column; // Stack columns vertically
-      text-align: center;    // Center text when stacked
-      gap: 30px;             // Adjust vertical gap
+      text-align: center; // Center text when stacked
+      gap: 30px; // Adjust vertical gap
 
       .hero-image-col {
         flex-basis: auto; // Reset flex properties
-        max-width: 85%;   // Limit image width a bit, centered due to container margin auto
-        order: 1;         // Keep image first
+        max-width: 85%; // Limit image width a bit, centered due to container margin auto
+        order: 1; // Keep image first
       }
 
       .hero-text-col {
         flex-basis: auto; // Reset flex properties
-        max-width: 100%;  // Allow text to take full width
-        order: 2;         // Text comes after image
+        max-width: 100%; // Allow text to take full width
+        order: 2; // Text comes after image
 
         .hero-headline {
           // Font size already responsive via clamp()
@@ -841,13 +846,12 @@ $hero-breakpoint: 960px; // When the columns stack (adjust as needed, maybe 768p
         }
 
         .hero-paragraph {
-           // Font size already responsive via clamp()
+          // Font size already responsive via clamp()
         }
       }
     }
   }
 }
-
 
 // ===== STATS SECTION STYLES =====
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -952,11 +956,196 @@ $stats-breakpoint: 768px; // When the columns stack (adjust if needed)
           }
 
           .stat-number {
-             margin-bottom: 10px;
-             display: block; // Ensure centering works well
+            margin-bottom: 10px;
+            display: block; // Ensure centering works well
           }
         }
       }
     }
+  }
+}
+
+// ===== CARD GRID SECTION STYLES =====
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// --- Add this line at the very top ---
+
+// --- Variables ---
+$bg-color-card: #000000; // Dark grey background
+$text-color-primary: #ffffff; // White text
+$text-color-secondary: #d0d0d0; // Lighter grey for category
+$accent-color: #8a2be2; // Purple accent (approximated)
+
+$font-family-sans: sans-serif;
+$base-font-size: 16px;
+$base-padding: 1.5rem; // Standard padding for content
+$card-gap: 1.5rem; // Gap between cards in the second row
+
+// --- Section Container ---
+.card-section {
+  margin: 0 auto; // Center the section
+  .section-title {
+    font-size: 2rem; // Example size
+    color: $text-color-primary; // Use existing variable
+    margin-bottom: 2rem; // Add space below the title
+    text-align: left; // Or center, right as needed
+  }
+}
+
+// --- Card Row ---
+.card-row {
+  display: flex;
+  margin-bottom: $card-gap; // Space between rows
+
+  // Modifier for the row with two cards
+  &--double {
+    gap: $card-gap; // Space between the two cards
+  }
+}
+
+// --- Card Base Styles ---
+.card {
+  background-color: $bg-color-card;
+  overflow: hidden; // Ensures image corners don't stick out if rounded
+  display: flex;
+  position: relative; // Still potentially useful for descendants
+  width: 100%; // Default to full width within its container
+}
+
+// --- Card Content Area ---
+.card__content {
+  padding: $base-padding;
+  position: relative; // Needed for absolute positioning of the link AND the pseudo-element
+  padding-top: $base-padding + 1rem; // Extra padding top to make space for the line
+  display: flex;
+  flex-direction: column; // Stack content vertically by default
+  flex-grow: 1; // Ensure content area tries to grow (helps push link down in vertical)
+
+  // Purple line above category
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: $base-padding; // Position it within the top padding
+    left: $base-padding;
+    width: 40px; // Width of the purple line
+    height: 4px; // Thickness of the line
+    background-color: $accent-color;
+  }
+}
+
+// --- Image Wrapper ---
+.card__image-wrapper {
+  img {
+    display: block; // Remove extra space below image
+    width: 100%;
+    height: 100%; // Make image fill wrapper height
+    object-fit: cover; // Cover the area, cropping if needed
+  }
+}
+
+// --- Text Elements ---
+.card__category {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: $text-color-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.card__title {
+  font-size: 1.75rem; // Larger title size
+  font-weight: bold;
+  color: $text-color-primary;
+  line-height: 1.3;
+  margin-bottom: 1rem; // Space below title
+  // Removed flex-grow from here, added to parent .card__content
+}
+
+// --- Link Button (Arrow) - Applied to ALL Cards Now ---
+.card__link {
+  background-color: $accent-color;
+  color: $text-color-primary;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem; // Adjust icon size if needed
+  display: inline-flex; // Use inline-flex for alignment
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: absolute; // Position relative to the parent .card__content
+  bottom: $base-padding;
+  right: $base-padding;
+  transition: background-color 0.2s ease;
+  margin-top: auto; // Helps push it down if content is short in flex column
+
+  // No specific SVG styling needed anymore
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust(
+      $accent-color,
+      $lightness: -5%
+    ); // Darken on hover/focus
+    outline: none; // Remove default focus outline if desired
+  }
+}
+
+// --- Horizontal Card Modifier ---
+.card--horizontal {
+  flex-direction: row; // Image left, text right
+  align-items: stretch; // Stretch items to fill height
+
+  .card__image-wrapper {
+    flex: 0 0 45%; // Image takes up 45% of width, doesn't grow/shrink
+  }
+
+  .card__content {
+    flex: 1 1 auto; // Content takes remaining space, can grow/shrink
+    justify-content: center; // Vertically center content block within its space
+  }
+
+  // REMOVED: Rule that hid the link
+  // .card__link {
+  //   display: none;
+  // }
+}
+
+// --- Vertical Card Modifier ---
+.card--vertical {
+  flex-direction: column; // Image top, text bottom (default)
+
+  .card__image-wrapper {
+    width: 100%;
+    height: 400px; // Give image a fixed height in vertical layout
+  }
+
+  // .card__content already has flex-grow: 1
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: 768px) {
+  .card-row {
+    flex-direction: column; // Stack cards vertically on smaller screens
+    gap: $card-gap; // Keep gap between stacked cards
+  }
+
+  .card--horizontal {
+    flex-direction: column; // Stack horizontal card content vertically too
+
+    .card__image-wrapper {
+      flex-basis: auto; // Reset flex-basis
+      width: 100%;
+      height: 250px; // Give image a fixed height when stacked
+      max-width: none; // Reset max-width
+    }
+    .card__content {
+      justify-content: flex-start; // Align top when stacked
+    }
+  }
+
+  // Adjust title size on smaller screens
+  .card__title {
+    font-size: 1.5rem;
   }
 }
