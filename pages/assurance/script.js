@@ -178,4 +178,128 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
    });
+
+
+   /////////////////////////////////////////////////////////////////////////////////////////////
+
+   const slider = document.querySelector('.partners-slider');
+   if (!slider) return; // Exit if slider element doesn't exist
+
+   const track = slider.querySelector('.partners-track');
+   const cards = slider.querySelectorAll('.partner-card');
+   const prevButton = slider.querySelector('.slider-btn.prev');
+   const nextButton = slider.querySelector('.slider-btn.next');
+
+   if (!track || !prevButton || !nextButton || cards.length === 0) {
+       console.warn('Slider elements (track, buttons, or cards) not found.');
+       if(prevButton) prevButton.style.display = 'none'; // Hide buttons if setup fails
+       if(nextButton) nextButton.style.display = 'none';
+       return;
+   }
+
+   let currentIndex = 0;
+   let cardWidth = 0;
+   let trackGap = 0;
+   let cardsInView = calculateCardsInView(); // Function to determine based on viewport
+
+   function calculateCardWidthAndGap() {
+       if (cards.length > 0) {
+           const cardStyle = window.getComputedStyle(cards[0]);
+           //offsetWidth includes padding and border, but not margin
+           cardWidth = cards[0].offsetWidth;
+
+           // Get gap value from the track's style
+           const trackStyle = window.getComputedStyle(track);
+           trackGap = parseFloat(trackStyle.gap) || 0;
+
+           // Effective width for sliding includes the gap
+           return cardWidth + trackGap;
+       }
+       return 0; // No cards
+   }
+
+   function calculateCardsInView() {
+       // This is an approximation - determines how many cards *mostly* fit
+       // You might adjust this logic based on your specific card widths/breakpoints
+       const viewportWidth = slider.querySelector('.partners-viewport').clientWidth;
+       const slideWidth = calculateCardWidthAndGap();
+       if (slideWidth > 0) {
+           // See how many full cards + gaps fit
+            return Math.max(1, Math.floor(viewportWidth / slideWidth));
+       }
+       return 1; // Default to 1 if calculation fails
+   }
+
+
+   function updateSliderPosition() {
+       const slideWidth = calculateCardWidthAndGap();
+       if (slideWidth > 0) {
+            // Calculate the total offset needed
+           const offset = -currentIndex * slideWidth;
+           track.style.transform = `translateX(${offset}px)`;
+       }
+       updateButtonStates();
+   }
+
+   function updateButtonStates() {
+       // Disable prev button if at the beginning
+       prevButton.disabled = currentIndex === 0;
+
+       // Disable next button if the last potential full view is reached
+       // We can slide until the 'cardsInView'-th card from the end is reached
+       const maxIndex = cards.length - cardsInView; // Or adjust based on how you want the end to behave
+        nextButton.disabled = currentIndex >= maxIndex || maxIndex <= 0; // also disable if not enough cards to scroll
+
+       // Alternative end condition: disable when the *last* card is fully visible or partially visible at the end
+       // const lastCardFullyVisibleIndex = cards.length - cardsInView;
+       // nextButton.disabled = currentIndex >= lastCardFullyVisibleIndex;
+
+       // Simpler end condition: Disable when you can't slide one more full card width
+       // nextButton.disabled = currentIndex >= cards.length - 1; // Might allow empty space at the end
+   }
+
+
+   function handleResize() {
+       // Recalculate based on new viewport size
+       cardsInView = calculateCardsInView();
+       // Snap back to a valid position if current index becomes invalid
+       const maxIndex = Math.max(0, cards.length - cardsInView);
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+       updateSliderPosition(); // Adjust position and button states
+   }
+
+   // Event Listeners
+   nextButton.addEventListener('click', () => {
+       const maxIndex = cards.length - cardsInView;
+       if (currentIndex < maxIndex) {
+           currentIndex++;
+           updateSliderPosition();
+       }
+   });
+
+   prevButton.addEventListener('click', () => {
+       if (currentIndex > 0) {
+           currentIndex--;
+           updateSliderPosition();
+       }
+   });
+
+   // Resize listener
+   let resizeTimerSection;
+   window.addEventListener('resize', () => {
+       clearTimeout(resizeTimerSection);
+       resizeTimerSection = setTimeout(handleResize, 250); // Debounce resize events
+   });
+
+   // Initial setup
+   handleResize(); // Calculate initial state
+
+    // Hide buttons if there are not enough cards to scroll
+    if (cards.length <= cardsInView) {
+        prevButton.style.display = 'none';
+        nextButton.style.display = 'none';
+    }
+
 });

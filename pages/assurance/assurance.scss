@@ -20,7 +20,6 @@ $desktop-breakpoint: 961px; // Point at which mobile styles turn off
 // =========================================
 * {
   box-sizing: border-box;
-  margin: 30px 0; // Reset margin for all elements
   padding: 0;
 }
 
@@ -1322,3 +1321,165 @@ section{
 //   from { opacity: 0; }
 //   to { opacity: 1; }
 // }
+
+
+///// // ===== PARTNERS SECTION STYLES =====
+
+// --- Partners Section Variables ---
+$partners-bg-color: #000000;
+$partners-text-color: #ffffff;
+$partners-card-bg: transparent; // Or a very dark grey if needed #1a1a1a;
+$partners-button-bg: #2d2d2d;
+$partners-button-hover-bg: #444444;
+$partner-gap: 1.5rem; // Gap between cards
+
+// --- Partners Section General Styles ---
+.partners-section {
+  margin: 0;
+  background-color: $partners-bg-color;
+  color: $partners-text-color;
+  padding: 4rem 0;
+  position: relative; // Needed if positioning nav absolutely relative to section
+
+  .container { // Using the same container class as before
+      padding: 0 1.5rem;
+  }
+}
+
+.partners-main-title {
+  font-size: 2.5rem; // Same as .segments-main-title
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+// --- Slider Structure ---
+.partners-slider {
+  position: relative; // For absolute positioning of nav buttons if needed
+}
+
+.partners-viewport {
+  overflow: hidden; // This is crucial for the slider effect
+  margin: 0 calc($partner-gap / 2); // Adjust viewport slightly if needed for edge gaps
+  padding: 0 calc($partner-gap / 2); // Counteract margin adjustment
+}
+
+.partners-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out; // Smooth sliding animation
+  padding-bottom: 1rem; // Add padding if cards have shadows or borders that get cut off
+}
+
+// --- Partner Card Styling ---
+.partner-card {
+  background-color: $partners-card-bg;
+  // Calculate basis to show 2 cards + a bit of the 3rd.
+  // This might need slight adjustment depending on exact gap/padding.
+  // Aiming for slightly less than 1/2 width. 48% often works well with gap.
+  flex: 0 0 calc(50% - #{$partner-gap}); // Adjust if needed
+  // Or try a slightly smaller value to guarantee preview space:
+  // flex: 0 0 calc(100% / 2.2 - #{$partner-gap});
+  min-width: 280px; // Prevent cards from becoming too small
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Pushes link to bottom
+  min-height: 250px; // Give cards a minimum height
+}
+
+.partner-logo {
+  margin-bottom: 1.5rem;
+  min-height: 40px; // Ensure space even if logo fails to load
+  img {
+    max-height: 100px; // Control logo height
+    width: auto; // Maintain aspect ratio
+    display: block;
+  }
+}
+
+.partner-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; // Allows description to take up space and push link down
+}
+
+.partner-link {
+  color: $partners-text-color;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-flex; // Align text and icon
+  align-items: center;
+  gap: 0.5rem; // Space between text and icon
+
+  i {
+      font-size: 0.75rem; // Slightly smaller icon
+  }
+
+  &:hover {
+    text-decoration: underline; // Or change color
+  }
+}
+
+// --- Navigation Buttons ---
+.partners-nav {
+  display: flex;
+  justify-content: flex-end; // Position buttons to the right
+  gap: 0.75rem;
+  margin-top: 1.5rem; // Space above buttons
+  // Alternatively, use absolute positioning:
+  // position: absolute;
+  // bottom: -2.5rem; // Adjust as needed
+  // right: 0; // Or use container padding 'right' value
+}
+
+.slider-btn {
+  background-color: $partners-button-bg;
+  color: $partners-text-color;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $partners-button-hover-bg;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+// --- Responsive Adjustments ---
+@media (max-width: 960px) {
+  // Styles for screens 960px wide and below
+
+  // --- Slider Card Layout ---
+  .partner-card {
+      // Show exactly 1 card
+      flex-basis: 100%;
+      // Override the desktop min-width to allow shrinking on narrow viewports
+      min-width: 0;
+  }
+
+  // --- Navigation Button Layout ---
+   .partners-nav {
+       justify-content: center; // Center buttons below slider
+   }
+
+  // --- Title Font Size (Optional adjustment) ---
+   .partners-main-title {
+      font-size: 2rem; // Adjust title size for smaller screens
+  }
+
+  // --- Optional: Adjust viewport padding/margin if needed ---
+  // .partners-viewport {
+  //   margin: 0; // Remove horizontal margin if it causes issues
+  //   padding: 0; // Remove horizontal padding if it causes issues
+  // }
+}
