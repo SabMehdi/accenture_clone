@@ -648,3 +648,136 @@ body {
     } // --- End of mobile media query ---
   
   } // --- End of .hero-section ---
+
+
+  // =========================================
+// ============ TEASER STYLES ==============
+// =========================================
+
+// --- Define necessary variables if not already global ---
+$light-grey: #f4f4f4; // Background for the section
+$white: #fff;
+$black: #000;
+$accent-purple: #a100ff; // Color for the icon
+$link-blue: #007bff; // Example blue for the link
+$grey-text: #555; // For the description text
+$mobile-breakpoint: 767px; // Use your defined breakpoint
+
+.teaser-section {
+  background-color: $light-grey;
+  padding: 20px ; // Vertical padding for the section
+}
+
+.teaser-box {
+  background-color: $white;
+  margin: 0 auto; // Center the box
+  padding: 15px 50px; // Padding inside the white box
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0; // Subtle border like the image
+  // Optional: add a subtle shadow
+  // box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.teaser-icon {
+  flex-shrink: 0; // Prevent icon from shrinking
+  width: 30px; // Adjust size
+  height: 30px; // Adjust size
+  margin-right: 20px; // Space between icon and text
+
+  // Style if using <img> for SVG
+  // The SVG file itself should ideally define the purple color
+  // or use `currentColor` and set the color here.
+  // If SVG uses currentColor:
+  // color: $accent-purple;
+
+  // If using Font Awesome <i> tag:
+  // font-size: 2rem; // Adjust size
+  // color: $accent-purple;
+}
+
+.teaser-text {
+  flex-grow: 1; // Allow text block to take up available space if needed (optional)
+  margin-right: 20px; // Space between text and link
+  display: flex; // Keep label and description together
+  align-items: baseline; // Align text nicely if font sizes differ
+  flex-wrap: wrap; // Allow wrapping if needed on medium screens
+}
+
+.teaser-label {
+  font-weight: bold;
+  color: $black;
+  margin-right: 10px; // Space between label and description
+  white-space: nowrap; // Prevent label from wrapping
+}
+
+.teaser-description {
+  color: $grey-text;
+  font-size: 0.95rem;
+}
+
+.teaser-link {
+  flex-shrink: 0; // Prevent link from shrinking
+  margin-left: auto; // Pushes the link to the far right
+  text-decoration: none;
+  color: $link-blue;
+  font-weight: bold;
+  font-size: 0.9rem;
+  white-space: nowrap; // Prevent link text from wrapping
+  display: inline-flex; // Align icon nicely with text
+  align-items: center;
+
+  i, // Style for Font Awesome arrow
+  &::after // Style if using content:"\2192"; for arrow
+   {
+    margin-left: 8px;
+    font-size: 1em; // Make arrow relative to link font size
+  }
+
+   &:hover {
+     text-decoration: underline;
+   }
+}
+
+
+// =========================================
+// ============ TEASER MOBILE STYLES =======
+// =========================================
+@media screen and (max-width: $mobile-breakpoint) {
+  .teaser-box {
+    padding: 15px; // Reduce padding slightly
+    flex-wrap: wrap; // Allow items to wrap onto next line
+  }
+
+  .teaser-icon {
+    display: none; // Hide the icon on mobile
+  }
+
+  .teaser-text {
+     // Take full width when icon is gone and potentially wrapping
+     flex-basis: 100%; // Allow text block to take full width if needed
+     margin-right: 0; // Remove right margin when wrapping might occur
+     margin-bottom: 10px; // Add space below text if link wraps below
+     justify-content: center; // Center text if it wraps alone
+     text-align: center; // Center text
+     align-items: center;
+     flex-direction: column;
+  }
+
+  .teaser-label {
+    margin-right: 0; // Remove right margin when stacking
+    margin-bottom: 5px; // Add space below label when stacking
+    text-align: center;
+  }
+
+   .teaser-description{
+       text-align: center;
+   }
+
+  .teaser-link {
+    margin-left: 0; // Remove auto margin
+    flex-basis: 100%; // Make link take full width
+    justify-content: center; // Center link content (text + arrow)
+    margin-top: 5px; // Add slight space above if text didn't wrap but icon disappeared
+  }
+}
