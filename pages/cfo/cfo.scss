@@ -528,129 +528,128 @@ body {
 // $mobile-breakpoint: 767px; // Example breakpoint
 
 .hero-section {
-    position: relative; // Crucial for absolute positioning of children
+  position: relative; // Crucial for absolute positioning of children
+  width: 100%;
+  min-height: 65vh; // Adjust height as needed for desktop/tablet
+  display: flex; // Using flex to help center content vertically
+  align-items: center; // Vertically center content
+  justify-content: flex-start; // Align content to the left
+  overflow: hidden; // Prevents video overflow issues
+  color: $white; // Default text color for overlay
+
+  // --- Video Background Container ---
+  .hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 65vh; // Adjust height as needed for desktop/tablet
-    display: flex; // Using flex to help center content vertically
-    align-items: center; // Vertically center content
-    justify-content: flex-start; // Align content to the left
-    overflow: hidden; // Prevents video overflow issues
-    color: $white; // Default text color for overlay
-  
-    // --- Video Background Container ---
-    .hero-video-background {
+    height: 100%;
+    z-index: -1; // Place it behind the content and overlay
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Cover the area, cropping as needed
+    }
+
+    // --- Optional Overlay ---
+    .hero-overlay {
+      // Nested overlay style if you add the div back to HTML
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; // Place it behind the content and overlay
-  
-      video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; // Cover the area, cropping as needed
-      }
-  
-      // --- Optional Overlay ---
-      .hero-overlay { // Nested overlay style if you add the div back to HTML
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.35); // Adjust darkness/opacity
-          z-index: 0; // Between video (-1) and content (1)
-      }
+      background-color: rgba(0, 0, 0, 0.35); // Adjust darkness/opacity
+      z-index: 0; // Between video (-1) and content (1)
     }
-  
-    // --- Content Container ---
-    .hero-content {
-      position: relative; // Keep it above the overlay
-      z-index: 1;
-      padding: 40px 60px; // Adjust padding as needed
-      max-width: 700px; // Limit width of text container
-      text-align: left;
-  
-      .hero-category {
-        display: block;
-        font-size: 0.9rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-        color: rgba($white, 0.9); // Slightly less bright than title
-      }
-  
-      .hero-title {
-        font-size: 3.5rem; // Adjust size
-        font-weight: bold;
-        margin-bottom: 20px;
-        line-height: 1.2;
-      }
-  
-      .hero-subtitle {
-        font-size: 1.2rem; // Adjust size
-        line-height: 1.6;
-        color: rgba($white, 0.9); // Slightly less bright than title
-      }
-    }
-  
-    // =========================================
-    // ============ HERO MOBILE STYLES =========
-    // (Nested within .hero-section)
-    // =========================================
-    @media screen and (max-width: $mobile-breakpoint) {
-      // --- Adjustments to the main section container ---
-      flex-direction: column; // Stack items vertically
-      min-height: auto; // Let content define height
-      height: auto;
-      align-items: stretch; // Stretch items to full width
-      padding-top: 0; // Remove padding used for vertical alignment
-  
-      // --- Adjustments to the video background container ---
-      .hero-video-background {
-        position: relative; // Change from absolute to relative/static
-        z-index: auto; // Reset z-index
-        width: 100%;
-        height: 50vh; // Give video a specific height on mobile, adjust as needed
-        order: 2; // Make video appear *after* the content block
-  
-        // Remove overlay on mobile if content is separate
-        .hero-overlay {
-          display: none;
-        }
-        // video styles generally don't need changing here unless specific overrides needed
-      }
-  
-      // --- Adjustments to the content container ---
-      .hero-content {
-        position: relative; // Ensure it's in normal flow
-        order: 1; // Make content appear *before* the video block
-        background-color: $accent-purple; // Purple background
-        color: $white; // Ensure text is white on purple
-        padding: 30px 20px; // Adjust mobile padding
-        max-width: 100%; // Allow full width
-  
-        // Adjust text styles within content for mobile
-        .hero-category,
-        .hero-subtitle {
-          color: $white; // Ensure these are also white
-        }
-  
-        .hero-title {
-          font-size: 2.5rem; // Smaller title for mobile
-        }
-        .hero-subtitle {
-          font-size: 1rem; // Smaller subtitle
-        }
-      }
-    } // --- End of mobile media query ---
-  
-  } // --- End of .hero-section ---
+  }
 
+  // --- Content Container ---
+  .hero-content {
+    position: relative; // Keep it above the overlay
+    z-index: 1;
+    padding: 40px 60px; // Adjust padding as needed
+    max-width: 700px; // Limit width of text container
+    text-align: left;
+
+    .hero-category {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      color: rgba($white, 0.9); // Slightly less bright than title
+    }
+
+    .hero-title {
+      font-size: 3.5rem; // Adjust size
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem; // Adjust size
+      line-height: 1.6;
+      color: rgba($white, 0.9); // Slightly less bright than title
+    }
+  }
 
   // =========================================
+  // ============ HERO MOBILE STYLES =========
+  // (Nested within .hero-section)
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    // --- Adjustments to the main section container ---
+    flex-direction: column; // Stack items vertically
+    min-height: auto; // Let content define height
+    height: auto;
+    align-items: stretch; // Stretch items to full width
+    padding-top: 0; // Remove padding used for vertical alignment
+
+    // --- Adjustments to the video background container ---
+    .hero-video-background {
+      position: relative; // Change from absolute to relative/static
+      z-index: auto; // Reset z-index
+      width: 100%;
+      height: 50vh; // Give video a specific height on mobile, adjust as needed
+      order: 2; // Make video appear *after* the content block
+
+      // Remove overlay on mobile if content is separate
+      .hero-overlay {
+        display: none;
+      }
+      // video styles generally don't need changing here unless specific overrides needed
+    }
+
+    // --- Adjustments to the content container ---
+    .hero-content {
+      position: relative; // Ensure it's in normal flow
+      order: 1; // Make content appear *before* the video block
+      background-color: $accent-purple; // Purple background
+      color: $white; // Ensure text is white on purple
+      padding: 30px 20px; // Adjust mobile padding
+      max-width: 100%; // Allow full width
+
+      // Adjust text styles within content for mobile
+      .hero-category,
+      .hero-subtitle {
+        color: $white; // Ensure these are also white
+      }
+
+      .hero-title {
+        font-size: 2.5rem; // Smaller title for mobile
+      }
+      .hero-subtitle {
+        font-size: 1rem; // Smaller subtitle
+      }
+    }
+  } // --- End of mobile media query ---
+} // --- End of .hero-section ---
+
+// =========================================
 // ============ TEASER STYLES ==============
 // =========================================
 
@@ -665,7 +664,7 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
 
 .teaser-section {
   background-color: $light-grey;
-  padding: 20px ; // Vertical padding for the section
+  padding: 20px; // Vertical padding for the section
 }
 
 .teaser-box {
@@ -729,16 +728,15 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
 
   i, // Style for Font Awesome arrow
   &::after // Style if using content:"\2192"; for arrow
-   {
+  {
     margin-left: 8px;
     font-size: 1em; // Make arrow relative to link font size
   }
 
-   &:hover {
-     text-decoration: underline;
-   }
+  &:hover {
+    text-decoration: underline;
+  }
 }
-
 
 // =========================================
 // ============ TEASER MOBILE STYLES =======
@@ -754,14 +752,14 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
   }
 
   .teaser-text {
-     // Take full width when icon is gone and potentially wrapping
-     flex-basis: 100%; // Allow text block to take full width if needed
-     margin-right: 0; // Remove right margin when wrapping might occur
-     margin-bottom: 10px; // Add space below text if link wraps below
-     justify-content: center; // Center text if it wraps alone
-     text-align: center; // Center text
-     align-items: center;
-     flex-direction: column;
+    // Take full width when icon is gone and potentially wrapping
+    flex-basis: 100%; // Allow text block to take full width if needed
+    margin-right: 0; // Remove right margin when wrapping might occur
+    margin-bottom: 10px; // Add space below text if link wraps below
+    justify-content: center; // Center text if it wraps alone
+    text-align: center; // Center text
+    align-items: center;
+    flex-direction: column;
   }
 
   .teaser-label {
@@ -770,9 +768,9 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
     text-align: center;
   }
 
-   .teaser-description{
-       text-align: center;
-   }
+  .teaser-description {
+    text-align: center;
+  }
 
   .teaser-link {
     margin-left: 0; // Remove auto margin
@@ -795,7 +793,8 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
 .content-video-section {
   padding: 60px 20px; // Vertical and horizontal padding for the whole section
 
-  .section-container { // Optional: Centers content and sets max-width
+  .section-container {
+    // Optional: Centers content and sets max-width
     max-width: 1140px;
     margin: 0 auto;
     display: flex;
@@ -876,7 +875,6 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
     }
   }
 
-
   // =========================================
   // ======== CONTENT VIDEO MOBILE STYLES ====
   // =========================================
@@ -884,27 +882,159 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
     padding: 40px 15px; // Reduce padding on mobile
 
     .section-container {
-        flex-direction: column; // Stack columns vertically
-        gap: 30px; // Adjust vertical gap
+      flex-direction: column; // Stack columns vertically
+      gap: 30px; // Adjust vertical gap
     }
 
     // No need to change flex properties of columns as they stack naturally now
 
     .content-column {
-        .cv-heading {
-            font-size: 2rem; // Smaller heading on mobile
-        }
-        p {
-            font-size: 0.95rem;
-        }
+      .cv-heading {
+        font-size: 2rem; // Smaller heading on mobile
+      }
+      p {
+        font-size: 0.95rem;
+      }
     }
 
     .video-column {
-        width: 100%; // Full width on mobile
-        .video-caption {
-            font-size: 1rem;
-        }
+      width: 100%; // Full width on mobile
+      .video-caption {
+        font-size: 1rem;
+      }
     }
   } // --- End of mobile media query ---
-
 } // --- End of .content-video-section ---
+// =========================================
+// ========= EXPERTISE SECTION STYLES ======
+// =========================================
+
+// --- Define necessary variables if not already global ---
+$light-grey-bg: #f8f8f8;
+$white: #fff;
+$black: #000;
+$grey-text: #555;
+$accent-purple: #a100ff;
+$grid-gap: 30px;
+$card-horizontal-padding: 30px; // Padding left/right for card content
+$icon-size: 55px; // Define icon size
+$icon-overlap: calc(
+  $icon-size * 0.9 / 2
+); // How much the icon overlaps (half its height)
+$mobile-breakpoint: 767px;
+
+.expertise-section {
+  background-color: $light-grey-bg;
+  padding: 80px 20px 60px; // Increased top padding to make space for overlapping icons visually
+
+  .section-container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .expertise-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .expertise-intro {
+    color: $grey-text;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 850px;
+    margin-bottom: 60px; // Increased space before grid starts due to overlap
+    text-align: left;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $grid-gap * 1.5 $grid-gap; // Increase row gap to accommodate overlap visually
+    // Keep column gap normal
+  }
+
+  // --- Card Styling ---
+  .expertise-card {
+    background-color: $white;
+    border: 1px solid #eee;
+    position: relative; // CRUCIAL: Context for absolute icon positioning
+    padding: ($icon-overlap + 20px)
+      // Top padding starts below the icon's center + some space
+      $card-horizontal-padding // Right padding
+      30px // Bottom padding
+      $card-horizontal-padding; // Left padding
+    margin-top: $icon-overlap; // Add margin-top to card to push it down, making space for icon
+    // This helps the grid gap calculation visually
+    min-height: 200px; // Give card some minimum height if needed
+  }
+
+  // --- Icon Styling (Absolute Positioning) ---
+  .card-icon {
+    position: absolute;
+    top: -$icon-overlap; // Pull icon up by half its height to overlap top edge
+    left: $card-horizontal-padding; // Position horizontally from the left edge of the card
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  // --- Card Content Styling ---
+  .card-content {
+    // Styles for the text wrapper inside the card
+    text-align: left; // Ensure content is left-aligned
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: $black;
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      color: $grey-text;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+
+  // =========================================
+  // ========= EXPERTISE MOBILE STYLES =======
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding: 40px 15px; // Adjust section padding
+
+    .expertise-intro {
+      margin-bottom: 50px; // Adjust space
+    }
+
+    .expertise-grid {
+      grid-template-columns: 1fr; // Single column
+      gap: $grid-gap + $icon-overlap; // Adjust vertical gap for mobile, considering overlap space
+    }
+
+    // --- Reset Card for Mobile ---
+    .expertise-card {
+      padding: ($icon-overlap + 20px) 25px 30px 25px; // Keep top padding for icon overlap
+      margin-top: $icon-overlap; // Keep margin-top to allow overlap space
+      // Other styles like background remain
+    }
+
+    // --- Reset Icon Positioning Slightly for Mobile if needed ---
+    .card-icon {
+      // Position remains absolute, top/left/z-index remain the same
+      left: 25px; // Adjust left position based on mobile card padding
+      width: $icon-size * 0.9; // Optionally make icon slightly smaller
+      height: $icon-size * 0.9;
+    }
+
+    // --- Adjust Card Content Padding/Fonts ---
+    .card-content {
+      .card-title {
+        font-size: 1.3rem;
+      }
+      // Description font size likely okay
+    }
+  } // --- End of mobile media query ---
+} // --- End of .expertise-section ---
