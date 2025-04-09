@@ -1038,3 +1038,109 @@ $mobile-breakpoint: 767px;
     }
   } // --- End of mobile media query ---
 } // --- End of .expertise-section ---
+
+
+// =========================================
+// ========= STATS SECTION STYLES ==========
+// =========================================
+
+// --- Define necessary variables if not already global ---
+// $light-grey-bg: #f8f8f8;
+// $black: #000;
+// $grey-text: #555;
+// $accent-purple: #a100ff;
+// $mobile-breakpoint: 767px;
+
+.stats-section {
+    background-color: $light-grey-bg; // Matches previous section bg
+    padding: 60px 20px;
+  
+    .section-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+  
+    .stats-heading {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: $black;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+  
+    .stats-intro {
+      color: $grey-text;
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 850px;
+      margin-bottom: 40px; // Space before the grid
+      text-align: left;
+    }
+  
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // 2 columns on desktop/tablet
+      gap: 40px 30px; // Row gap, Column gap
+    }
+  
+    // --- Stat Card Styling ---
+    .stat-card {
+      // No background needed, sits on section background
+      text-align: left;
+  
+      .stat-percentage {
+        font-size: 4.5rem; // Large percentage text
+        font-weight: bold;
+        color: $black;
+        line-height: 1.1; // Adjust line height for large font
+        margin-bottom: 15px; // Space between percentage and line
+      }
+  
+      .stat-line {
+        display: block;
+        width: 100%; // Make line full width of its container (the grid column)
+        height: 5px; // Thickness of the line
+        background-color: $accent-purple;
+        margin-bottom: 15px; // Space between line and description
+      }
+  
+      .stat-description {
+        color: $grey-text;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+    }
+  
+  
+    // =========================================
+    // ========== STATS MOBILE STYLES ==========
+    // =========================================
+    @media screen and (max-width: $mobile-breakpoint) {
+      padding: 40px 15px; // Adjust section padding
+  
+      .stats-heading {
+        font-size: 2rem;
+      }
+  
+      .stats-grid {
+        grid-template-columns: 1fr; // Switch to single column
+        gap: 35px; // Only need one gap value for single column
+      }
+  
+      .stat-card {
+        .stat-percentage {
+          font-size: 3.5rem; // Smaller percentage on mobile
+        }
+  
+        .stat-line {
+          height: 4px; // Slightly thinner line if desired
+          // max-width: 150px; // Optional: reduce max-width on mobile
+        }
+  
+        .stat-description {
+          font-size: 0.9rem;
+        }
+      }
+    } // --- End of mobile media query ---
+  
+  } // --- End of .stats-section ---
