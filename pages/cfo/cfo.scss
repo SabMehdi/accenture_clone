@@ -12,7 +12,7 @@ $grey-text: #555; // Darker grey for readability on white
 $navbar-height: 80px;
 $mobile-menu-transition: right 0.4s ease-in-out, opacity 0.4s ease-in-out; // Added opacity
 $tablet-breakpoint: 960px; // Breakpoint where mobile styles START
-$mobile-breakpoint: 600px;  // Breakpoint for full-width mobile menu
+$mobile-breakpoint: 600px; // Breakpoint for full-width mobile menu
 
 // --- Base & Desktop Styles (Mostly unchanged, added comments) ---
 * {
@@ -68,12 +68,12 @@ body {
 }
 
 .menu-icon {
-    display: none; // Hidden on desktop
-    color: $black;
-    font-size: 1.8rem;
-    cursor: pointer;
-    z-index: 1001;
-    position: relative; // Ensure it's clickable
+  display: none; // Hidden on desktop
+  color: $black;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+  position: relative; // Ensure it's clickable
 }
 
 .nav-menu {
@@ -180,13 +180,13 @@ body {
 
 // Show desktop dropdown on hover
 .nav-item.dropdown:hover > .dropdown-content {
-    @media screen and (min-width: ($tablet-breakpoint + 1px)) { // Only apply hover on desktop
-        display: flex; // Use flex for the inner .submenu-nav layout
-        // position: fixed; // Avoid fixed position unless absolutely necessary
-        // right: 0;
-    }
+  @media screen and (min-width: ($tablet-breakpoint + 1px)) {
+    // Only apply hover on desktop
+    display: flex; // Use flex for the inner .submenu-nav layout
+    // position: fixed; // Avoid fixed position unless absolutely necessary
+    // right: 0;
+  }
 }
-
 
 .navbar-right {
   display: flex;
@@ -212,18 +212,18 @@ body {
 }
 // --- Ensure Desktop Elements are Visible ---
 @media screen and (min-width: ($tablet-breakpoint + 1px)) {
-    .navbar-right {
-      display: flex; // Explicitly show on desktop
-    }
-    .menu-icon {
-      display: none; // Explicitly hide on desktop
-    }
-    // Ensure mobile-only elements are hidden on desktop if they ever leak
-    .mobile-menu-header,
-    .mobile-menu-footer {
-       display: none;
-    }
+  .navbar-right {
+    display: flex; // Explicitly show on desktop
   }
+  .menu-icon {
+    display: none; // Explicitly hide on desktop
+  }
+  // Ensure mobile-only elements are hidden on desktop if they ever leak
+  .mobile-menu-header,
+  .mobile-menu-footer {
+    display: none;
+  }
+}
 
 // ================================================
 // ============ TABLET & MOBILE STYLES ============
@@ -237,7 +237,7 @@ body {
   }
   // Hide desktop hover dropdown effect on touch devices/mobile view
   .nav-item.dropdown:hover > .dropdown-content {
-      display: none;
+    display: none;
   }
 
   .nav-menu {
@@ -247,7 +247,7 @@ body {
     position: fixed; // Fixed position for slide-in
     top: 0;
     right: -370px; // Start off-screen (adjust width + padding)
-    width: 350px;  // Fixed width for tablet menu
+    width: 350px; // Fixed width for tablet menu
     max-width: 90%; // Ensure it doesn't exceed screen width on narrow tablets
     height: 100vh;
     background-color: $white;
@@ -258,7 +258,7 @@ body {
     align-items: stretch;
     text-align: left;
     border-left: 1px solid $light-dark-bg;
-    box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
+    box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.1);
     opacity: 0; // Start hidden for fade-in
 
     &.active {
@@ -276,199 +276,210 @@ body {
     // &.submenu-visible { ... } // DELETE THIS BLOCK
 
     .mobile-menu-header {
-        display: none; // Shown by &.active
-        height: $navbar-height;
+      display: none; // Shown by &.active
+      height: $navbar-height;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid $light-dark-bg;
+      flex-shrink: 0;
+
+      .close-menu-btn {
+        color: $black;
+        font-size: 1.8rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 5px;
+        margin-left: -5px;
+      }
+
+      .mobile-header-right {
+        display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-        border-bottom: 1px solid $light-dark-bg;
-        flex-shrink: 0;
+        gap: 1.5rem;
 
-        .close-menu-btn {
-            color: $black;
-            font-size: 1.8rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px;
-            margin-left: -5px;
+        .nav-icon-link,
+        .nav-locale {
+          display: flex;
+          color: $black;
+          text-decoration: none;
+          align-items: center;
+          i {
+            margin-right: 5px;
+          }
+          &:hover {
+            color: $accent-purple;
+          }
         }
-
-        .mobile-header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-
-            .nav-icon-link,
-            .nav-locale {
-                display: flex;
-                color: $black;
-                text-decoration: none;
-                align-items: center;
-                i { margin-right: 5px; }
-                &:hover { color: $accent-purple; }
-            }
-        }
+      }
     }
 
     .nav-item {
-        height: auto; // Override desktop height
-        width: 100%;
-        position: relative; // Needed for potential absolute elements within if any, but dropdown is block now
-        border-bottom: 1px solid $light-dark-bg;
+      height: auto; // Override desktop height
+      width: 100%;
+      position: relative; // Needed for potential absolute elements within if any, but dropdown is block now
+      border-bottom: 1px solid $light-dark-bg;
 
-        &:last-of-type { // Check if this selector correctly targets the last dropdown item
-            border-bottom: none;
-        }
+      &:last-of-type {
+        // Check if this selector correctly targets the last dropdown item
+        border-bottom: none;
+      }
 
-        // This class is now toggled by JS for accordion
-        &.submenu-open {
-             > .nav-links {
-                // Optional: Style the active link differently if desired
-                // background-color: rgba($black, 0.05);
-             }
-             > .nav-links .mobile-arrow {
-                transform: rotate(180deg); // Rotate arrow when open
-             }
-             > .dropdown-content {
-                display: block; // Show the dropdown content
-                // Optional: Add animation
-                // max-height: 1000px; // Example max-height for transition
-                // transition: max-height 0.5s ease-in-out;
-             }
+      // This class is now toggled by JS for accordion
+      &.submenu-open {
+        > .nav-links {
+          // Optional: Style the active link differently if desired
+          // background-color: rgba($black, 0.05);
         }
+        > .nav-links .mobile-arrow {
+          transform: rotate(180deg); // Rotate arrow when open
+        }
+        > .dropdown-content {
+          display: block; // Show the dropdown content
+          // Optional: Add animation
+          // max-height: 1000px; // Example max-height for transition
+          // transition: max-height 0.5s ease-in-out;
+        }
+      }
     }
 
     .nav-links {
-        display: flex;
-        justify-content: space-between; // Push arrow right
-        align-items: center;
-        padding: 1rem 1.5rem; // Adjust padding
-        height: auto; // Override desktop height
-        font-size: 1.1rem; // Slightly smaller font size
-        color: $black;
-        text-decoration: none;
-        width: 100%;
-        border-bottom: none; // Remove desktop hover border
-        font-weight: bold; // Keep bold for clarity
+      display: flex;
+      justify-content: space-between; // Push arrow right
+      align-items: center;
+      padding: 1rem 1.5rem; // Adjust padding
+      height: auto; // Override desktop height
+      font-size: 1.1rem; // Slightly smaller font size
+      color: $black;
+      text-decoration: none;
+      width: 100%;
+      border-bottom: none; // Remove desktop hover border
+      font-weight: bold; // Keep bold for clarity
 
-        &:hover {
-            background-color: rgba($black, 0.03); // Subtle hover
-            color: $accent-purple;
-            border-bottom: none;
-        }
+      &:hover {
+        background-color: rgba($black, 0.03); // Subtle hover
+        color: $accent-purple;
+        border-bottom: none;
+      }
 
-        .dropdown-arrow {
-            font-size: 1em; // Adjust size if needed
-            margin-left: 10px;
-            transition: transform 0.3s ease-in-out; // Smooth rotation
-        }
+      .dropdown-arrow {
+        font-size: 1em; // Adjust size if needed
+        margin-left: 10px;
+        transition: transform 0.3s ease-in-out; // Smooth rotation
+      }
 
-        // Show the mobile arrow, hide the (now non-existent) desktop one
-        .mobile-arrow { display: inline-block; }
-        // .desktop-arrow { display: none; } // Not needed if removed from HTML
+      // Show the mobile arrow, hide the (now non-existent) desktop one
+      .mobile-arrow {
+        display: inline-block;
+      }
+      // .desktop-arrow { display: none; } // Not needed if removed from HTML
     }
 
     // --- Mobile Dropdown Content (Accordion Style) ---
     .dropdown-content {
-        display: none; // Hidden by default, shown by .submenu-open on parent
-        position: static; // Important: No longer absolute/fixed
+      display: none; // Hidden by default, shown by .submenu-open on parent
+      position: static; // Important: No longer absolute/fixed
+      width: 100%;
+      height: auto; // Height is determined by content
+      background: #f8f8f8; // Slightly different background for visual hierarchy
+      z-index: auto; // Reset z-index
+      padding: 0; // Reset padding, handled by inner elements
+      margin: 0;
+      box-shadow: none; // Remove desktop shadow
+      border-top: 1px solid $light-dark-bg; // Add separator line
+      // Optional: Transition for smooth open/close
+      // max-height: 0;
+      // overflow: hidden;
+      // transition: max-height 0.5s ease-in-out;
+
+      // Remove mobile-specific header (back button)
+      .submenu-header {
+        display: none !important;
+      }
+
+      // Reset desktop layout wrappers if they interfere
+      > .dropdown-wrapper,
+      > .dropdown-wrapper > .dropdown-column,
+      > .dropdown-wrapper > .dropdown-column > .dropdown-column-types {
+        //display: contents; // Might not be needed if layout below is sufficient
+      }
+
+      .submenu-nav {
+        display: block; // Ensure it's block for vertical stacking
+        padding: 0.5rem 0; // Add some vertical padding
         width: 100%;
-        height: auto; // Height is determined by content
-        background: #f8f8f8; // Slightly different background for visual hierarchy
-        z-index: auto; // Reset z-index
-        padding: 0; // Reset padding, handled by inner elements
-        margin: 0;
-        box-shadow: none; // Remove desktop shadow
-        border-top: 1px solid $light-dark-bg; // Add separator line
-        // Optional: Transition for smooth open/close
-        // max-height: 0;
-        // overflow: hidden;
-        // transition: max-height 0.5s ease-in-out;
+        // Reset desktop flex behavior
+        // gap: 0;
+        // justify-content: initial;
+      }
 
-        // Remove mobile-specific header (back button)
-        .submenu-header {
-            display: none !important;
+      .dropdown-wrapper {
+        padding: 0 1.5rem 0 2.5rem; // Indent submenu items slightly
+        margin-bottom: 0.5rem;
+
+        h4 {
+          color: $grey-text;
+          font-size: 0.8rem;
+          margin-bottom: 5px;
+          padding-top: 0.8rem;
+          font-weight: normal; // Less emphasis than main links
         }
 
-        // Reset desktop layout wrappers if they interfere
-         > .dropdown-wrapper,
-         > .dropdown-wrapper > .dropdown-column,
-         > .dropdown-wrapper > .dropdown-column > .dropdown-column-types {
-           //display: contents; // Might not be needed if layout below is sufficient
-         }
+        .dropdown-column {
+          .dropdown-column-types {
+            a {
+              color: $black;
+              padding: 0.6rem 0; // Adjust padding
+              text-decoration: none;
+              display: block;
+              font-size: 1rem; // Match parent link or slightly smaller
+              white-space: normal;
 
-        .submenu-nav {
-            display: block; // Ensure it's block for vertical stacking
-            padding: 0.5rem 0; // Add some vertical padding
-            width: 100%;
-            // Reset desktop flex behavior
-            // gap: 0;
-            // justify-content: initial;
+              &:hover {
+                color: $accent-purple;
+                background-color: transparent;
+              }
+            }
+          }
         }
-
-        .dropdown-wrapper {
-             padding: 0 1.5rem 0 2.5rem; // Indent submenu items slightly
-             margin-bottom: 0.5rem;
-
-             h4 {
-                color: $grey-text;
-                font-size: 0.8rem;
-                margin-bottom: 5px;
-                padding-top: 0.8rem;
-                font-weight: normal; // Less emphasis than main links
-             }
-
-             .dropdown-column {
-                .dropdown-column-types {
-                     a {
-                         color: $black;
-                         padding: 0.6rem 0; // Adjust padding
-                         text-decoration: none;
-                         display: block;
-                         font-size: 1rem; // Match parent link or slightly smaller
-                         white-space: normal;
-
-                         &:hover {
-                             color: $accent-purple;
-                             background-color: transparent;
-                         }
-                     }
-                }
-             }
-        }
+      }
     }
 
     .mobile-menu-footer {
-        display: none; // Shown by &.active
-        flex-direction: column;
-        padding: 1rem 1.5rem 1.5rem 1.5rem; // Match link padding
-        border-top: 1px solid $light-dark-bg;
-        width: 100%;
-        flex-shrink: 0;
-        margin-top: auto; // Push to bottom
+      display: none; // Shown by &.active
+      flex-direction: column;
+      padding: 1rem 1.5rem 1.5rem 1.5rem; // Match link padding
+      border-top: 1px solid $light-dark-bg;
+      width: 100%;
+      flex-shrink: 0;
+      margin-top: auto; // Push to bottom
 
-        a:not(.social-icons a) {
-          color: $grey-text;
-          text-decoration: none;
-          display: block;
-          padding: 0.5rem 0;
-          font-size: 1rem;
-          text-align: left;
-          &:hover { color: $black; }
+      a:not(.social-icons a) {
+        color: $grey-text;
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        text-align: left;
+        &:hover {
+          color: $black;
         }
+      }
 
-        .social-icons {
-          display: flex;
-          gap: 1.5rem;
-          margin-top: 1rem;
-          a {
-            font-size: 1.5rem;
-            padding: 0;
-            color: $grey-text;
-            &:hover { color: $black; }
+      .social-icons {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        a {
+          font-size: 1.5rem;
+          padding: 0;
+          color: $grey-text;
+          &:hover {
+            color: $black;
           }
         }
+      }
     }
   }
 
@@ -476,22 +487,164 @@ body {
   // ============ SMALL MOBILE OVERRIDES ==========
   // ==============================================
   @media screen and (max-width: $mobile-breakpoint) {
-      .nav-menu {
-          // Override tablet styles for full-width menu
-          width: 100%;
-          max-width: 100%;
-          right: -100%; // Start fully off-screen
-          border-left: none; // No left border needed on full width
-          box-shadow: none; // No shadow needed
+    .nav-menu {
+      // Override tablet styles for full-width menu
+      width: 100%;
+      max-width: 100%;
+      right: -100%; // Start fully off-screen
+      border-left: none; // No left border needed on full width
+      box-shadow: none; // No shadow needed
 
-          &.active {
-              right: 0; // Slide in fully
-          }
-
-          // Adjust padding for smaller screens if needed
-          .nav-links { padding: 1rem; }
-          .dropdown-content .dropdown-wrapper { padding: 0 1rem 0 2rem; } // Adjust indentation
-          .mobile-menu-footer { padding: 1rem; }
+      &.active {
+        right: 0; // Slide in fully
       }
+
+      // Adjust padding for smaller screens if needed
+      .nav-links {
+        padding: 1rem;
+      }
+      .dropdown-content .dropdown-wrapper {
+        padding: 0 1rem 0 2rem;
+      } // Adjust indentation
+      .mobile-menu-footer {
+        padding: 1rem;
+      }
+    }
   }
 } // End of main mobile media query
+
+// =========================================
+// ============ HERO SECTION STYLES ========
+// =========================================
+
+// --- Define mobile breakpoint if not already defined globally ---
+// =========================================
+// ============ HERO SECTION STYLES ========
+// =========================================
+
+// --- Define necessary variables if not already global ---
+// $white: #fff;
+// $accent-purple: #a100ff; // Example color
+// $mobile-breakpoint: 767px; // Example breakpoint
+
+.hero-section {
+    position: relative; // Crucial for absolute positioning of children
+    width: 100%;
+    min-height: 65vh; // Adjust height as needed for desktop/tablet
+    display: flex; // Using flex to help center content vertically
+    align-items: center; // Vertically center content
+    justify-content: flex-start; // Align content to the left
+    overflow: hidden; // Prevents video overflow issues
+    color: $white; // Default text color for overlay
+  
+    // --- Video Background Container ---
+    .hero-video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; // Place it behind the content and overlay
+  
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Cover the area, cropping as needed
+      }
+  
+      // --- Optional Overlay ---
+      .hero-overlay { // Nested overlay style if you add the div back to HTML
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.35); // Adjust darkness/opacity
+          z-index: 0; // Between video (-1) and content (1)
+      }
+    }
+  
+    // --- Content Container ---
+    .hero-content {
+      position: relative; // Keep it above the overlay
+      z-index: 1;
+      padding: 40px 60px; // Adjust padding as needed
+      max-width: 700px; // Limit width of text container
+      text-align: left;
+  
+      .hero-category {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        color: rgba($white, 0.9); // Slightly less bright than title
+      }
+  
+      .hero-title {
+        font-size: 3.5rem; // Adjust size
+        font-weight: bold;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+  
+      .hero-subtitle {
+        font-size: 1.2rem; // Adjust size
+        line-height: 1.6;
+        color: rgba($white, 0.9); // Slightly less bright than title
+      }
+    }
+  
+    // =========================================
+    // ============ HERO MOBILE STYLES =========
+    // (Nested within .hero-section)
+    // =========================================
+    @media screen and (max-width: $mobile-breakpoint) {
+      // --- Adjustments to the main section container ---
+      flex-direction: column; // Stack items vertically
+      min-height: auto; // Let content define height
+      height: auto;
+      align-items: stretch; // Stretch items to full width
+      padding-top: 0; // Remove padding used for vertical alignment
+  
+      // --- Adjustments to the video background container ---
+      .hero-video-background {
+        position: relative; // Change from absolute to relative/static
+        z-index: auto; // Reset z-index
+        width: 100%;
+        height: 50vh; // Give video a specific height on mobile, adjust as needed
+        order: 2; // Make video appear *after* the content block
+  
+        // Remove overlay on mobile if content is separate
+        .hero-overlay {
+          display: none;
+        }
+        // video styles generally don't need changing here unless specific overrides needed
+      }
+  
+      // --- Adjustments to the content container ---
+      .hero-content {
+        position: relative; // Ensure it's in normal flow
+        order: 1; // Make content appear *before* the video block
+        background-color: $accent-purple; // Purple background
+        color: $white; // Ensure text is white on purple
+        padding: 30px 20px; // Adjust mobile padding
+        max-width: 100%; // Allow full width
+  
+        // Adjust text styles within content for mobile
+        .hero-category,
+        .hero-subtitle {
+          color: $white; // Ensure these are also white
+        }
+  
+        .hero-title {
+          font-size: 2.5rem; // Smaller title for mobile
+        }
+        .hero-subtitle {
+          font-size: 1rem; // Smaller subtitle
+        }
+      }
+    } // --- End of mobile media query ---
+  
+  } // --- End of .hero-section ---
