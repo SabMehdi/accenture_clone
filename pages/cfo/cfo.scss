@@ -1336,3 +1336,205 @@ $blog-card-top-line-height: 5px;
     }
   } // --- End of mobile media query ---
 } // --- End of .blog-section ---
+
+// =========================================
+// ===== POINTS OF VIEW SECTION STYLES =====
+// =========================================
+
+// --- Define necessary variables if not already global ---
+// $light-grey-bg: #f8f8f8;
+// $white: #fff;
+// $black: #000;
+// $grey-text: #555;
+// $link-blue: #007bff;
+// $accent-purple: #a100ff;
+// $light-grey-border: #e0e0e0;
+// $mobile-breakpoint: 767px;
+
+.pov-section {
+  background-color: $light-grey-bg; // Adjust background as needed
+  padding: 60px 0; // Use container padding for horizontal
+
+  .section-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .pov-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  // --- Layout Container ---
+  .pov-layout {
+    display: flex;
+    flex-wrap: wrap; // Allow side column to wrap on smaller tablet if needed before full mobile
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  // --- Main Column (Left) ---
+  .pov-main-column {
+    flex: 2; // Takes roughly 2/3rds of the space
+    min-width: 0; // Prevent flexbox overflow issues
+    display: flex;
+    flex-direction: column;
+    gap: 40px; // Space between large articles
+  }
+
+  // --- Side Column (Right) ---
+  .pov-side-column {
+    flex: 1; // Takes roughly 1/3rd of the space
+    min-width: 0; // Prevent flexbox overflow issues
+    display: flex;
+    flex-direction: column;
+    gap: 25px; // Space between small articles
+  }
+
+  // --- Shared Article Styles ---
+  .article-category {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $link-blue;
+    text-decoration: none;
+    border-bottom: 2px solid $link-blue;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .article-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: $black;
+    line-height: 1.4;
+    margin-bottom: 8px;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // --- Large Article Styles (with image) ---
+  .pov-article-large {
+    display: flex;
+    gap: 25px; // Space between image and text content
+    align-items: flex-start; // Align top of image and text
+
+    .article-image-link {
+      display: block;
+      flex-shrink: 0; // Prevent image link container from shrinking
+    }
+
+    .article-image {
+      flex-basis: 160px; // Width of the image container
+      height: 160px; // Height of the image container (make it square)
+      overflow: hidden;
+      // Removed: position: relative; - No longer needed for border
+
+      // Removed: ::after pseudo-element for purple border
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .article-content {
+      flex-grow: 1;
+      min-width: 0; // Help prevent text overflow issues in flex child
+    }
+
+    .article-description {
+      color: $grey-text;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 5px;
+    }
+  }
+
+  // --- Small Article Styles (text only) ---
+  .pov-article-small {
+    border-bottom: 1px solid red;
+    padding-bottom: 25px;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .article-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  // =========================================
+  // ===== POINTS OF VIEW MOBILE STYLES ======
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding: 40px 0; // Adjust section padding
+
+    .pov-heading {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .pov-layout {
+      flex-direction: column; // Stack main and side columns
+      gap: 40px; // Vertical gap between main and side sections
+    }
+
+    .pov-main-column,
+    .pov-side-column {
+      flex-basis: auto; // Reset flex basis for stacking
+      gap: 30px; // Adjust vertical gap between articles within columns
+    }
+
+    // --- Large Article on Mobile - MODIFIED ---
+    .pov-article-large {
+      // Keep default flex-direction: row - image and text stay side-by-side
+      gap: 15px; // Reduce gap between image and text
+
+      .article-image-link {
+        // Stays display block, flex-shrink 0
+      }
+
+      .article-image {
+        flex-basis: 100px; // Make image smaller and fixed width
+        height: 100px; // Keep it square (or adjust height)
+        flex-shrink: 0; // Ensure it doesn't shrink further
+        // object-fit remains cover
+      }
+
+      .article-content {
+        // Will take remaining space
+      }
+
+      .article-title {
+        font-size: 1.1rem;
+      } // Adjust font size
+      .article-description {
+        font-size: 0.9rem;
+      }
+    }
+
+    // --- Small Article on Mobile ---
+    .pov-article-small {
+      padding-bottom: 20px; // Adjust padding
+      .article-title {
+        font-size: 1.05rem;
+      } // Slightly adjust
+    }
+  } // --- End of mobile media query ---
+} // --- End of .pov-section ---
