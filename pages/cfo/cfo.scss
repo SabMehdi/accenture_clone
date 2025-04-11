@@ -1538,3 +1538,146 @@ $blog-card-top-line-height: 5px;
     }
   } // --- End of mobile media query ---
 } // --- End of .pov-section ---
+
+
+// =========================================
+// ========== EXPERT SECTION STYLES ========
+// =========================================
+
+// --- Define necessary variables if not already global ---
+// $white: #fff;
+// $black: #000;
+// $grey-text: #555;
+// $link-blue: #007bff; // LinkedIn link color
+// $light-grey-bg: #f8f8f8; // Card background
+// $mobile-breakpoint: 767px;
+
+.expert-section {
+  background-color: $white; // Section background
+  padding: 60px 0; // Vertical padding, horizontal handled by container
+
+  .section-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .expert-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 40px; // Space below heading
+    text-align: left;
+  }
+
+  // --- Container for the cards ---
+  .expert-cards-container {
+    display: flex; // Arrange cards horizontally
+    flex-wrap: wrap; // Allow cards to wrap onto next line
+    gap: 30px; // Gap between cards
+    justify-content: flex-start; // Align cards to the start (left)
+    // Or use 'center' if you want cards centered when wrapping
+  }
+
+  // --- Individual Expert Card ---
+  .expert-card {
+    background-color: $light-grey-bg;
+    border: 1px solid $accent-purple; // Optional subtle border
+    display: flex; // Use flex for internal structure if needed, or keep block
+    flex-direction: column;
+    overflow: hidden; // Ensure nothing spills out
+
+    flex-basis: calc(33.333% - 20px); // Example: 3 cards per row (100% / 3), subtract gap adjustment
+
+    .expert-image {
+      display: block; // Remove extra space below image
+      width: 100%; // Image fills its container width
+      height: auto; // Maintain aspect ratio
+      object-fit: cover; // Cover area if wrapper had fixed height (not used here)
+    }
+
+    .expert-details {
+      padding: 20px 25px; // Padding for name, title, link
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; // Allows link to be potentially pushed down if needed
+    }
+
+    .expert-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $black;
+      margin-bottom: 5px;
+    }
+
+    .expert-title {
+      font-size: 0.9rem;
+      color: $grey-text;
+      line-height: 1.5;
+      margin-bottom: 15px; // Space before LinkedIn link
+      flex-grow: 1; // Push LinkedIn link down if card heights vary
+    }
+
+    .expert-linkedin {
+      color: $link-blue;
+      font-size: 0.9rem;
+      font-weight: 500; // Slightly bold
+      text-decoration: none;
+      display: inline-flex; // Align icon and text
+      align-items: center;
+      margin-top: auto; // Align to bottom if flex-grow used above
+
+      i { // Style for Font Awesome icon
+        margin-right: 6px;
+        font-size: 1.1em; // Slightly larger icon
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  // =========================================
+  // ========== EXPERT MOBILE STYLES =========
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding: 40px 0; // Adjust section padding
+
+    .expert-heading {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .expert-cards-container {
+      gap: 25px; // Adjust vertical gap when stacked
+      // Flex wrap already handles stacking
+    }
+
+    .expert-card {
+      // --- Mobile Sizing ---
+      flex-basis: 100%; // Make card take full width
+      max-width: 100%; // Ensure it doesn't exceed screen width
+      min-width: 0; // Reset min-width if set for desktop
+
+      .expert-details {
+         padding: 15px 20px; // Adjust padding
+      }
+
+      .expert-name {
+         font-size: 1.15rem;
+      }
+
+      .expert-title {
+         font-size: 0.85rem;
+      }
+
+      .expert-linkedin {
+          font-size: 0.85rem;
+      }
+    }
+  } // --- End of mobile media query ---
+
+} // --- End of .expert-section ---
