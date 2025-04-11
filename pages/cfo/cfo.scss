@@ -656,7 +656,6 @@ body {
 // ============ TEASER STYLES ==============
 // =========================================
 
-
 .teaser-section {
   background-color: $light-grey;
   padding: 20px; // Vertical padding for the section
@@ -1018,122 +1017,131 @@ $mobile-breakpoint: 767px;
   } // --- End of mobile media query ---
 } // --- End of .expertise-section ---
 
-
 // =========================================
 // ========= STATS SECTION STYLES ==========
 // =========================================
 
-
-
 .stats-section {
-    background-color: $light-grey-bg; // Matches previous section bg
-    padding: 60px 20px;
-  
-    .section-container {
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-  
-    .stats-heading {
-      font-size: 2.5rem;
+  background-color: $light-grey-bg; // Matches previous section bg
+  padding: 60px 20px;
+
+  .section-container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .stats-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .stats-intro {
+    color: $grey-text;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 850px;
+    margin-bottom: 40px; // Space before the grid
+    text-align: left;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 columns on desktop/tablet
+    gap: 40px 30px; // Row gap, Column gap
+  }
+
+  // --- Stat Card Styling ---
+  .stat-card {
+    // No background needed, sits on section background
+    text-align: left;
+
+    .stat-percentage {
+      font-size: 4.5rem; // Large percentage text
       font-weight: bold;
       color: $black;
-      margin-bottom: 15px;
-      text-align: left;
+      line-height: 1.1; // Adjust line height for large font
+      margin-bottom: 15px; // Space between percentage and line
     }
-  
-    .stats-intro {
+
+    .stat-line {
+      display: block;
+      width: 100%; // Make line full width of its container (the grid column)
+      height: 5px; // Thickness of the line
+      background-color: $accent-purple;
+      margin-bottom: 15px; // Space between line and description
+    }
+
+    .stat-description {
       color: $grey-text;
-      font-size: 1rem;
-      line-height: 1.7;
-      max-width: 850px;
-      margin-bottom: 40px; // Space before the grid
-      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
-  
+  }
+
+  // =========================================
+  // ========== STATS MOBILE STYLES ==========
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding: 40px 15px; // Adjust section padding
+
+    .stats-heading {
+      font-size: 2rem;
+    }
+
     .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr); // 2 columns on desktop/tablet
-      gap: 40px 30px; // Row gap, Column gap
+      grid-template-columns: 1fr; // Switch to single column
+      gap: 35px; // Only need one gap value for single column
     }
-  
-    // --- Stat Card Styling ---
+
     .stat-card {
-      // No background needed, sits on section background
-      text-align: left;
-  
       .stat-percentage {
-        font-size: 4.5rem; // Large percentage text
-        font-weight: bold;
-        color: $black;
-        line-height: 1.1; // Adjust line height for large font
-        margin-bottom: 15px; // Space between percentage and line
+        font-size: 3.5rem; // Smaller percentage on mobile
       }
-  
+
       .stat-line {
-        display: block;
-        width: 100%; // Make line full width of its container (the grid column)
-        height: 5px; // Thickness of the line
-        background-color: $accent-purple;
-        margin-bottom: 15px; // Space between line and description
+        height: 4px; // Slightly thinner line if desired
+        // max-width: 150px; // Optional: reduce max-width on mobile
       }
-  
+
       .stat-description {
-        color: $grey-text;
-        font-size: 0.95rem;
-        line-height: 1.6;
+        font-size: 0.9rem;
       }
     }
-  
-  
-    // =========================================
-    // ========== STATS MOBILE STYLES ==========
-    // =========================================
-    @media screen and (max-width: $mobile-breakpoint) {
-      padding: 40px 15px; // Adjust section padding
-  
-      .stats-heading {
-        font-size: 2rem;
-      }
-  
-      .stats-grid {
-        grid-template-columns: 1fr; // Switch to single column
-        gap: 35px; // Only need one gap value for single column
-      }
-  
-      .stat-card {
-        .stat-percentage {
-          font-size: 3.5rem; // Smaller percentage on mobile
-        }
-  
-        .stat-line {
-          height: 4px; // Slightly thinner line if desired
-          // max-width: 150px; // Optional: reduce max-width on mobile
-        }
-  
-        .stat-description {
-          font-size: 0.9rem;
-        }
-      }
-    } // --- End of mobile media query ---
-  
-  } // --- End of .stats-section ---
+  } // --- End of mobile media query ---
+} // --- End of .stats-section ---
+
 // =========================================
 // ========== BLOG SECTION STYLES ==========
 // =========================================
 
-// Specific variable for this component
-$blog-card-top-line-height: 5px; // Thickness of the line on top of the card
+$blog-card-top-line-height: 5px;
 
 .blog-section {
-  background-color: $white; // Section background is white
-  padding: 60px 0; // Apply vertical padding, horizontal handled by container
+  background-color: $white;
+  padding: 60px 0; // Vertical padding
 
   .section-container {
     max-width: 1140px;
     margin: 0 auto;
     padding-left: 15px;
     padding-right: 15px;
+
+    // --- Desktop Flex Layout ---
+    display: flex;
+    flex-wrap: wrap; // Allow items below the first "row" to wrap
+    justify-content: space-between; // Push text block and link apart
+    align-items: flex-start; // Align tops of text block and link
+    row-gap: 30px; // Add gap between the header row and separator/grid
+  }
+
+  // --- Element 1: Text Content Block ---
+  .blog-text-content {
+    flex-basis: 75%; // Take up most of the space on the left
+    max-width: 850px; // Apply max-width here
+    // order: 1; // Default order
   }
 
   .blog-heading {
@@ -1148,118 +1156,122 @@ $blog-card-top-line-height: 5px; // Thickness of the line on top of the card
     color: $grey-text;
     font-size: 1rem;
     line-height: 1.7;
-    max-width: 850px;
-    margin-bottom: 30px; // Space before separator
+    margin-bottom: 0; // Remove bottom margin, spacing controlled by row-gap now
     text-align: left;
   }
 
-  // --- Separator Line Styling ---
-  .blog-separator {
-    display: block;
-    width: 100%;
-    height: 5px; // Thickness of the line
-    background-color: $accent-purple;
-    border: none; // Reset default hr border
-    margin: 0 0 40px 0; // Space below separator before grid
+  // --- Element 2: View More Link ---
+  .blog-view-more {
+    color: $link-blue;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 0.5em; // Align roughly with top of heading
+    // order: 2; // Default order
+
+    i,
+    &::after {
+      margin-left: 8px;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  // --- Blog Grid Styling ---
+  // --- Element 4: Blog Grid Styling ---
   .blog-grid {
+    flex-basis: 100%; // Make grid take full width
     display: grid;
-    grid-template-columns: repeat(2, 1fr); // 2 columns on desktop/tablet
-    gap: 30px; // Gap between cards
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    // order: 4; // Default order
   }
 
-  // --- Blog Card Styling ---
+  // --- Blog Card Styling (remains the same as previous) ---
   .blog-card {
-    background-color: $light-grey-bg; // Light grey background for card
+    background-color: $light-grey-bg;
     padding: 30px;
-    display: flex; // Use flexbox for vertical stacking inside card
+    display: flex;
     flex-direction: column;
-    height: 100%; // Make cards in same row equal height (optional)
-    position: relative; // Needed for the ::before pseudo-element positioning
-    overflow: hidden; // Contain the pseudo-element
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 
-    // --- Add the purple top line ---
     &::before {
-      content: ""; // Required for pseudo-elements
+      /* Top purple line */
+      content: "";
       display: block;
-      position: absolute; // Position relative to the card
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100%; // Full width of the card
-      height: $blog-card-top-line-height; // Use the variable for thickness
-      background-color: $accent-purple; // Line color
-      z-index: 2; // Ensure it's above the background
+      width: 100%;
+      height: $blog-card-top-line-height;
+      background-color: $accent-purple;
+      z-index: 2;
     }
-
-    // --- Card Content Elements ---
-    // Add z-index to ensure they are above the ::before pseudo-element
     .card-category,
     .card-title,
     .card-description,
     .card-read-more {
-        position: relative; // Needed for z-index to work reliably
-        z-index: 3;
+      position: relative;
+      z-index: 3;
     }
-
     .card-category {
-      display: inline-block; // Allows border-bottom to fit text
+      /* styles */
+      display: inline-block;
       font-size: 0.85rem;
       font-weight: 600;
       color: $link-blue;
       text-decoration: none;
       border-bottom: 2px solid $link-blue;
       margin-bottom: 15px;
-      align-self: flex-start; // Keep category left-aligned
+      align-self: flex-start;
     }
-
     .card-title {
-      font-size: 1.5rem; // Adjust title size
+      /* styles */
+      font-size: 1.5rem;
       font-weight: bold;
       color: $black;
       line-height: 1.4;
       margin-bottom: 10px;
-
-      a { // Style the link within the title
-        color: inherit; // Inherit black color from h3
+      a {
+        color: inherit;
         text-decoration: none;
-         &:hover {
-            text-decoration: underline;
-         }
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
-
     .card-description {
+      /* styles */
       color: $grey-text;
       font-size: 0.95rem;
       line-height: 1.6;
-      flex-grow: 1; // Allows description to push link down
-      margin-bottom: 20px; // Space before read more link
+      flex-grow: 1;
+      margin-bottom: 20px;
     }
-
     .card-read-more {
+      /* styles */
       text-decoration: none;
       color: $link-blue;
       font-weight: bold;
       font-size: 0.9rem;
-      display: inline-flex; // Align icon nicely
+      display: inline-flex;
       align-items: center;
-      margin-top: auto; // Push link to bottom if flex-grow is used on description
-      align-self: flex-start; // Keep link left-aligned
-
-      // Style for Font Awesome icon or similar
+      margin-top: auto;
+      align-self: flex-start;
       i,
-      // Style if using CSS content for arrow (e.g., content: '\2192';)
-      &::after
-      {
+      &::after {
         margin-left: 8px;
-        font-size: 1em; // Relative size to link text
+        font-size: 1em;
       }
-
-       &:hover {
-         text-decoration: underline;
-       }
+      &:hover {
+        text-decoration: underline;
+      }
     }
   } // --- End .blog-card ---
 
@@ -1267,16 +1279,42 @@ $blog-card-top-line-height: 5px; // Thickness of the line on top of the card
   // ========== BLOG MOBILE STYLES ===========
   // =========================================
   @media screen and (max-width: $mobile-breakpoint) {
-    // Section padding already reduced by container's padding
-    // padding: 40px 0;
+    // --- Switch container to column flow for ordering ---
+    .section-container {
+      flex-direction: column;
+      align-items: stretch; // Make children take full width by default
+      row-gap: 0; // Reset row gap as spacing is handled by margins now
+    }
 
+    // --- Reorder Elements ---
+    .blog-text-content {
+      order: 1;
+      flex-basis: auto;
+      margin-bottom: 25px;
+    } // Text first
+    .blog-grid {
+      order: 2;
+      flex-basis: auto;
+      margin-bottom: 30px;
+    } // Grid third
+    .blog-view-more {
+      order: 4;
+      flex-basis: auto;
+      align-self: center;
+      margin-top: 0;
+    } // Link last & centered
+
+    // --- Specific Mobile Adjustments ---
     .blog-heading {
       font-size: 2rem;
     }
 
+    .blog-intro {
+      // Stays within .blog-text-content
+    }
+
     .blog-separator {
-        height: 4px; // Slightly thinner separator line
-        margin-bottom: 30px;
+      height: 4px;
     }
 
     .blog-grid {
@@ -1286,21 +1324,15 @@ $blog-card-top-line-height: 5px; // Thickness of the line on top of the card
 
     .blog-card {
       padding: 25px; // Adjust card padding
-
-      // --- Adjust top line thickness on mobile if desired ---
-       &::before {
-           height: $blog-card-top-line-height * 0.8; // e.g., make it slightly thinner (4px)
-       }
-
+      &::before {
+        height: $blog-card-top-line-height * 0.8; // Thinner line on mobile
+      }
       .card-title {
         font-size: 1.3rem;
       }
-
       .card-description {
         font-size: 0.9rem;
       }
-      // Category and Read More styles likely okay, adjust if needed
     }
   } // --- End of mobile media query ---
-
 } // --- End of .blog-section ---
