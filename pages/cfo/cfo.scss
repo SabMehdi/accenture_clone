@@ -1681,3 +1681,198 @@ $blog-card-top-line-height: 5px;
   } // --- End of mobile media query ---
 
 } // --- End of .expert-section ---
+
+// =========================================
+// =========== FOOTER STYLES ===============
+// =========================================
+
+// --- Define necessary variables if not already global ---
+$footer-bg: $black;
+$footer-text-color: #ccc; // Light grey for text
+$footer-link-hover: $white;
+$footer-separator-color: #444; // Darker grey for separator
+$footer-social-border: #666;
+
+.site-footer {
+  background-color: $footer-bg;
+  color: $footer-text-color;
+  padding: 40px 20px; // Top/bottom padding
+  font-size: 0.85rem; // Slightly smaller base font for footer
+
+  a {
+    color: $footer-text-color;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $footer-link-hover;
+      text-decoration: none;
+    }
+  }
+
+  .footer-container { // Extends .section-container potentially
+      // Specific footer container styles if needed
+  }
+
+  // --- Footer Main Row ---
+  .footer-main {
+    display: flex;
+    flex-wrap: wrap; // Allow wrapping on smaller screens
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px 30px; // Row gap, Column gap
+    margin-bottom: 30px; // Space before separator
+  }
+
+  .footer-logo {
+    flex-shrink: 0; // Prevent logo from shrinking
+    img {
+      display: block;
+      height: 30px; // Adjust logo height
+      width: auto;
+    }
+    // Style .footer-logo-text if using text option
+  }
+
+  .footer-nav-main {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap; // Allow links to wrap
+      gap: 15px 25px; // Row gap, Column gap
+      justify-content: center; // Center links if they wrap
+    }
+    li {
+      // No extra styles needed for li
+    }
+    a {
+      font-weight: 600;
+      text-transform: uppercase; // Match image style
+      letter-spacing: 0.5px;
+      // Text decoration handled by general footer 'a' style
+    }
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px; // Circle size
+      height: 36px;
+      border: 1px solid $footer-social-border;
+      border-radius: 50%;
+      color: $footer-text-color; // Icon color
+      text-decoration: none; // Remove underline from icon links
+
+      i { // Font Awesome icon style
+          font-size: 1rem;
+      }
+
+      &:hover {
+        background-color: rgba($white, 0.1); // Subtle hover background
+        border-color: $footer-link-hover;
+        color: $footer-link-hover;
+      }
+    }
+  }
+
+  // --- Separator ---
+  .footer-separator {
+    border: none;
+    border-top: 1px solid $footer-separator-color;
+    margin: 0 0 30px 0; // Space below separator
+  }
+
+  // --- Footer Bottom Row ---
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px 30px; // Row gap, Column gap
+  }
+
+  .footer-nav-secondary {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px; // Row gap, Column gap
+    }
+     a {
+       // Style inherited, could make font-weight normal if needed
+     }
+  }
+
+  .footer-copyright {
+    color: $footer-text-color; // Ensure copyright has the base color
+    text-align: right;
+  }
+
+
+  // =========================================
+  // =========== FOOTER MOBILE STYLES ========
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding: 30px 0 20px 0; // Reduce padding slightly
+    font-size: 0.8rem; // Slightly smaller font overall
+
+    .footer-main {
+      flex-direction: column; // Stack logo, nav, social
+      align-items: center; // Center items horizontally
+      text-align: center;
+      margin-bottom: 25px;
+      gap: 25px; // Adjust vertical gap
+    }
+
+    .footer-nav-main {
+        ul {
+            justify-content: center; // Ensure links are centered
+            gap: 10px 15px; // Reduce gap
+        }
+    }
+
+    .footer-social {
+        justify-content: center; // Center icons
+         a { // Optionally make icons slightly smaller
+             width: 32px;
+             height: 32px;
+             i { font-size: 0.9rem; }
+         }
+    }
+
+    .footer-separator {
+      margin-bottom: 25px;
+    }
+
+    .footer-bottom {
+      flex-direction: column; // Stack secondary nav and copyright
+      align-items: center; // Center items
+      text-align: center;
+      gap: 20px; // Adjust vertical gap
+    }
+
+    .footer-nav-secondary {
+      order: 2; // Place copyright above secondary nav if preferred visually
+      ul {
+        justify-content: center; // Center links
+        gap: 8px 15px; // Reduce gap
+      }
+    }
+
+    .footer-copyright {
+       order: 1; // Place copyright above secondary nav if preferred visually
+       text-align: center;
+    }
+  } // --- End of mobile media query ---
+
+} // --- End of .site-footer ---
