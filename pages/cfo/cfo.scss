@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "sass:math"; // Needed for division potentially
+@use "sass:math";
 
 // --- Variables ---
 $accent-purple: #a100ff;
@@ -12,7 +12,10 @@ $grey-text: #555; // Darker grey for readability on white
 $navbar-height: 80px;
 $mobile-menu-transition: right 0.4s ease-in-out, opacity 0.4s ease-in-out; // Added opacity
 $tablet-breakpoint: 960px; // Breakpoint where mobile styles START
-$mobile-breakpoint: 600px; // Breakpoint for full-width mobile menu
+$mobile-breakpoint: 767px; // Breakpoint for full-width mobile menu
+$light-grey: #f4f4f4; // Background for the section
+$link-blue: #007bff; // Example blue for the link
+$grey-text: #555; // For the description text
 
 // --- Base & Desktop Styles (Mostly unchanged, added comments) ---
 * {
@@ -653,14 +656,6 @@ body {
 // ============ TEASER STYLES ==============
 // =========================================
 
-// --- Define necessary variables if not already global ---
-$light-grey: #f4f4f4; // Background for the section
-$white: #fff;
-$black: #000;
-$accent-purple: #a100ff; // Color for the icon
-$link-blue: #007bff; // Example blue for the link
-$grey-text: #555; // For the description text
-$mobile-breakpoint: 767px; // Use your defined breakpoint
 
 .teaser-section {
   background-color: $light-grey;
@@ -683,16 +678,6 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
   width: 30px; // Adjust size
   height: 30px; // Adjust size
   margin-right: 20px; // Space between icon and text
-
-  // Style if using <img> for SVG
-  // The SVG file itself should ideally define the purple color
-  // or use `currentColor` and set the color here.
-  // If SVG uses currentColor:
-  // color: $accent-purple;
-
-  // If using Font Awesome <i> tag:
-  // font-size: 2rem; // Adjust size
-  // color: $accent-purple;
 }
 
 .teaser-text {
@@ -783,12 +768,6 @@ $mobile-breakpoint: 767px; // Use your defined breakpoint
 // =========================================
 // ======== CONTENT VIDEO SECTION STYLES ===
 // =========================================
-
-// --- Define necessary variables if not already global ---
-$black: #000;
-$grey-text: #555;
-$link-blue: #007bff; // Example blue
-$mobile-breakpoint: 767px; // Use your defined breakpoint
 
 .content-video-section {
   padding: 60px 20px; // Vertical and horizontal padding for the whole section
@@ -1044,12 +1023,7 @@ $mobile-breakpoint: 767px;
 // ========= STATS SECTION STYLES ==========
 // =========================================
 
-// --- Define necessary variables if not already global ---
-// $light-grey-bg: #f8f8f8;
-// $black: #000;
-// $grey-text: #555;
-// $accent-purple: #a100ff;
-// $mobile-breakpoint: 767px;
+
 
 .stats-section {
     background-color: $light-grey-bg; // Matches previous section bg
@@ -1144,3 +1118,189 @@ $mobile-breakpoint: 767px;
     } // --- End of mobile media query ---
   
   } // --- End of .stats-section ---
+// =========================================
+// ========== BLOG SECTION STYLES ==========
+// =========================================
+
+// Specific variable for this component
+$blog-card-top-line-height: 5px; // Thickness of the line on top of the card
+
+.blog-section {
+  background-color: $white; // Section background is white
+  padding: 60px 0; // Apply vertical padding, horizontal handled by container
+
+  .section-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .blog-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .blog-intro {
+    color: $grey-text;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 850px;
+    margin-bottom: 30px; // Space before separator
+    text-align: left;
+  }
+
+  // --- Separator Line Styling ---
+  .blog-separator {
+    display: block;
+    width: 100%;
+    height: 5px; // Thickness of the line
+    background-color: $accent-purple;
+    border: none; // Reset default hr border
+    margin: 0 0 40px 0; // Space below separator before grid
+  }
+
+  // --- Blog Grid Styling ---
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 columns on desktop/tablet
+    gap: 30px; // Gap between cards
+  }
+
+  // --- Blog Card Styling ---
+  .blog-card {
+    background-color: $light-grey-bg; // Light grey background for card
+    padding: 30px;
+    display: flex; // Use flexbox for vertical stacking inside card
+    flex-direction: column;
+    height: 100%; // Make cards in same row equal height (optional)
+    position: relative; // Needed for the ::before pseudo-element positioning
+    overflow: hidden; // Contain the pseudo-element
+
+    // --- Add the purple top line ---
+    &::before {
+      content: ""; // Required for pseudo-elements
+      display: block;
+      position: absolute; // Position relative to the card
+      top: 0;
+      left: 0;
+      width: 100%; // Full width of the card
+      height: $blog-card-top-line-height; // Use the variable for thickness
+      background-color: $accent-purple; // Line color
+      z-index: 2; // Ensure it's above the background
+    }
+
+    // --- Card Content Elements ---
+    // Add z-index to ensure they are above the ::before pseudo-element
+    .card-category,
+    .card-title,
+    .card-description,
+    .card-read-more {
+        position: relative; // Needed for z-index to work reliably
+        z-index: 3;
+    }
+
+    .card-category {
+      display: inline-block; // Allows border-bottom to fit text
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: $link-blue;
+      text-decoration: none;
+      border-bottom: 2px solid $link-blue;
+      margin-bottom: 15px;
+      align-self: flex-start; // Keep category left-aligned
+    }
+
+    .card-title {
+      font-size: 1.5rem; // Adjust title size
+      font-weight: bold;
+      color: $black;
+      line-height: 1.4;
+      margin-bottom: 10px;
+
+      a { // Style the link within the title
+        color: inherit; // Inherit black color from h3
+        text-decoration: none;
+         &:hover {
+            text-decoration: underline;
+         }
+      }
+    }
+
+    .card-description {
+      color: $grey-text;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      flex-grow: 1; // Allows description to push link down
+      margin-bottom: 20px; // Space before read more link
+    }
+
+    .card-read-more {
+      text-decoration: none;
+      color: $link-blue;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: inline-flex; // Align icon nicely
+      align-items: center;
+      margin-top: auto; // Push link to bottom if flex-grow is used on description
+      align-self: flex-start; // Keep link left-aligned
+
+      // Style for Font Awesome icon or similar
+      i,
+      // Style if using CSS content for arrow (e.g., content: '\2192';)
+      &::after
+      {
+        margin-left: 8px;
+        font-size: 1em; // Relative size to link text
+      }
+
+       &:hover {
+         text-decoration: underline;
+       }
+    }
+  } // --- End .blog-card ---
+
+  // =========================================
+  // ========== BLOG MOBILE STYLES ===========
+  // =========================================
+  @media screen and (max-width: $mobile-breakpoint) {
+    // Section padding already reduced by container's padding
+    // padding: 40px 0;
+
+    .blog-heading {
+      font-size: 2rem;
+    }
+
+    .blog-separator {
+        height: 4px; // Slightly thinner separator line
+        margin-bottom: 30px;
+    }
+
+    .blog-grid {
+      grid-template-columns: 1fr; // Switch to single column
+      gap: 25px; // Adjust vertical gap
+    }
+
+    .blog-card {
+      padding: 25px; // Adjust card padding
+
+      // --- Adjust top line thickness on mobile if desired ---
+       &::before {
+           height: $blog-card-top-line-height * 0.8; // e.g., make it slightly thinner (4px)
+       }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+      }
+      // Category and Read More styles likely okay, adjust if needed
+    }
+  } // --- End of mobile media query ---
+
+} // --- End of .blog-section ---
