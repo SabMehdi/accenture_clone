@@ -120,11 +120,6 @@ body {
     font-size: 0.8em;
     transition: transform 0.3s ease; // Add transition for potential rotation
   }
-
-  // Hide the arrow used for mobile accordion on desktop
-  .mobile-arrow {
-    display: none; // Hidden on desktop
-  }
 }
 
 // --- Desktop Dropdown Styles ---
@@ -514,22 +509,11 @@ body {
       }
     }
   }
-} // End of main mobile media query
+} 
 
 // =========================================
 // ============ HERO SECTION STYLES ========
 // =========================================
-
-// --- Define mobile breakpoint if not already defined globally ---
-// =========================================
-// ============ HERO SECTION STYLES ========
-// =========================================
-
-// --- Define necessary variables if not already global ---
-// $white: #fff;
-// $accent-purple: #a100ff; // Example color
-// $mobile-breakpoint: 767px; // Example breakpoint
-
 .hero-section {
   position: relative; // Crucial for absolute positioning of children
   width: 100%;
