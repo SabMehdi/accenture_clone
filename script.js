@@ -234,75 +234,102 @@ document.addEventListener("DOMContentLoaded", function () {
   handleScroll();
   window.addEventListener("scroll", handleScroll);
 
-  const menu = document.getElementById("mobile-menu");
-  const menuLinks = document.getElementById("nav-menu-list");
-  const expertisesToggle = document.getElementById("expertises-toggle");
-  const expertisesDropdown = expertisesToggle.nextElementSibling; // Get the dropdown content
-  const navbarRight = document.querySelector(".navbar-right"); // Get the right side container
+  const menuIcon = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('nav-menu-list');
+    const closeBtn = document.getElementById('close-menu');
+    const dropdownToggles = navMenu.querySelectorAll('.nav-item.dropdown > .nav-links');
+    const backButtons = navMenu.querySelectorAll('.submenu-back-btn');
+    const mobileBreakpoint = 960; // Match SCSS variable
 
-  // --- Burger Menu Toggle ---
-  menu.addEventListener("click", () => {
-    menu.classList.toggle("is-active"); // Optional: for styling the burger icon itself
-    menuLinks.classList.toggle("active");
+    // --- Burger Menu Toggle ---
+    menuIcon.addEventListener('click', () => {
+        navMenu.classList.add('active'); // Show the menu panel
+        menuIcon.style.display = 'none'; // <<< HIDE the burger icon
+    });
 
-    // If menu is closing and expertises dropdown is open, close it too
-    if (
-      !menuLinks.classList.contains("active") &&
-      expertisesDropdown.classList.contains("active")
-    ) {
-      expertisesDropdown.classList.remove("active");
-      expertisesToggle.classList.remove("open");
+    // --- Close Button ---
+    closeBtn.addEventListener('click', () => {
+        closeMobileMenu();
+    });
+
+    // --- Mobile Submenu Open ---
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= mobileBreakpoint) {
+                e.preventDefault();
+                const parentItem = toggle.closest('.nav-item.dropdown');
+                if (parentItem) {
+                    parentItem.classList.add('submenu-active');
+                    navMenu.classList.add('submenu-visible');
+                }
+            }
+        });
+    });
+
+    // --- Mobile Submenu Back Button ---
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const parentItem = button.closest('.nav-item.dropdown');
+            if (parentItem) {
+                parentItem.classList.remove('submenu-active');
+                navMenu.classList.remove('submenu-visible');
+            }
+        });
+    });
+
+    // --- Helper Function to Close Menu and Reset States ---
+    function closeMobileMenu() {
+        navMenu.classList.remove('active');
+        navMenu.classList.remove('submenu-visible');
+
+        const activeSubmenu = navMenu.querySelector('.nav-item.submenu-active');
+        if (activeSubmenu) {
+            activeSubmenu.classList.remove('submenu-active');
+        }
+
+        // Check if we are still in mobile view before showing the burger
+        // This prevents it from showing if resized to desktop while menu was open
+        if (window.innerWidth <= mobileBreakpoint) {
+             menuIcon.style.display = 'block'; // <<< SHOW the burger icon again
+        }
+        // If window is wider than breakpoint, CSS rules should already hide it,
+        // but setting it explicitly ensures it's hidden if JS ever showed it incorrectly.
+        else {
+             menuIcon.style.display = 'none';
+        }
     }
-  });
 
-  // --- Mobile Dropdown Toggle ---
-  expertisesToggle.addEventListener("click", (e) => {
-    // Only prevent default and toggle on smaller screens (where burger is visible)
-    if (window.innerWidth <= 960) {
-      e.preventDefault(); // Prevent link navigation only on mobile toggle
-      expertisesToggle.classList.toggle("open"); // For arrow rotation
-      expertisesDropdown.classList.toggle("active");
-    }
-  });
+    // --- Close Menu on Resize to Desktop ---
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            // Always check the current state on resize finish
+            if (window.innerWidth > mobileBreakpoint) {
+                // If menu is active when resizing to desktop, close it
+                if (navMenu.classList.contains('active')) {
+                   closeMobileMenu(); // This will now also handle burger display
+                }
+                 // Ensure burger is hidden on desktop regardless of menu state
+                 menuIcon.style.display = 'none';
+            } else {
+                // If resizing back to mobile AND the menu is NOT active,
+                // ensure the burger icon is visible (CSS should handle this, but JS can reinforce)
+                 if (!navMenu.classList.contains('active')) {
+                    menuIcon.style.display = 'block';
+                 }
+                 // If menu IS active on mobile, burger should remain hidden (handled by open/close logic)
+            }
+        }, 250);
+    });
 
-  // --- Move Right-Side Items to Mobile Menu ---
-  function setupMobileMenu() {
-    if (window.innerWidth <= 960) {
-      // Check if items haven't already been moved
-      if (!menuLinks.querySelector(".mobile-only")) {
-        // Clone or create items for mobile menu
-        const searchItem = document.createElement("li");
-        searchItem.classList.add("nav-item", "mobile-only");
-        searchItem.innerHTML = `<a href="#" class="nav-links"><i class="fas fa-search"></i> Search</a>`;
-        menuLinks.appendChild(searchItem);
+    // --- Optional: Close menu if clicking outside of it on mobile ---
+    document.addEventListener('click', (event) => {
+        if (navMenu.classList.contains('active') &&
+            !navMenu.contains(event.target) &&
+            !menuIcon.contains(event.target)) { // Make sure click wasn't on the (now hidden) burger space
+            closeMobileMenu(); // This will now also show the burger
+        }
+    });
 
-        const localeItem = document.createElement("li");
-        localeItem.classList.add("nav-item", "mobile-only");
-        localeItem.innerHTML = `<a href="#" class="nav-links"><i class="fas fa-globe"></i> France</a>`;
-        menuLinks.appendChild(localeItem);
-      }
-    } else {
-      // Screen is larger, remove mobile-only items if they exist
-      const mobileOnlyItems = menuLinks.querySelectorAll(".mobile-only");
-      mobileOnlyItems.forEach((item) => item.remove());
-
-      // Ensure main menu and dropdown are correctly reset if window resized while open
-      menu.classList.remove("is-active");
-      menuLinks.classList.remove("active");
-      expertisesDropdown.classList.remove("active");
-      expertisesToggle.classList.remove("open");
-    }
-  }
-
-  // Initial setup on load
-  setupMobileMenu();
-
-  // Adjust mobile menu items on window resize
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      setupMobileMenu();
-    }, 250); // Debounce resize event
-  });
 });
