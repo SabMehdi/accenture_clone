@@ -13,111 +13,160 @@
     <body>
         <nav class="navbar">
             <div class="navbar-container">
-                <a href="#" class="navbar-logo">
-                    accenture <span class="logo-arrow">></span>
-                </a>
-
-                <div class="menu-icon" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-
-                <ul class="nav-menu" id="nav-menu-list">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-links" id="expertises-toggle">
-                            Expertises <i
-                                class="fas fa-chevron-down dropdown-arrow"></i>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="dropdown-wrapper">
-                                <h4>Expertises</h4>
-                                <div class="dropdown-column">
-                                    <div class="dropdown-column-types">
-                                        <a href="#">Automatisation</a>
-                                        <a href="#">Budget base zéro (ZBB)</a>
-                                        <a href="#">Business Process Services</a>
-                                        <a href="#">Cloud</a>
-                                        <a href="#">Conduite du changement</a>
-                                        <a href="#">Conseil en technologies</a>
-                                        <a href="#">Développement durable</a>
-                                        <a href="#">E-commerce</a>
-                                        <a href="#">Expérience Client</a>
-                                        <a href="#">Finance</a>
-                                        <a href="#">Fusions et acquisitions</a>
-                                        <a href="#">Infrastructure</a>
-                                    </div>
-                                    <div class="dropdown-column-types">
-                                        <a href="#">Automatisation</a>
-                                        <a href="#">Budget base zéro (ZBB)</a>
-                                        <a href="#">Business Process Services</a>
-                                        <a href="#">Cloud</a>
-                                        <a href="#">Conduite du changement</a>
-                                        <a href="#">Conseil en technologies</a>
-                                        <a href="#">Développement durable</a>
-                                        <a href="#">E-commerce</a>
-                                        <a href="#">Expérience Client</a>
-                                        <a href="#">Finance</a>
-                                        <a href="#">Fusions et acquisitions</a>
-                                        <a href="#">Infrastructure</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown-wrapper">
-                        
-                                <h4>Secteurs d'activité</h4>
-                                <div class="dropdown-column">
-                        
-                                    <div class="dropdown-column-types">
-                                        <a href="#">Aéronautique et Défense</a>
-                                        <a href="#">Assurance</a>
-                                        <a href="#">Automobile</a>
-                                        <a href="#">Banque</a>
-                                        <a href="#">Biens et services de
-                                            consommation</a>
-                                        <a href="#">Capital Markets</a>
-                                        <a href="#">Chimie</a>
-                                        <a href="#">Communications et Médias</a>
-                                        <a href="#">Energie</a>
-                                        <a href="#">High-tech</a>
-                                    </div>
-                                    <div class="dropdown-column-types">
-                                        <a href="#">Aéronautique et Défense</a>
-                                        <a href="#">Assurance</a>
-                                        <a href="#">Automobile</a>
-                                        <a href="#">Banque</a>
-                                        <a href="#">Biens et services de
-                                            consommation</a>
-                                        <a href="#">Capital Markets</a>
-                                        <a href="#">Chimie</a>
-                                        <a href="#">Communications et Médias</a>
-                                        <a href="#">Energie</a>
-                                        <a href="#">High-tech</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-links">Découvrir Accenture <i
-                                class="fas fa-chevron-down dropdown-arrow"></i></a>
-                        <!-- Add dropdown content here if needed -->
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-links">Carrières <i
-                                class="fas fa-chevron-down dropdown-arrow"></i></a>
-                        <!-- Add dropdown content here if needed -->
-                    </li>
-                    <!-- Mobile only items will be appended here by JS -->
-                </ul>
-
-                <div class="navbar-right">
+              <a href="#" class="navbar-logo">
+                accenture <span class="logo-arrow">></span>
+              </a>
+      
+              <div class="menu-icon" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+              </div>
+      
+              <ul class="nav-menu" id="nav-menu-list">
+                <div class="mobile-menu-header">
+                  <button class="close-menu-btn" id="close-menu">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <div class="mobile-header-right">
                     <a href="#" class="nav-icon-link"><i
-                            class="fas fa-search"></i></a>
+                        class="fas fa-search"></i></a>
                     <a href="#" class="nav-locale">
-                        <i class="fas fa-globe"></i> France
+                      <i class="fas fa-globe"></i> France
+                      <i class="fas fa-chevron-down"></i>
                     </a>
+                  </div>
                 </div>
+      
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-links" id="expertises-toggle">
+                    Expertises
+                    <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+                    <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+                  </a>
+                  <div class="dropdown-content">
+                    <div class="submenu-header">
+                      <button class="submenu-back-btn">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Expertises</span>
+                      </button>
+                    </div>
+                    <div class="submenu-nav">
+                      <div class="dropdown-wrapper">
+                        <h4>Expertises</h4>
+                        <div class="dropdown-column">
+                          <div class="dropdown-column-types">
+                            <a href="#">Automatisation</a>
+                            <a href="#">Budget base zéro (ZBB)</a>
+                            <a href="#">Business Process Services</a>
+                            <a href="#">Cloud</a>
+                            <a href="#">Conduite du changement</a>
+                            <a href="#">Conseil en technologies</a>
+                            <a href="#">Développement durable</a>
+                            <a href="#">E-commerce</a>
+                            <a href="#">Expérience Client</a>
+                            <a href="#">Finance</a>
+                            <a href="#">Fusions et acquisitions</a>
+                            <a href="#">Infrastructure</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="dropdown-wrapper">
+                        <h4>Secteurs d'activité</h4>
+                        <div class="dropdown-column">
+                          <div class="dropdown-column-types">
+                            <a href="#">Aéronautique et Défense</a>
+                            <a href="#">Assurance</a>
+                            <a href="#">Automobile</a>
+                            <a href="#">Banque</a>
+                            <a href="#">Biens et services de consommation</a>
+                            <a href="#">Capital Markets</a>
+                            <a href="#">Chimie</a>
+                            <a href="#">Communications et Médias</a>
+                            <a href="#">Energie</a>
+                            <a href="#">High-tech</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+      
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-links">
+                    Découvrir Accenture
+                    <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+                    <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+                  </a>
+                  <div class="dropdown-content">
+                    <div class="submenu-header">
+                      <button class="submenu-back-btn">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Découvrir Accenture</span>
+                      </button>
+                    </div>
+                    <div class="submenu-nav">
+                      <div class="dropdown-wrapper">
+                        <h4>À propos</h4>
+                        <div class="dropdown-column">
+                          <div class="dropdown-column-types">
+                            <a href="#">Qui sommes-nous ?</a>
+                            <a href="#">Notre histoire</a>
+                            <a href="#">Nos valeurs</a>
+                            <a href="#">Leadership</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+      
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-links">
+                    Carrières
+                    <i class="fas fa-chevron-down dropdown-arrow desktop-arrow"></i>
+                    <i class="fas fa-chevron-right dropdown-arrow mobile-arrow"></i>
+                  </a>
+                  <div class="dropdown-content">
+                    <div class="submenu-header">
+                      <button class="submenu-back-btn">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Carrières</span>
+                      </button>
+                    </div>
+                    <div class="submenu-nav">
+                      <div class="dropdown-wrapper">
+                        <h4>Rejoignez-nous</h4>
+                        <div class="dropdown-column">
+                          <div class="dropdown-column-types">
+                            <a href="#">Offres d'emploi</a>
+                            <a href="#">Stages et Alternance</a>
+                            <a href="#">La vie chez Accenture</a>
+                            <a href="#">Processus de recrutement</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+      
+                <div class="mobile-menu-footer">
+                  <a href="#">Contact Us</a>
+                  <a href="#">Careers</a>
+                  <a href="#">Locations</a>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+              </ul>
+              <div class="navbar-right">
+                <a href="#" class="nav-icon-link"><i class="fas fa-search"></i></a>
+                <a href="#" class="nav-locale">
+                  <i class="fas fa-globe"></i> France
+                </a>
+              </div>
             </div>
-        </nav>
+          </nav>
 
         <section class="hero">
             <svg xmlns="http://www.w3.org/2000/svg"
