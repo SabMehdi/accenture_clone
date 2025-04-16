@@ -29,7 +29,6 @@ body {
   background-color: $white;
   color: $black; // Default text color to black
 }
-
 .navbar {
   background-color: $white;
   height: $navbar-height;
@@ -39,7 +38,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid $light-dark-bg; // Lighter border
+  border-bottom: 1px solid $light-dark-bg;
 
   .navbar-container {
     display: flex;
@@ -50,372 +49,121 @@ body {
     margin: 0 auto;
     padding: 0 25px;
   }
-}
 
-.navbar-logo {
-  color: $black;
-  text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-
-  .logo-arrow {
-    color: $accent-purple;
-    margin-left: 2px;
-    font-weight: bold;
-    font-size: 2.2rem;
-    line-height: 1;
-  }
-}
-
-.menu-icon {
-  display: none; // Hidden on desktop
-  color: $black;
-  font-size: 1.8rem;
-  cursor: pointer;
-  z-index: 1001;
-  position: relative; // Ensure it's clickable
-}
-
-.nav-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  height: 100%; // For desktop alignment
-
-  // Hide mobile-specific elements on desktop
-  .mobile-menu-header,
-  .mobile-menu-footer {
-    display: none;
-  }
-}
-
-.nav-item {
-  height: 100%; // For desktop alignment
-  position: relative; // For desktop dropdown positioning
-}
-
-.nav-links {
-  color: $black;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  height: 100%; // For desktop alignment
-  padding: 0 1rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: color 0.3s ease, border-color 0.3s ease; // Smooth transitions
-
-  &:hover {
-    color: $accent-purple;
-    border-bottom: 3px solid $accent-purple;
-  }
-
-  .dropdown-arrow {
-    margin-left: 8px;
-    font-size: 0.8em;
-    transition: transform 0.3s ease; // Add transition for potential rotation
-  }
-}
-
-// --- Desktop Dropdown Styles ---
-.dropdown-content {
-  display: none; // Hidden by default
-  position: absolute; // Absolute positioning for desktop
-  top: $navbar-height; // Position below navbar
-  left: 0; // Align with nav item start
-  background-color: $white;
-  min-width: 500px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15); // Softer shadow
-  z-index: 10;
-  padding: 20px;
-  text-align: left;
-  border-top: 1px solid $light-dark-bg; // Add top border
-
-  .submenu-nav {
-    display: inline-flex; // Horizontal layout for wrappers
-    gap: 30px;
-    width: 100%;
-    justify-content: flex-start; // Align left
-  }
-
-  .dropdown-wrapper {
-    display: flex;
-    flex-direction: column;
-
-    h4 {
-      color: $grey-text;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .dropdown-column {
-      .dropdown-column-types {
-        display: flex;
-        flex-direction: column; // Links stack vertically
-
-        a {
-          color: $black;
-          padding: 8px 0px;
-          text-decoration: none;
-          display: block;
-          font-size: 0.95rem;
-
-          &:hover {
-            color: $accent-purple;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Show desktop dropdown on hover
-.nav-item.dropdown:hover > .dropdown-content {
-  @media screen and (min-width: ($tablet-breakpoint + 1px)) {
-    // Only apply hover on desktop
-    display: flex; // Use flex for the inner .submenu-nav layout
-    // position: fixed; // Avoid fixed position unless absolutely necessary
-    // right: 0;
-  }
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-  color: $black;
-
-  .nav-icon-link,
-  .nav-locale {
+  .navbar-logo {
     color: $black;
     text-decoration: none;
-    margin-left: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 
-    i {
-      margin-right: 5px;
-    }
-
-    &:hover {
+    .logo-arrow {
       color: $accent-purple;
+      margin-left: 2px;
+      font-weight: bold;
+      font-size: 2.2rem;
+      line-height: 1;
     }
   }
-}
-// --- Ensure Desktop Elements are Visible ---
-@media screen and (min-width: ($tablet-breakpoint + 1px)) {
-  .navbar-right {
-    display: flex; // Explicitly show on desktop
-  }
-  .menu-icon {
-    display: none; // Explicitly hide on desktop
-  }
-  // Ensure mobile-only elements are hidden on desktop if they ever leak
-  .mobile-menu-header,
-  .mobile-menu-footer {
-    display: none;
-  }
-}
 
-// ================================================
-// ============ TABLET & MOBILE STYLES ============
-// ================================================
-@media screen and (max-width: $tablet-breakpoint) {
   .menu-icon {
-    display: block; // Show burger
-  }
-  .navbar-right {
-    display: none; // Hide desktop icons
-  }
-  // Hide desktop hover dropdown effect on touch devices/mobile view
-  .nav-item.dropdown:hover > .dropdown-content {
     display: none;
+    color: $black;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
   }
 
   .nav-menu {
-    // --- Tablet Styling (Partial Width) ---
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
-    position: fixed; // Fixed position for slide-in
-    top: 0;
-    right: -370px; // Start off-screen (adjust width + padding)
-    width: 350px; // Fixed width for tablet menu
-    max-width: 90%; // Ensure it doesn't exceed screen width on narrow tablets
-    height: 100vh;
-    background-color: $white;
-    z-index: 1000;
-    transition: $mobile-menu-transition;
-    overflow-y: auto;
-    overflow-x: hidden;
-    align-items: stretch;
-    text-align: left;
-    border-left: 1px solid $light-dark-bg;
-    box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.1);
-    opacity: 0; // Start hidden for fade-in
+    align-items: center;
+    height: 100%;
 
-    &.active {
-      right: 0; // Slide in
-      opacity: 1; // Fade in
-
-      .mobile-menu-header,
-      .mobile-menu-footer {
-        display: flex; // Show header/footer when active
-      }
+    .mobile-menu-header,
+    .mobile-menu-footer {
+      display: none;
     }
+  }
 
-    // --- Accordion Submenu Logic ---
-    // Remove the old submenu-visible logic entirely
-    // &.submenu-visible { ... } // DELETE THIS BLOCK
-
-    .mobile-menu-header {
-      display: none; // Shown by &.active
-      height: $navbar-height;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      border-bottom: 1px solid $light-dark-bg;
-      flex-shrink: 0;
-
-      .close-menu-btn {
-        color: $black;
-        font-size: 1.8rem;
-        cursor: pointer;
-        background: none;
-        border: none;
-        padding: 5px;
-        margin-left: -5px;
-      }
-
-      .mobile-header-right {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-
-        .nav-icon-link,
-        .nav-locale {
-          display: flex;
-          color: $black;
-          text-decoration: none;
-          align-items: center;
-          i {
-            margin-right: 5px;
-          }
-          &:hover {
-            color: $accent-purple;
-          }
-        }
-      }
-    }
-
-    .nav-item {
-      height: auto; // Override desktop height
-      width: 100%;
-      position: relative; // Needed for potential absolute elements within if any, but dropdown is block now
-      border-bottom: 1px solid $light-dark-bg;
-
-      &:last-of-type {
-        // Check if this selector correctly targets the last dropdown item
-        border-bottom: none;
-      }
-
-      // This class is now toggled by JS for accordion
-      &.submenu-open {
-        > .nav-links {
-        }
-        > .nav-links .mobile-arrow {
-          transform: rotate(180deg); // Rotate arrow when open
-        }
-        > .dropdown-content {
-          display: block; // Show the dropdown content
-        }
-      }
-    }
+  .nav-item {
+    height: 100%;
+    position: relative;
 
     .nav-links {
-      display: flex;
-      justify-content: space-between; // Push arrow right
-      align-items: center;
-      padding: 1rem 1.5rem; // Adjust padding
-      height: auto; // Override desktop height
-      font-size: 1.1rem; // Slightly smaller font size
       color: $black;
       text-decoration: none;
-      width: 100%;
-      border-bottom: none; // Remove desktop hover border
-      font-weight: bold; // Keep bold for clarity
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 1rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.3s ease, border-color 0.3s ease;
 
       &:hover {
-        background-color: rgba($black, 0.03); // Subtle hover
         color: $accent-purple;
-        border-bottom: none;
+        border-bottom: 3px solid $accent-purple;
       }
 
       .dropdown-arrow {
-        font-size: 1em; // Adjust size if needed
-        margin-left: 10px;
-        transition: transform 0.3s ease-in-out; // Smooth rotation
+        margin-left: 8px;
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
       }
-
-      // Show the mobile arrow, hide the (now non-existent) desktop one
-      .mobile-arrow {
-        display: inline-block;
-      }
-      // .desktop-arrow { display: none; } // Not needed if removed from HTML
     }
 
     .dropdown-content {
-      display: none; // Hidden by default, shown by .submenu-open on parent
-      position: static; // Important: No longer absolute/fixed
-      width: 100%;
-      height: auto; // Height is determined by content
-      background: #f8f8f8; // Slightly different background for visual hierarchy
-      z-index: auto; // Reset z-index
-      padding: 0; // Reset padding, handled by inner elements
-      margin: 0;
-      box-shadow: none; // Remove desktop shadow
-      border-top: 1px solid $light-dark-bg; // Add separator line
+      display: none;
+      position: absolute;
+      top: $navbar-height;
+      left: 0;
+      background-color: $white;
+      min-width: 500px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+      padding: 20px;
+      text-align: left;
+      border-top: 1px solid $light-dark-bg;
 
-      .submenu-header {
-        display: none !important;
-      }
       .submenu-nav {
-        display: block; // Ensure it's block for vertical stacking
-        padding: 0.5rem 0; // Add some vertical padding
+        display: inline-flex;
+        gap: 30px;
         width: 100%;
+        justify-content: flex-start;
 
-      }
+        .dropdown-wrapper {
+          display: flex;
+          flex-direction: column;
 
-      .dropdown-wrapper {
-        padding: 0 1.5rem 0 2.5rem; // Indent submenu items slightly
-        margin-bottom: 0.5rem;
+          h4 {
+            color: $grey-text;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
 
-        h4 {
-          color: $grey-text;
-          font-size: 0.8rem;
-          margin-bottom: 5px;
-          padding-top: 0.8rem;
-          font-weight: normal; // Less emphasis than main links
-        }
+          .dropdown-column {
+            .dropdown-column-types {
+              display: flex;
+              flex-direction: column;
 
-        .dropdown-column {
-          .dropdown-column-types {
-            a {
-              color: $black;
-              padding: 0.6rem 0; // Adjust padding
-              text-decoration: none;
-              display: block;
-              font-size: 1rem; // Match parent link or slightly smaller
-              white-space: normal;
+              a {
+                color: $black;
+                padding: 8px 0px;
+                text-decoration: none;
+                display: block;
+                font-size: 0.95rem;
 
-              &:hover {
-                color: $accent-purple;
-                background-color: transparent;
+                &:hover {
+                  color: $accent-purple;
+                }
               }
             }
           }
@@ -423,68 +171,289 @@ body {
       }
     }
 
-    .mobile-menu-footer {
-      display: none; // Shown by &.active
-      flex-direction: column;
-      padding: 1rem 1.5rem 1.5rem 1.5rem; // Match link padding
-      border-top: 1px solid $light-dark-bg;
-      width: 100%;
-      flex-shrink: 0;
-      margin-top: auto; // Push to bottom
-
-      a:not(.social-icons a) {
-        color: $grey-text;
-        text-decoration: none;
-        display: block;
-        padding: 0.5rem 0;
-        font-size: 1rem;
-        text-align: left;
-        &:hover {
-          color: $black;
-        }
-      }
-
-      .social-icons {
+    &:hover > .dropdown-content {
+      @media screen and (min-width: ($tablet-breakpoint + 1px)) {
         display: flex;
-        gap: 1.5rem;
-        margin-top: 1rem;
-        a {
-          font-size: 1.5rem;
-          padding: 0;
-          color: $grey-text;
-          &:hover {
-            color: $black;
-          }
-        }
       }
     }
   }
 
-  // ==============================================
-  // ============ SMALL MOBILE OVERRIDES ==========
-  // ==============================================
-  @media screen and (max-width: $mobile-breakpoint) {
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    color: $black;
+
+    .nav-icon-link,
+    .nav-locale {
+      color: $black;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 5px;
+      }
+
+      &:hover {
+        color: $accent-purple;
+      }
+    }
+  }
+
+  @media screen and (min-width: ($tablet-breakpoint + 1px)) {
+    .navbar-right {
+      display: flex;
+    }
+    .menu-icon {
+      display: none;
+    }
+    .mobile-menu-header,
+    .mobile-menu-footer {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: $tablet-breakpoint) {
+    .menu-icon {
+      display: block;
+    }
+    .navbar-right {
+      display: none;
+    }
+    .nav-item.dropdown:hover > .dropdown-content {
+      display: none;
+    }
+
     .nav-menu {
-      // Override tablet styles for full-width menu
-      width: 100%;
-      max-width: 100%;
-      right: -100%; // Start fully off-screen
-      border-left: none; // No left border needed on full width
-      box-shadow: none; // No shadow needed
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: -370px;
+      width: 350px;
+      max-width: 90%;
+      height: 100vh;
+      background-color: $white;
+      z-index: 1000;
+      transition: $mobile-menu-transition;
+      overflow-y: auto;
+      overflow-x: hidden;
+      align-items: stretch;
+      text-align: left;
+      border-left: 1px solid $light-dark-bg;
+      box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
 
       &.active {
-        right: 0; // Slide in fully
+        right: 0;
+        opacity: 1;
+
+        .mobile-menu-header,
+        .mobile-menu-footer {
+          display: flex;
+        }
       }
 
-      // Adjust padding for smaller screens if needed
-      .nav-links {
-        padding: 1rem;
+      .mobile-menu-header {
+        display: none;
+        height: $navbar-height;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid $light-dark-bg;
+        flex-shrink: 0;
+
+        .close-menu-btn {
+          color: $black;
+          font-size: 1.8rem;
+          cursor: pointer;
+          background: none;
+          border: none;
+          padding: 5px;
+          margin-left: -5px;
+        }
+
+        .mobile-header-right {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+
+          .nav-icon-link,
+          .nav-locale {
+            display: flex;
+            color: $black;
+            text-decoration: none;
+            align-items: center;
+
+            i {
+              margin-right: 5px;
+            }
+
+            &:hover {
+              color: $accent-purple;
+            }
+          }
+        }
       }
-      .dropdown-content .dropdown-wrapper {
-        padding: 0 1rem 0 2rem;
-      } // Adjust indentation
+
+      .nav-item {
+        height: auto;
+        width: 100%;
+        position: relative;
+        border-bottom: 1px solid $light-dark-bg;
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        &.submenu-open {
+          > .nav-links .mobile-arrow {
+            transform: rotate(180deg);
+          }
+          > .dropdown-content {
+            display: block;
+          }
+        }
+      }
+
+      .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        height: auto;
+        font-size: 1.1rem;
+        color: $black;
+        text-decoration: none;
+        width: 100%;
+        font-weight: bold;
+
+        &:hover {
+          background-color: rgba($black, 0.03);
+          color: $accent-purple;
+        }
+
+        .dropdown-arrow {
+          font-size: 1em;
+          margin-left: 10px;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-arrow {
+          display: inline-block;
+        }
+      }
+
+      .dropdown-content {
+        display: none;
+        position: static;
+        width: 100%;
+        height: auto;
+        background: #f8f8f8;
+        z-index: auto;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid $light-dark-bg;
+
+        .submenu-nav {
+          display: block;
+          padding: 0.5rem 0;
+          width: 100%;
+
+          .dropdown-wrapper {
+            padding: 0 1.5rem 0 2.5rem;
+            margin-bottom: 0.5rem;
+
+            h4 {
+              color: $grey-text;
+              font-size: 0.8rem;
+              margin-bottom: 5px;
+              padding-top: 0.8rem;
+              font-weight: normal;
+            }
+
+            .dropdown-column {
+              .dropdown-column-types {
+                a {
+                  color: $black;
+                  padding: 0.6rem 0;
+                  text-decoration: none;
+                  display: block;
+                  font-size: 1rem;
+
+                  &:hover {
+                    color: $accent-purple;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
       .mobile-menu-footer {
-        padding: 1rem;
+        display: none;
+        flex-direction: column;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        border-top: 1px solid $light-dark-bg;
+        width: 100%;
+        flex-shrink: 0;
+        margin-top: auto;
+
+        a:not(.social-icons a) {
+          color: $grey-text;
+          text-decoration: none;
+          display: block;
+          padding: 0.5rem 0;
+          font-size: 1rem;
+
+          &:hover {
+            color: $black;
+          }
+        }
+
+        .social-icons {
+          display: flex;
+          gap: 1.5rem;
+          margin-top: 1rem;
+
+          a {
+            font-size: 1.5rem;
+            padding: 0;
+            color: $grey-text;
+
+            &:hover {
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      .nav-menu {
+        width: 100%;
+        max-width: 100%;
+        right: -100%;
+        border-left: none;
+        box-shadow: none;
+
+        &.active {
+          right: 0;
+        }
+
+        .nav-links {
+          padding: 1rem;
+        }
+
+        .dropdown-content .dropdown-wrapper {
+          padding: 0 1rem 0 2rem;
+        }
+
+        .mobile-menu-footer {
+          padding: 1rem;
+        }
       }
     }
   }
@@ -677,7 +646,6 @@ $button-bg-hover: #0056b3;
   }
 }
 
-
 /* ======================== GLOBAL TEAM STATS SECTION STYLES ======================== */
 .global-team-stats-section {
   padding: 60px 20px; /* Add some padding top/bottom and sides */
@@ -686,11 +654,10 @@ $button-bg-hover: #0056b3;
 }
 
 .global-team-stats-section .section-container {
-   max-width: 1140px; /* Match your existing container max-width */
-   margin: 0 auto;
-   padding: 0 15px; /* Add side padding if needed, or rely on parent */
+  max-width: 1140px; /* Match your existing container max-width */
+  margin: 0 auto;
+  padding: 0 15px; /* Add side padding if needed, or rely on parent */
 }
-
 
 .global-stats-heading {
   font-size: 2.5rem;
@@ -722,7 +689,7 @@ $button-bg-hover: #0056b3;
 }
 
 .global-stats-right .stat-block {
-   text-align: left; /* Override alignment for right column */
+  text-align: left; /* Override alignment for right column */
 }
 
 .stat-number {
@@ -760,7 +727,6 @@ $button-bg-hover: #0056b3;
   margin-right: auto; /* Push the line to the left within its container */
 }
 
-
 /* --- Central Visual Element Styling --- */
 .global-stats-visual {
   position: relative; /* Context for absolute positioning of shapes */
@@ -793,7 +759,7 @@ $button-bg-hover: #0056b3;
 .image-shape {
   z-index: 2; /* Image shape is in front */
   overflow: hidden; /* Hide parts of the image that go outside the shape */
-   /* Skewing from top left */
+  /* Skewing from top left */
   transform-origin: top left;
   transform: skewY(-10deg); /* Same angle for consistency */
   /* Adjust positioning slightly if needed after skew */
@@ -810,107 +776,106 @@ $button-bg-hover: #0056b3;
   /* transform: skewY(10deg); */ /* Experiment with this */
 }
 /* ======================== MOBILE STYLES (Corrected Row Layout) ======================== */
-@media screen and (max-width: 767px) { /* Adjust breakpoint */
+@media screen and (max-width: 767px) {
+  /* Adjust breakpoint */
 
   .global-stats-heading {
-      font-size: 2rem;
-      margin-bottom: 30px;
+    font-size: 2rem;
+    margin-bottom: 30px;
   }
 
   /* Change layout to Flexbox row */
   .global-stats-layout {
-      display: flex;
-      flex-direction: row;      /* Arrange children side-by-side */
-      flex-wrap: nowrap;       /* IMPORTANT: Prevent wrapping to next line */
-      gap: 15px;               /* Reduce gap slightly for smaller screens */
-      align-items: center;     /* Vertically center the text block and image block */
-      grid-template-columns: none; /* Remove grid definition */
+    display: flex;
+    flex-direction: row; /* Arrange children side-by-side */
+    flex-wrap: nowrap; /* IMPORTANT: Prevent wrapping to next line */
+    gap: 15px; /* Reduce gap slightly for smaller screens */
+    align-items: center; /* Vertically center the text block and image block */
+    grid-template-columns: none; /* Remove grid definition */
   }
 
   /* Style the text wrapper (Left Column on Mobile) */
   .global-stats-text-wrapper {
-      display: flex;
-      flex-direction: column;
-      /* Use width instead of flex-basis for clarity with gap */
-      /* Calculate width considering the gap (e.g., 15px gap) */
-      width: calc(60% - 7.5px); /* Example: 60% width minus half the gap */
-      order: 1;
-      flex-shrink: 0; /* Prevent shrinking if content is large */
+    display: flex;
+    flex-direction: column;
+    /* Use width instead of flex-basis for clarity with gap */
+    /* Calculate width considering the gap (e.g., 15px gap) */
+    width: calc(60% - 7.5px); /* Example: 60% width minus half the gap */
+    order: 1;
+    flex-shrink: 0; /* Prevent shrinking if content is large */
   }
 
   /* Style the visual element (Right Column on Mobile) */
   .global-stats-visual {
-      grid-column: auto;
-      /* Use width instead of flex-basis */
-      width: calc(40% - 7.5px); /* Example: 40% width minus half the gap */
-      order: 2;
-      height: auto;
-      min-height: 280px; /* Adjust height as needed */
-      max-width: none;      /* REMOVE max-width constraint */
-      margin: 0;
-      align-self: center;   /* Keep vertical centering */
-      position: relative; /* Keep relative positioning */
-      flex-shrink: 0; /* Prevent shrinking */
-      z-index: 1;
+    grid-column: auto;
+    /* Use width instead of flex-basis */
+    width: calc(40% - 7.5px); /* Example: 40% width minus half the gap */
+    order: 2;
+    height: auto;
+    min-height: 280px; /* Adjust height as needed */
+    max-width: none; /* REMOVE max-width constraint */
+    margin: 0;
+    align-self: center; /* Keep vertical centering */
+    position: relative; /* Keep relative positioning */
+    flex-shrink: 0; /* Prevent shrinking */
+    z-index: 1;
   }
 
   /* Ensure columns stack correctly inside the text wrapper */
   .global-stats-column {
-      width: 100%;
-      text-align: left !important;
-      grid-column: auto;
+    width: 100%;
+    text-align: left !important;
+    grid-column: auto;
   }
   .global-stats-column .stat-block:last-child {
-       margin-bottom: 0;
+    margin-bottom: 0;
   }
 
-
   .stat-block {
-      text-align: left !important;
-      margin-bottom: 20px; /* Adjust spacing */
+    text-align: left !important;
+    margin-bottom: 20px; /* Adjust spacing */
   }
 
   .stat-item {
-      text-align: left !important;
-       margin-bottom: 5px;
+    text-align: left !important;
+    margin-bottom: 5px;
   }
   .stat-item-description {
-       margin-bottom: 10px;
+    margin-bottom: 10px;
   }
-   .stat-item:last-child {
-      margin-bottom: 0;
+  .stat-item:last-child {
+    margin-bottom: 0;
   }
-
 
   /* Mobile Font Size Adjustments */
   .stat-number {
-      font-size: 2.5rem; /* Further adjust if needed for space */
-      font-weight: 300;
-      letter-spacing: 0.5px;
+    font-size: 2.5rem; /* Further adjust if needed for space */
+    font-weight: 300;
+    letter-spacing: 0.5px;
   }
   .stat-description {
-      font-size: 0.8rem; /* Adjust if needed */
-      line-height: 1.4;
+    font-size: 0.8rem; /* Adjust if needed */
+    line-height: 1.4;
   }
 
   .stat-line {
-      margin: 0 auto 0 0 !important;
+    margin: 0 auto 0 0 !important;
   }
 
   /* Mobile visual shape adjustments */
-   .visual-shape {
-      transform-origin: center;
-      transform: skewY(-8deg); /* Adjust skew if needed */
-   }
-   .purple-shape {
-      transform: skewY(-8deg);
-   }
-   .image-shape {
-       transform: skewY(-8deg);
-   }
-   /* Adjust image height/object-position if aspect ratio looks odd */
-   .image-shape img {
-       min-height: 280px; /* Match container min-height */
-       /* object-position: center top; /* Example adjustment */
-   }
+  .visual-shape {
+    transform-origin: center;
+    transform: skewY(-8deg); /* Adjust skew if needed */
+  }
+  .purple-shape {
+    transform: skewY(-8deg);
+  }
+  .image-shape {
+    transform: skewY(-8deg);
+  }
+  /* Adjust image height/object-position if aspect ratio looks odd */
+  .image-shape img {
+    min-height: 280px; /* Match container min-height */
+    /* object-position: center top; /* Example adjustment */
+  }
 }
