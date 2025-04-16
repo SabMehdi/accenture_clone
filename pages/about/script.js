@@ -253,4 +253,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Initial Call ---
   handleScroll(); // Run once on load to set initial state correctly
+
+
+
+  const statsSection = document.querySelector('.global-team-stats-section');
+
+  if (statsSection) { // Check if the section exists on the page
+      const observerOptions = {
+          root: null, // Use the viewport as the root
+          rootMargin: '0px 0px -50px 0px', // Trigger slightly before it's fully in view
+          threshold: 0.1 // Trigger when 10% of the element is visible
+      };
+
+      const observerCallback = (entries, observer) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target); // Stop observing once visible (optional)
+              }
+              // No 'else' needed if you only want the animation to run once
+          });
+      };
+
+      const statsObserver = new IntersectionObserver(observerCallback, observerOptions);
+      statsObserver.observe(statsSection);
+  }
+  // --- End Global Stats Animation ---
+
 });
