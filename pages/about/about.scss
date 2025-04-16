@@ -676,3 +676,241 @@ $button-bg-hover: #0056b3;
     opacity: 1;
   }
 }
+
+
+/* ======================== GLOBAL TEAM STATS SECTION STYLES ======================== */
+.global-team-stats-section {
+  padding: 60px 20px; /* Add some padding top/bottom and sides */
+  background-color: #fff; /* Assuming a white background */
+  text-align: center; /* Center the main heading */
+}
+
+.global-team-stats-section .section-container {
+   max-width: 1140px; /* Match your existing container max-width */
+   margin: 0 auto;
+   padding: 0 15px; /* Add side padding if needed, or rely on parent */
+}
+
+
+.global-stats-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 40px; /* Space below the heading */
+  text-align: center; /* Ensure heading is centered */
+}
+
+.global-stats-layout {
+  display: grid; /* Use CSS Grid for desktop layout */
+  /* Define 3 columns: left stats, visual, right stats */
+  /* Adjust column widths as needed. Auto makes visual take up space based on content. */
+  /* Using percentages or fr units could also work. */
+  grid-template-columns: 1fr auto 1fr; /* 1fr makes columns flexible */
+  gap: 40px; /* Gap between columns */
+  align-items: center; /* Vertically center items in the grid row */
+}
+
+/* Positioning for the two stats columns within the grid */
+.global-stats-column {
+  /* No explicit column styling needed yet, grid handles it */
+}
+
+/* Style for each individual stat block */
+.stat-block {
+  margin-bottom: 40px; /* Space between top and bottom stat in a column */
+  text-align: right; /* Default alignment for left column */
+}
+
+.global-stats-right .stat-block {
+   text-align: left; /* Override alignment for right column */
+}
+
+.stat-number {
+  font-size: 4.5rem; /* Large font size for the number */
+  font-weight: normal; /* As seen in the image, not bold */
+  color: #000;
+  line-height: 1; /* Tight line height */
+  margin-bottom: 8px; /* Space below the number */
+}
+
+.stat-description {
+  font-size: 0.95rem;
+  color: #555; /* Or a dark gray */
+  line-height: 1.5;
+  margin-bottom: 15px; /* Space below the text, before the line */
+}
+
+.stat-line {
+  display: block; /* Ensure it takes full width */
+  height: 1px; /* Thin line */
+  background-color: #e0e0e0; /* Light gray line color */
+  border: none; /* Remove default <hr> border */
+  margin: 0; /* Remove default <hr> margin */
+}
+
+.global-stats-left .stat-block .stat-line {
+  /* Line alignment for left column */
+  margin-left: auto; /* Push the line to the right within its container */
+  margin-right: 0;
+}
+
+.global-stats-right .stat-block .stat-line {
+  /* Line alignment for right column */
+  margin-left: 0;
+  margin-right: auto; /* Push the line to the left within its container */
+}
+
+
+/* --- Central Visual Element Styling --- */
+.global-stats-visual {
+  position: relative; /* Context for absolute positioning of shapes */
+  /* Set a width/height for the visual container itself */
+  /* Adjust to control the size of the visual block in the grid */
+  width: 250px; /* Example width */
+  height: 350px; /* Example height */
+  flex-shrink: 0; /* Prevent it from shrinking in flex layout */
+}
+
+.visual-shape {
+  position: absolute;
+  width: 100%; /* Shapes fill the visual container */
+  height: 100%;
+  /* Adjust transform-origin for skewing from a specific point if desired */
+  transform-origin: top right;
+}
+
+.purple-shape {
+  background-color: #a100ff; /* Your brand purple color */
+  z-index: 1; /* Purple shape is behind the image shape */
+  /* Skewing from bottom right */
+  transform-origin: bottom right;
+  transform: skewY(-10deg); /* Adjust angle as needed */
+  /* Adjust positioning slightly if needed after skew */
+  top: 0;
+  right: 0; /* Example positioning */
+}
+
+.image-shape {
+  z-index: 2; /* Image shape is in front */
+  overflow: hidden; /* Hide parts of the image that go outside the shape */
+   /* Skewing from top left */
+  transform-origin: top left;
+  transform: skewY(-10deg); /* Same angle for consistency */
+  /* Adjust positioning slightly if needed after skew */
+  top: 0;
+  left: 0; /* Example positioning */
+}
+
+.image-shape img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the shape area without distortion */
+  /* Counter-skew the image slightly if needed to make its content appear less skewed */
+  /* transform: skewY(10deg); */ /* Experiment with this */
+}
+/* ======================== MOBILE STYLES (Corrected Row Layout) ======================== */
+@media screen and (max-width: 767px) { /* Adjust breakpoint */
+
+  .global-stats-heading {
+      font-size: 2rem;
+      margin-bottom: 30px;
+  }
+
+  /* Change layout to Flexbox row */
+  .global-stats-layout {
+      display: flex;
+      flex-direction: row;      /* Arrange children side-by-side */
+      flex-wrap: nowrap;       /* IMPORTANT: Prevent wrapping to next line */
+      gap: 15px;               /* Reduce gap slightly for smaller screens */
+      align-items: center;     /* Vertically center the text block and image block */
+      grid-template-columns: none; /* Remove grid definition */
+  }
+
+  /* Style the text wrapper (Left Column on Mobile) */
+  .global-stats-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      /* Use width instead of flex-basis for clarity with gap */
+      /* Calculate width considering the gap (e.g., 15px gap) */
+      width: calc(60% - 7.5px); /* Example: 60% width minus half the gap */
+      order: 1;
+      flex-shrink: 0; /* Prevent shrinking if content is large */
+  }
+
+  /* Style the visual element (Right Column on Mobile) */
+  .global-stats-visual {
+      grid-column: auto;
+      /* Use width instead of flex-basis */
+      width: calc(40% - 7.5px); /* Example: 40% width minus half the gap */
+      order: 2;
+      height: auto;
+      min-height: 280px; /* Adjust height as needed */
+      max-width: none;      /* REMOVE max-width constraint */
+      margin: 0;
+      align-self: center;   /* Keep vertical centering */
+      position: relative; /* Keep relative positioning */
+      flex-shrink: 0; /* Prevent shrinking */
+      z-index: 1;
+  }
+
+  /* Ensure columns stack correctly inside the text wrapper */
+  .global-stats-column {
+      width: 100%;
+      text-align: left !important;
+      grid-column: auto;
+  }
+  .global-stats-column .stat-block:last-child {
+       margin-bottom: 0;
+  }
+
+
+  .stat-block {
+      text-align: left !important;
+      margin-bottom: 20px; /* Adjust spacing */
+  }
+
+  .stat-item {
+      text-align: left !important;
+       margin-bottom: 5px;
+  }
+  .stat-item-description {
+       margin-bottom: 10px;
+  }
+   .stat-item:last-child {
+      margin-bottom: 0;
+  }
+
+
+  /* Mobile Font Size Adjustments */
+  .stat-number {
+      font-size: 2.5rem; /* Further adjust if needed for space */
+      font-weight: 300;
+      letter-spacing: 0.5px;
+  }
+  .stat-description {
+      font-size: 0.8rem; /* Adjust if needed */
+      line-height: 1.4;
+  }
+
+  .stat-line {
+      margin: 0 auto 0 0 !important;
+  }
+
+  /* Mobile visual shape adjustments */
+   .visual-shape {
+      transform-origin: center;
+      transform: skewY(-8deg); /* Adjust skew if needed */
+   }
+   .purple-shape {
+      transform: skewY(-8deg);
+   }
+   .image-shape {
+       transform: skewY(-8deg);
+   }
+   /* Adjust image height/object-position if aspect ratio looks odd */
+   .image-shape img {
+       min-height: 280px; /* Match container min-height */
+       /* object-position: center top; /* Example adjustment */
+   }
+}
