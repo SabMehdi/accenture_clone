@@ -120,7 +120,6 @@ body {
     font-size: 0.8em;
     transition: transform 0.3s ease; // Add transition for potential rotation
   }
-
 }
 
 // --- Desktop Dropdown Styles ---
@@ -370,7 +369,6 @@ body {
       // .desktop-arrow { display: none; } // Not needed if removed from HTML
     }
 
-    // --- Mobile Dropdown Content (Accordion Style) ---
     .dropdown-content {
       display: none; // Hidden by default, shown by .submenu-open on parent
       position: static; // Important: No longer absolute/fixed
@@ -382,30 +380,15 @@ body {
       margin: 0;
       box-shadow: none; // Remove desktop shadow
       border-top: 1px solid $light-dark-bg; // Add separator line
-      // Optional: Transition for smooth open/close
-      // max-height: 0;
-      // overflow: hidden;
-      // transition: max-height 0.5s ease-in-out;
 
-      // Remove mobile-specific header (back button)
       .submenu-header {
         display: none !important;
       }
-
-      // Reset desktop layout wrappers if they interfere
-      > .dropdown-wrapper,
-      > .dropdown-wrapper > .dropdown-column,
-      > .dropdown-wrapper > .dropdown-column > .dropdown-column-types {
-        //display: contents; // Might not be needed if layout below is sufficient
-      }
-
       .submenu-nav {
         display: block; // Ensure it's block for vertical stacking
         padding: 0.5rem 0; // Add some vertical padding
         width: 100%;
-        // Reset desktop flex behavior
-        // gap: 0;
-        // justify-content: initial;
+
       }
 
       .dropdown-wrapper {
@@ -505,9 +488,10 @@ body {
       }
     }
   }
-} 
+}
 /* --- Variables --- */
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $line-height-base: 1.6;
 $spacer-bg-color: #f0f4f8;
 $reveal-section-initial-bg: #e0e0e0;
@@ -520,181 +504,175 @@ $text-color-light: #ffffff;
 $button-bg: #007bff;
 $button-bg-hover: #0056b3;
 
-
-
 /* --- Scroll Reveal Section --- */
 .scroll-reveal-section {
-    height: $reveal-section-height;
-    position: relative;
-    background-color: $reveal-section-initial-bg;
+  height: $reveal-section-height;
+  position: relative;
+  background-color: $reveal-section-initial-bg;
 }
 
 .sticky-container {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;   // Horizontal center
-    align-items: flex-end;     // Vertical alignment to bottom
-    padding-bottom: 15vh;      // Push text up from bottom
-    box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; // Horizontal center
+  align-items: flex-end; // Vertical alignment to bottom
+  padding-bottom: 15vh; // Push text up from bottom
+  box-sizing: border-box;
 }
 
 .masked-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); // Background Image
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: 1; // Base layer
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"); // Background Image
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1; // Base layer
 
-    // CSS Masking
-    mask-image: radial-gradient(circle, black 100%, transparent 100%);
-    mask-size: $initial-mask-size $initial-mask-size; // Use variable twice for clarity
-    mask-repeat: no-repeat;
-    mask-position: center center;
-    // Apply vendor prefixes directly here for simplicity,
-    // though mixins or autoprefixers are common in real projects
-    -webkit-mask-image: radial-gradient(circle, black 100%, transparent 100%);
-    -webkit-mask-size: $initial-mask-size $initial-mask-size;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center center;
+  // CSS Masking
+  mask-image: radial-gradient(circle, black 100%, transparent 100%);
+  mask-size: $initial-mask-size $initial-mask-size; // Use variable twice for clarity
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  // Apply vendor prefixes directly here for simplicity,
+  // though mixins or autoprefixers are common in real projects
+  -webkit-mask-image: radial-gradient(circle, black 100%, transparent 100%);
+  -webkit-mask-size: $initial-mask-size $initial-mask-size;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
 }
 
 /* --- Initial Centered Text --- */
 .centered-text {
-    position: relative;
-    z-index: 10;
-    color: $text-color-dark;
-    text-align: center;
-    opacity: 1;
-    transition: opacity 0.3s ease-out;
-    max-width: 80%;
-    padding: 25px 35px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0; // Managed by container padding
+  position: relative;
+  z-index: 10;
+  color: $text-color-dark;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+  max-width: 80%;
+  padding: 25px 35px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0; // Managed by container padding
 
-    h1 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-size: clamp(1.8rem, 5vw, 3rem);
-    }
-    p {
-        margin-bottom: 0;
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        color: $text-color-medium;
-    }
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+  p {
+    margin-bottom: 0;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: $text-color-medium;
+  }
 }
 
 /* --- Final Revealed Content --- */
 .final-content {
-    position: absolute;
-    bottom: $final-content-bottom-pos;
-    left: 50%;
-    width: 80%;
-    max-width: 700px;
-    z-index: 5;
-    color: $text-color-light;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
+  position: absolute;
+  bottom: $final-content-bottom-pos;
+  left: 50%;
+  width: 80%;
+  max-width: 700px;
+  z-index: 5;
+  color: $text-color-light;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
 
-    // Initial state for animation
-    opacity: 0;
-    transform: translate(-50%, 30px); // Start shifted down & centered
-    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-    pointer-events: none;
+  // Initial state for animation
+  opacity: 0;
+  transform: translate(-50%, 30px); // Start shifted down & centered
+  transition: opacity 0.8s ease-out,
+    transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  pointer-events: none;
 
-    // State when visible - using & to refer to the parent selector
-    &.visible {
-        opacity: 1;
-        transform: translate(-50%, 0); // Slide up & centered
-        pointer-events: auto;
+  // State when visible - using & to refer to the parent selector
+  &.visible {
+    opacity: 1;
+    transform: translate(-50%, 0); // Slide up & centered
+    pointer-events: auto;
 
-        // Apply breathing animation only when visible
-        .author,
-        .title {
-            animation: breath 4s ease-in-out infinite;
-        }
-        .title {
-            animation-delay: 0.2s; // Stagger
-        }
-    }
-
-    // Nested styles for children
-    .quote {
-        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-        font-style: italic;
-        margin-bottom: 1.5rem;
-        line-height: 1.4;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
+    // Apply breathing animation only when visible
     .author,
     .title {
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
-        margin: 0.2rem 0;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        // Base state for animation
-        opacity: 1;
-        transform: scale(1);
+      animation: breath 4s ease-in-out infinite;
     }
-
     .title {
-        font-size: clamp(0.8rem, 1.8vw, 1rem);
-        opacity: 0.9;
-        margin-bottom: 2rem;
+      animation-delay: 0.2s; // Stagger
     }
+  }
 
-    .cta-button {
-        display: inline-block;
-        padding: 12px 25px;
-        background-color: $button-bg;
-        color: $text-color-light;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        margin-top: 1rem;
+  // Nested styles for children
+  .quote {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
 
-        // Hover/focus states using &
-        &:hover,
-        &:focus {
-            background-color: $button-bg-hover;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+  .author,
+  .title {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin: 0.2rem 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    // Base state for animation
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .title {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: $button-bg;
+    color: $text-color-light;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+
+    // Hover/focus states using &
+    &:hover,
+    &:focus {
+      background-color: $button-bg-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
+  }
 }
 
 /* --- Breathing Animation Keyframes --- */
 @keyframes breath {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.9;
-    }
-    50% {
-        transform: scale(1.03);
-        opacity: 1;
-    }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
 }
-
-// Include prefixed version if needed, often handled by autoprefixer tools
-// @-webkit-keyframes breath {
-//     0%, 100% { transform: scale(1); opacity: 0.9; }
-//     50% { transform: scale(1.03); opacity: 1; }
-// }
