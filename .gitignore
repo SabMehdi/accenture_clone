@@ -4,4 +4,3 @@ node_modules/
 out.css
 out.css.map
 tests/
-pages/assets/*

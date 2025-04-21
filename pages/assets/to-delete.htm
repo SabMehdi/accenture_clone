@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Reveal Effect - Final Content</title>
+    <style>
+        /* --- Base Styles --- */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+        }
+
+        /* --- Helper Spacer Sections --- */
+        .spacer {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f0f4f8;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+        }
+        .spacer h1, .spacer h2 { color: #333; margin-bottom: 1rem; }
+        .spacer p { color: #555; max-width: 600px; }
+        .content-after { background-color: #ffffff; height: auto; min-height: 100vh; }
+
+        /* --- Scroll Reveal Section --- */
+        .scroll-reveal-section {
+            height: 300vh; /* Controls scroll duration */
+            position: relative;
+            background-color: #e0e0e0; /* Initial background */
+        }
+
+        .sticky-container {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            /* --- Initial Text Positioning --- */
+            justify-content: center; /* Horizontal center */
+            align-items: flex-end;   /* Vertical alignment to bottom */
+            padding-bottom: 15vh; /* Push text up from bottom */
+            /* ------------------------------- */
+            box-sizing: border-box;
+        }
+
+        .masked-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Background Image */
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1; /* Base layer */
+
+            /* CSS Masking */
+            mask-image: radial-gradient(circle, black 100%, transparent 100%);
+            mask-size: 150px 150px; /* Initial small circle */
+            mask-repeat: no-repeat;
+            mask-position: center center;
+            -webkit-mask-image: radial-gradient(circle, black 100%, transparent 100%);
+            -webkit-mask-size: 150px 150px;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center center;
+        }
+
+        /* --- Initial Centered Text (modified position) --- */
+        .centered-text {
+            position: relative; /* Now relative to flex layout */
+            z-index: 10; /* Above mask, below final content if needed */
+            color: #1a1a1a;
+            text-align: center;
+            opacity: 1;
+            transition: opacity 0.3s ease-out; /* Fade out */
+            max-width: 80%;
+            padding: 25px 35px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            /* Adjust margins if needed due to flex-end */
+            margin-bottom: 0; /* Let padding-bottom on container handle spacing */
+        }
+        .centered-text h1 { margin-top: 0; margin-bottom: 0.5rem; font-size: clamp(1.8rem, 5vw, 3rem); }
+        .centered-text p { margin-bottom: 0; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #333; }
+
+        /* --- Final Revealed Content --- */
+        .final-content {
+            position: absolute;
+            bottom: 5vh; /* Position near the bottom */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            width: 80%; /* Max width */
+            max-width: 700px; /* Readable max width */
+            z-index: 5; /* Above masked content */
+            color: #ffffff; /* White text for contrast on image */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+
+            /* Initial state for fade/slide animation */
+            opacity: 0;
+            transform: translate(-50%, 30px); /* Start shifted down */
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smoother slide */
+            pointer-events: none; /* Not interactive until visible */
+        }
+
+        /* State when visible */
+        .final-content.visible {
+            opacity: 1;
+            transform: translate(-50%, 0); /* Slide up to final position */
+            pointer-events: auto; /* Enable interaction */
+        }
+
+        .final-content .quote {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Improve readability */
+        }
+
+        .final-content .author,
+        .final-content .title {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin: 0.2rem 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            /* Base state for animation */
+            opacity: 1;
+            transform: scale(1);
+        }
+         .final-content .title {
+             font-size: clamp(0.8rem, 1.8vw, 1rem);
+             opacity: 0.9;
+             margin-bottom: 2rem;
+         }
+
+        /* Apply breathing animation only when visible */
+        .final-content.visible .author,
+        .final-content.visible .title {
+            animation: breath 4s ease-in-out infinite;
+        }
+        /* Stagger animation slightly */
+         .final-content.visible .title {
+            animation-delay: 0.2s;
+         }
+
+
+        .final-content .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #007bff; /* Example blue */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: 1rem; /* Space above button */
+        }
+
+        .final-content .cta-button:hover,
+        .final-content .cta-button:focus {
+            background-color: #0056b3; /* Darker blue */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Breathing Animation Keyframes */
+        @keyframes breath {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: scale(1.03); /* Subtle scale up */
+                opacity: 1;
+            }
+        }
+         /* Add prefixed keyframes for compatibility if needed */
+         @-webkit-keyframes breath { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.03); opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <section class="spacer">
+        <h1>Scroll Down</h1>
+        <p>This is content above the special scroll effect section.</p>
+    </section>
+
+    <!-- The Scroll Reveal Section -->
+    <section class="scroll-reveal-section">
+        <div class="sticky-container">
+            <!-- Background image -->
+            <div class="masked-content"></div>
+
+            <!-- Initial text -->
+            <div class="centered-text">
+                <h1>Keep Scrolling</h1>
+                <p>Watch the background reveal.</p>
+            </div>
+
+            <!-- ****** NEW: Final Content ****** -->
+            <div class="final-content">
+                <p class="quote">« Chez Accenture, nous partageons tous la même philosophie : nous nous soucions profondément de l’impact de nos actions auprès de nos clients et de la société. »</p>
+                <p class="author">Julie Sweet</p>
+                <p class="title">PDG d’Accenture</p>
+                <a href="#team" class="cta-button">Rencontrez notre équipe dirigeante</a>
+                <!-- Replace #team with the actual link/target -->
+            </div>
+            <!-- ****** End of Final Content ****** -->
+
+        </div>
+    </section>
+    <!-- End of Scroll Reveal Section -->
+
+    <section class="spacer content-after">
+        <h2 id="team">Content Below the Effect</h2> <!-- Added id="team" as example target -->
+        <p>Normal page scrolling continues here.</p>
+        <p>Lorem ipsum dolor sit amet...</p>
+        <p>...</p>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.querySelector('.scroll-reveal-section');
+            const stickyContainer = section?.querySelector('.sticky-container');
+            const textElement = section?.querySelector('.centered-text');
+            const maskedElement = section?.querySelector('.masked-content');
+            const finalContent = section?.querySelector('.final-content'); // Get final content element
+
+            if (!section || !stickyContainer || !textElement || !maskedElement || !finalContent) { // Check for finalContent too
+                console.warn("Scroll reveal elements (including final content) not found. Effect disabled.");
+                return;
+            }
+
+            const initialMaskSizePx = 150;
+
+            const calculateMaxMaskSize = () => {
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                return Math.sqrt(viewportWidth**2 + viewportHeight**2) * 1.1; // Diagonal + buffer
+            };
+
+            let maxMaskSize = calculateMaxMaskSize();
+
+            window.addEventListener('resize', () => {
+                maxMaskSize = calculateMaxMaskSize();
+                handleScroll(); // Re-run calculations on resize
+            });
+
+            const handleScroll = () => {
+                const sectionHeight = section.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                const scrollDistance = sectionHeight - viewportHeight;
+
+                if (scrollDistance <= 0) {
+                    // Section shorter than viewport: Immediately reveal final state
+                    textElement.style.opacity = '0';
+                    const finalMaskSize = `${maxMaskSize.toFixed(0)}px ${maxMaskSize.toFixed(0)}px`;
+                    maskedElement.style.maskSize = finalMaskSize;
+                    maskedElement.style.webkitMaskSize = finalMaskSize;
+                    finalContent.classList.add('visible'); // Show final content
+                    return;
+                }
+
+                const sectionRect = section.getBoundingClientRect();
+
+                // Determine current state based on scroll position
+                let currentState = 'during'; // Assume 'during' unless proven otherwise
+                if (sectionRect.top > 0) {
+                    currentState = 'before';
+                } else if (sectionRect.top < -scrollDistance) {
+                    currentState = 'after';
+                }
+
+                // --- Handle States ---
+
+                // State 1: Before Sticky
+                if (currentState === 'before') {
+                    textElement.style.opacity = '1';
+                    const initialMaskSize = `${initialMaskSizePx}px ${initialMaskSizePx}px`;
+                    maskedElement.style.maskSize = initialMaskSize;
+                    maskedElement.style.webkitMaskSize = initialMaskSize;
+                    finalContent.classList.remove('visible'); // Ensure final content is hidden
+                    return;
+                }
+
+                // State 3: After Sticky
+                if (currentState === 'after') {
+                    textElement.style.opacity = '0';
+                    const finalMaskSize = `${maxMaskSize.toFixed(0)}px ${maxMaskSize.toFixed(0)}px`;
+                    maskedElement.style.maskSize = finalMaskSize;
+                    maskedElement.style.webkitMaskSize = finalMaskSize;
+                    finalContent.classList.add('visible'); // Ensure final content is visible
+                    return;
+                }
+
+                // State 2: During Sticky (Animation)
+                if (currentState === 'during') {
+                    const scrollFromSectionTop = -sectionRect.top;
+                    const progress = scrollFromSectionTop / scrollDistance;
+                    const clampedProgress = Math.max(0, Math.min(1, progress));
+
+                    // --- Animation Logic ---
+                    const textFadeEndProgress = 0.25;
+                    const maskGrowStartProgress = 0.25;
+
+                    // 1. Text Fade Out
+                    let textOpacity = (clampedProgress <= textFadeEndProgress)
+                        ? 1 - (clampedProgress / textFadeEndProgress)
+                        : 0;
+                    textElement.style.opacity = Math.max(0, Math.min(1, textOpacity)).toFixed(2);
+
+                    // 2. Mask Growth
+                    let currentMaskSize = initialMaskSizePx;
+                    if (clampedProgress >= maskGrowStartProgress) {
+                        const growthPhaseDuration = 1 - maskGrowStartProgress;
+                        const growthProgress = growthPhaseDuration > 0
+                            ? (clampedProgress - maskGrowStartProgress) / growthPhaseDuration
+                            : 1;
+                        currentMaskSize = initialMaskSizePx + growthProgress * (maxMaskSize - initialMaskSizePx);
+                        currentMaskSize = Math.max(initialMaskSizePx, Math.min(maxMaskSize, currentMaskSize));
+                    }
+                    const sizePx = currentMaskSize.toFixed(0);
+                    const maskSizeValue = `${sizePx}px ${sizePx}px`;
+                    maskedElement.style.maskSize = maskSizeValue;
+                    maskedElement.style.webkitMaskSize = maskSizeValue;
+
+                    // 3. Final Content Reveal <<--- NEW LOGIC
+                    // Show final content *only when* progress hits 1
+                    if (clampedProgress >= 1.0) {
+                        finalContent.classList.add('visible');
+                    } else {
+                        // Make sure it's hidden if scrolling back up slightly before completion
+                        finalContent.classList.remove('visible');
+                    }
+                }
+            }; // End of handleScroll
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll(); // Initial call
+        });
+    </script>
+
+</body>
+</html>
